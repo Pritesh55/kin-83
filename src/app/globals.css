@@ -1,0 +1,64 @@
+/* src\app\globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+
+.svg-convert-to-red {
+  filter: brightness(0) saturate(100%) invert(40%) sepia(29%) saturate(1041%) hue-rotate(312deg) brightness(106%) contrast(109%);
+}
+
+.svg-convert-to-white {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7472%) hue-rotate(114deg) brightness(109%) contrast(97%);
+}
+
+.svg-convert-to-red:hover {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(77%) saturate(7127%) hue-rotate(353deg) brightness(100%) contrast(129%);
+}
+
+:focus-visible {
+  outline: red auto 0px;
+}
+
+/* Track */
+.scrollbar::-webkit-scrollbar {
+  width: 0px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+background-color: transparent;
+}
+
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.do-select {
+  -webkit-user-select: auto !important; /* Safari */
+  -ms-user-select: auto !important; /* IE 10 and IE 11 */
+  user-select: auto !important; /* Standard syntax */
+}
+
+/* nextjs-portal {
+  display: none;
+} */
+
+.bg-antiquewhite {
+  background: antiquewhite;
+}
