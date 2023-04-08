@@ -15,7 +15,7 @@ export default function Home() {
         <div className="w-full bg-antiquewhite rounded-b-full px-20 py-2">
           <Header></Header>
         </div>
-        <main className="p-5">
+        <main className="px-5">
           This  is Home Page..
         </main>
       </div>
