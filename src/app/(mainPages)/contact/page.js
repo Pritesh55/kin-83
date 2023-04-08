@@ -7,7 +7,7 @@ export const metadata = {
 
 const contact = () => {
   return (
-    <div>This is Contact page...</div>
+    <div className='p-5'>This is Contact page...</div>
   )
 }
 
