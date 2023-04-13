@@ -1,14 +1,14 @@
 'use client';
 
 // userReducer 02 :: import ( useReducer hook )from React ::
-import React, { useReducer } from "react";
+import { useReducer } from "react";
 
 // userReducer 03 :: Define (reducer) Object ::
 import { reducer } from '@/app/context/reducer';
 
 // userReducer 05 :: import (products) Array of Objects :: 
 // It is used in initialState Object....
-import { products, products1, products2 } from '@/app/context/products';
+import { products } from '@/app/context/products';
 
 // userReducer 06 :: import (useEffect) from React ::
 // It is used (to preserve state) in Dispatch action....
@@ -19,7 +19,7 @@ import { CartProductsContext } from './createContext';
 
 {/* Context API 05 :: import child Component  */ }
 import ShowProducts from '../cliants/ShowProducts';
-import { getAllProductsData } from "@/utils/functions/getAllProducts";
+
 
 
 // userReducer 04 :: define (initialState) Object ::
@@ -29,16 +29,11 @@ const initialState = {
     totalAmount: 0,
 }
 
-
 // const CartProductsContextComponent = ({kyoData}) => {
-{/* @ts-expect-error Async Server Component */ }
-const CartProductsContextComponent = ({ children, ...pageProps }) => {
-    let products13 = pageProps.productsArrayFS;
+const CartProductsContextComponent = ({children}) => {
 
-    console.log("Enter 0");
     // userReducer 01 :: create (userReducer) hook....
     const [state, dispatch] = useReducer(reducer, initialState);
-
 
     //  (Remove Product from Cart) 02 :: Define onClick Function removeItem().. 
     const addToCart = (id) => {
@@ -101,8 +96,7 @@ const CartProductsContextComponent = ({ children, ...pageProps }) => {
     useEffect(() => {
         dispatch(
             {
-                type: "TOTAL_ITEM",
-
+                type: "TOTAL_ITEM"
             }
         );
     }, [state.item]);
@@ -110,8 +104,6 @@ const CartProductsContextComponent = ({ children, ...pageProps }) => {
 
 
     // ----------------------------------------------------------
-
-    console.log(`Your state = ${state.item}`);
 
     return (
 
@@ -122,12 +114,9 @@ const CartProductsContextComponent = ({ children, ...pageProps }) => {
             {/* Create {{ }} :: creating Empty object */}
             {/* :: insert data of (Array) by Spread operator(...) */}
             {/* :: insert other data normally after that */}
-            <CartProductsContext.Provider value={{ ...state, addToCart, removeItem, clearCart, incProductQuantity, decProductQuantity }}>
+            <CartProductsContext.Provider value={{ ...state, addToCart, removeItem, clearCart, incProductQuantity, decProductQuantity  }}>
                 {/* Context API 04 :: Call Child Component  */}
-                {/* {children} */}
-                {
-                    (children)
-                }
+               {children}
             </CartProductsContext.Provider>
         </>
 
