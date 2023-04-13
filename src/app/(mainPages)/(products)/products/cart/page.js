@@ -1,14 +1,26 @@
+
+
+
 import ShowCartCall from '@/app/components/cliants/ShowCart/ShowCartCall'
+import CartProductsContextComponent from '@/app/components/contexts/CartProductsContextComponent'
+import { getAllProductsData } from '@/utils/functions/getAllProducts';
 import React from 'react'
 
-const Mycart = () => {
+const Cart = async () => {
+
+  const productsJSONObjectFS = await getAllProductsData();
+  const productsArrayFS = productsJSONObjectFS.products;
+
   return (
     <>
-      <div className="">
-        <ShowCartCall></ShowCartCall>
-      </div>
+
+
+      <ShowCartCall></ShowCartCall>
+
+
+
     </>
   )
 }
 
-export default Mycart
+export default Cart
