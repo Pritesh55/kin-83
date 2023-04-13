@@ -7,7 +7,6 @@ export async function GET(request) {
   await dbConnect();
 
   // console.log("Now , lET'S cREATE dATA")
-
   // console.log(`--------------------------------------------`);
   // console.log(`---------        The END       ---------`);
   // console.log(`--------------------------------------------`);
