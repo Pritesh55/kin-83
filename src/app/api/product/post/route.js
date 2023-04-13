@@ -27,7 +27,7 @@ export async function POST(request) {
         quantity
     },);
 
-    const res = await fetch("http://localhost:3000/api/product/post",
+    const res = await fetch("https://kin-83.vercel.app/api/product/post",
         {
             method: "POST",
             headers: {

@@ -1,6 +1,6 @@
 
 export const getAllProductsData = async () => {
-    const res = await fetch('http://localhost:3000/api/product/sort');
+    const res = await fetch('https://kin-83.vercel.app/api/product/sort');
     // The return value is *not* serialized
     // You can return Date, Map, Set, etc.
   
