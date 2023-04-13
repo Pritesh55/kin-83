@@ -1,23 +1,4 @@
-
-
 export const reducer = (state, action) => {
-    console.log("Enter 1");
-    // (Remove Product from Cart) 04 :: Return the products which id is not equal to the id which user Click to remove......
-    if (action.type === "COPY_DATA_FROM_SERVER") {
-
-
-        console.log(`---------------okokkok 1-----------------------------`);
-        console.log(action.payLoad);
-        console.log(`-------------okokkok 2-------------------------------`);
-
-        return {
-            // destructure the intialState object into key-value pairs....
-            ...state,
-            // Update the first key (item) by filter method...
-
-        }
-    }
-
 
     // (Remove Product from Cart) 04 :: Return the products which id is not equal to the id which user Click to remove......
     if (action.type === "ADD_TO_CART") {

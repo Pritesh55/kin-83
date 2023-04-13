@@ -4,11 +4,8 @@ import React, { useContext } from 'react'
 import { CartProductsContext } from '../contexts/createContext';
 import { AddToCartHeader } from './AddToCartHeader';
 
-const ProductsCard = ({ id, title, description, price, img, quantity,isAddedToCart }) => {
-
-
+const ProductsCard = ({ id, title, description, price, img, quantity, isAddedToCart }) => {
     const { addToCart } = useContext(CartProductsContext);
-
 
     return (
         <>
