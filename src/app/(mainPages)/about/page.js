@@ -8,7 +8,7 @@ export const metadata = {
 const about = () => {
     return (
         <>
-            <div className="px-5">
+            <div className="">
                 This is About page...
             </div>
         </>

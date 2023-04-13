@@ -11,13 +11,12 @@ export const metadata = {
 
 export default function ProductsLayout({ children }) {
   return (
-   
-        <div className="2xl:container text-2xl">
-          <CartProductsContextComponent>
-            {children}
-          </CartProductsContextComponent>
+    <div className="2xl:container text-2xl">
 
-        </div>
+      <CartProductsContextComponent>
+        {children}
+      </CartProductsContextComponent>
 
+    </div>
   )
 }

@@ -1,7 +1,9 @@
 import AddToCartHeaderCall from '@/app/components/cliants/AddToCartHeaderCall'
+import { getAllProductsData } from '@/utils/functions/getAllProducts';
 import React from 'react'
 
-const checkout = () => {
+const checkout = async () => {
+
     return (
         <>
             <div className="flex flex-col gap-x-5 gap-y-5 justify-evenly flex-wrap">

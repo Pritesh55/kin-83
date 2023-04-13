@@ -1,17 +1,15 @@
 'use client';
 import React from 'react'
-
 import ShowProducts from './ShowProducts';
-import { AddToCartHeader } from './AddToCartHeader';
 
 
-const ShowProductsCall = () => {
+
+
+const ShowProductsCall = async () => {
+
     return (
         <>
-            <div className="">
-                <ShowProducts></ShowProducts>
-            </div>
-
+            <ShowProducts></ShowProducts>
         </>
     )
 }

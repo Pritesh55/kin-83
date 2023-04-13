@@ -1,14 +1,8 @@
-'use client';
 import Image from 'next/image';
-import React, { useContext } from 'react'
-import { CartProductsContext } from '../contexts/createContext';
-import { AddToCartHeader } from './AddToCartHeader';
-
-const ProductsCard = ({ id, title, description, price, img, quantity,isAddedToCart }) => {
+import React from 'react'
 
 
-    const { addToCart } = useContext(CartProductsContext);
-
+const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => {
 
     return (
         <>
@@ -41,13 +35,7 @@ const ProductsCard = ({ id, title, description, price, img, quantity,isAddedToCa
                             {`${price} ₹`}
                         </p>
 
-                        <button onClick={() => { addToCart(id); }} className="flex px-4 py-2 bg-orange-200 text-black text-base font-medium rounded-md text-center">
-                            Add to cart
-                        </button>
 
-                        <h1 className="text-orange-600 font-medium text-xl capitalize">
-                            {`Now : ${isAddedToCart} `}
-                        </h1>
                     </div>
                 </div>
             </div>
@@ -59,4 +47,4 @@ const ProductsCard = ({ id, title, description, price, img, quantity,isAddedToCa
     )
 }
 
-export default ProductsCard
+export default ProductsCardAdmin
