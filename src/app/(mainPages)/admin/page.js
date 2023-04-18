@@ -1,5 +1,3 @@
-
-import AllProductsDisplay from '@/app/components/cliants/AllProductsDisplay';
 import ProductsCardAdmin from '@/app/componentsAdmin/ProductsCardAdmin';
 import dbConnect from '@/utils/database';
 import { PtModels2 } from '@/utils/models/allModel';
@@ -12,6 +10,7 @@ export const metadata = {
 }
 
 const Admin = async () => {
+    
     await dbConnect();
 
     const sortAllProductsList = await PtModels2.find().sort({ "id": 1 });

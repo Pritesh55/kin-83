@@ -64,7 +64,7 @@ const ApiNavbar = () => {
             <ul className="flex gap-x-5 flex-wrap gap-y-5 pb-10">
 
                 <h1 className="">
-                    {process.env.NODE_ENV} { }
+                    {process.env.NODE_ENV}
                 </h1>
 
                 <Link href='/api/product/sort' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
