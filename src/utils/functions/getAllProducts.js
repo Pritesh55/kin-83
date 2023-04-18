@@ -6,12 +6,12 @@ export const getAllProductsData = async () => {
 
   const URL = config.url;
 
-  console.log(`url is ${URL}`);
+  console.log(`url is ${process.env.PROD_URL}`);
 
 
-  const res = await fetch(`${URL}/api/product/sort`);
+  const res = await fetch(`${process.env.PROD_URL}/api/product/sort`);
 
-  console.log(`${URL}/api/product/sort`);
+  console.log(`${process.env.PROD_URL}/api/product/sort`);
   // -------------------------------------------------------------------
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.

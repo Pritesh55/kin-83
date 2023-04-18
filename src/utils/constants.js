@@ -1,9 +1,9 @@
 const production = {
-    url: 'https://kin-83.vercel.app'
+    url: process.env.PROD_URL
 };
 
 const development = {
-    url: 'http://localhost:3000'
+    url: process.env.LOCAL_URL
 };
 
 export const config =
