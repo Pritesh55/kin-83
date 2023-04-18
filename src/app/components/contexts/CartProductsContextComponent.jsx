@@ -19,7 +19,7 @@ import { CartProductsContext } from './createContext';
 
 {/* Context API 05 :: import child Component  */ }
 import ShowProducts from '../cliants/ShowProducts';
-import { getAllProductsData } from "@/utils/functions/getAllProducts";
+
 
 
 // userReducer 04 :: define (initialState) Object ::

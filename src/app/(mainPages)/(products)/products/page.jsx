@@ -2,7 +2,7 @@
 
 import AddToCartHeaderCall from '@/app/components/cliants/AddToCartHeaderCall'
 import ShowProductsCall from '@/app/components/cliants/ShowProductsCall'
-import { getAllProductsData } from '@/utils/functions/getAllProducts'
+
 
 import React from 'react'
 
