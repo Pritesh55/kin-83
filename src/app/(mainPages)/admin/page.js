@@ -10,8 +10,8 @@ export const metadata = {
 
 const Admin = async () => {
 
-    // const productsJSONObjectFS = await getAllProductsData();
-    // const productsArrayFS = productsJSONObjectFS.products;
+    const productsJSONObjectFS = await getAllProductsData();
+    const productsArrayFS = productsJSONObjectFS.products;
 
     return (
         <>
@@ -21,7 +21,7 @@ const Admin = async () => {
                         This is Admin page...
                     </div>
 
-                    {/* <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10'>
+                    <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10'>
                         {productsArrayFS.map((curItem, index) => {
                             return (
                                 <ProductsCardAdmin key={curItem.id}
@@ -29,7 +29,7 @@ const Admin = async () => {
                                 </ProductsCardAdmin>
                             )
                         })}
-                    </div> */}
+                    </div>
                 </div>
             </div>
 
