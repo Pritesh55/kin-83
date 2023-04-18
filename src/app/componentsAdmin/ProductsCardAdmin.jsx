@@ -1,14 +1,15 @@
 "use client"
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react'
 
 
-const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => {
+const ProductsCardAdmin = ({ key ,id, title, description, price, img, quantity }) => {
 
     return (
         <>
 
-            <div className="w-max max-w-sm border-orange-400 border-2 rounded-lg px-10 pt-5 pb-5 h-max">
+            <div key = {key} className="w-max max-w-sm border-orange-400 border-2 rounded-lg px-10 pt-5 pb-5 h-max">
 
                 <h6 className="mb-2 text-2xl font-semibold text-orange-500 text-center">{`${id}`}</h6>
 
@@ -35,7 +36,6 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
                         <p className="text-2xl text-black font-semibold">
                             {`${price} ₹`}
                         </p>
-
 
                     </div>
                 </div>

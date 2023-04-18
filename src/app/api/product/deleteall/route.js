@@ -16,7 +16,7 @@ export async function GET(request) {
     // console.log(deleteAllProduct);
     // console.log(`--------------------------------------------`);
 
-    const allProductsList = await PtModels2.find();
+    const allProductsList = await PtModels2.find().sort({ "id": 1 });
 
     return NextResponse.json({
         success: true,

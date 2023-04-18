@@ -1,9 +1,12 @@
 
-import Link from 'next/link'
+
+
 import Header from './components/servers/header'
 import dbConnect from '@/utils/database';
 import { PtModels2 } from '@/utils/models/allModel';
 import ProductsCardAdmin from './componentsAdmin/ProductsCardAdmin';
+import ApiNavbar from './components/cliants/ApiNavbar';
+
 
 export const metadata = {
   title: 'Home Page',
@@ -30,37 +33,18 @@ export default async function Home() {
         </div>
         <main className="px-5">
 
-          <ul className="flex gap-x-5 flex-wrap gap-y-5 pb-10">
 
-            <h1 className="">
-              {process.env.NODE_ENV} { }
-            </h1>
+          <ApiNavbar></ApiNavbar>
 
-            <Link href='/api/product/sort' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full'>
-              Sort
-            </Link>
+ 
 
-            <Link href='/api/product/read' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full'>
-              Read
-            </Link>
-
-            <Link href='/api/product/addall' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full'>
-              Add all
-            </Link>
-
-            <Link href='/api/product/deleteall' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full'>
-              delete all
-            </Link>
-          </ul>
-
-          <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10'>
-
+          <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10 mt-10'>
 
 
             {sortAllProductsArray.map((curItem, index) => {
               return (
                 <>
-                  <ProductsCardAdmin key={curItem.id}
+                  <ProductsCardAdmin key={index}
                     id={sortAllProductsArray[index].id}
                     img={sortAllProductsArray[index].img}
                     title={sortAllProductsArray[index].title}
@@ -72,8 +56,6 @@ export default async function Home() {
               )
             })}
           </div>
-
-
 
         </main>
       </div>

@@ -56,9 +56,6 @@ export async function GET(request) {
                 img: "https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
                 quantity: 1,
                 isAddedToCart: false,
-
-
-
             },
             {
                 id: 6,
@@ -68,9 +65,6 @@ export async function GET(request) {
                 img: "https://images-na.ssl-images-amazon.com/images/I/71A9Vo1BatL._SL1500_.jpg",
                 quantity: 1,
                 isAddedToCart: false,
-
-
-
             },
             {
                 id: 7,
@@ -80,9 +74,6 @@ export async function GET(request) {
                 img: "https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
                 quantity: 1,
                 isAddedToCart: false,
-
-
-
             },
             {
                 id: 8,
@@ -92,9 +83,6 @@ export async function GET(request) {
                 img: "https://images-na.ssl-images-amazon.com/images/I/71hIfcIPyxS._SL1500_.jpg",
                 quantity: 1,
                 isAddedToCart: false,
-
-
-
             },
             {
                 id: 9,
@@ -104,9 +92,6 @@ export async function GET(request) {
                 img: "https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
                 quantity: 1,
                 isAddedToCart: false,
-
-
-
             },
             {
                 id: 10,

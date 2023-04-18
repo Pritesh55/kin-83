@@ -13,28 +13,40 @@ export async function POST(request) {
     //     "description": "White in color",
     //     "price": "89500",
     //     "img": "varun://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-    //     "quantity": 5
+    //     "quantity": 5,
+
     // }
 
-    const { id, title, description, price, img, quantity } = await request.json();
+    const { id, title, description, price, img, quantity, isAddedToCart } = await request.json();
 
-    await PtModels2.create({
-        id,
+    // console.log(data);
+
+    const idNum = Number(id);
+    const priceNum = Number(price);
+    const createProductdata = {
+        id: idNum,
         title,
         description,
-        price,
+        price: priceNum,
         img,
-        quantity
-    },);
+        quantity,
+        isAddedToCart
+    };
 
-    const res = await fetch("http://localhost:3000/api/product/post",
-        {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-    );
+    // console.log(id);
+    // console.log(title);
+    // console.log(description);
+
+    await PtModels2.create(createProductdata);
+
+    // const res = await fetch("http://localhost:3000/api/product/post",
+    //     {
+    //         method: "POST",
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     }
+    // );
 
 
     // console.log(`-----------------------------------`);
@@ -47,7 +59,10 @@ export async function POST(request) {
     return NextResponse.json({
         success: true,
         message: "Jio Phone Next :: New Product created Successfully...",
-        sortAllProductsList : sortAllProductsList
+        method: request.method,
+        sortAllProductsList: sortAllProductsList,
+        message: "This is Pritesh POST Data",
+        createProductdata: createProductdata
     });
 
 

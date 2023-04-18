@@ -17,7 +17,7 @@ export async function GET(request) {
 
     return NextResponse.json({
         success: true,
-        message: "Product sorted Successfully...",
+        message: "Product Read Successfully...",
         products: readAllProductsList
     });
 
