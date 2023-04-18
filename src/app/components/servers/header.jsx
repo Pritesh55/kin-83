@@ -2,10 +2,9 @@ import Link from 'next/link'
 import React from 'react'
 
 const Header = () => {
-    
     return (
         
-        <div className='text-xl font-semibold flex justify-between w-full'>
+        <div className='text-xl font-semibold flex justify-between w-full '>
 
             <Link href="/">
                 Home
