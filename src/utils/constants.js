@@ -1,5 +1,5 @@
 const production = {
-    url: 'https://<project-name>.herokuapp.com'
+    url: 'https://kin-83.vercel.app/'
 };
 
 const development = {
