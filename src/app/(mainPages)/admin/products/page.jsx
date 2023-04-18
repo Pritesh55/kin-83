@@ -13,10 +13,9 @@ export const metadata = {
 
 const Products = async () => {
 
-    
 
-    // const productsJSONObjectFS = await getAllProductsData();
-    // const productsArrayFS = productsJSONObjectFS.products;
+    const productsJSONObjectFS = await getAllProductsData();
+    const productsArrayFS = productsJSONObjectFS.products;
 
     return (
         <>
@@ -26,8 +25,8 @@ const Products = async () => {
                 </div>
 
                 <div className="flex flex-col gap-y-10">
-                    {/* <ShowProductsCall productsArrayFS= {productsArrayFS}></ShowProductsCall> */}
-                    <ShowProductsCall ></ShowProductsCall>
+                    <ShowProductsCall productsArrayFS= {productsArrayFS}></ShowProductsCall>
+                    {/* <ShowProductsCall ></ShowProductsCall> */}
                 </div>
             </div>
 

@@ -1,6 +1,7 @@
 
 import ProductsCardAdmin from '@/app/componentsAdmin/ProductsCardAdmin';
 import { getAllProductsData } from '@/utils/functions/getAllProducts';
+
 import React from 'react'
 
 export const metadata = {
@@ -12,6 +13,9 @@ const Admin = async () => {
 
     const productsJSONObjectFS = await getAllProductsData();
     const productsArrayFS = productsJSONObjectFS.products;
+
+
+    console.log(productsArrayFS);
 
     return (
         <>
