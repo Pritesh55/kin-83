@@ -1,5 +1,5 @@
 const production = {
-    url: 'https://kin-83.vercel.app/'
+    url: 'https://kin-83.vercel.app'
 };
 
 const development = {
