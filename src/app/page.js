@@ -1,6 +1,9 @@
 
 import Link from 'next/link'
 import Header from './components/servers/header'
+import dbConnect from '@/utils/database';
+import { PtModels2 } from '@/utils/models/allModel';
+import ProductsCardAdmin from './componentsAdmin/ProductsCardAdmin';
 
 export const metadata = {
   title: 'Home Page',
@@ -10,38 +13,67 @@ export const metadata = {
 
 export default async function Home() {
 
+  await dbConnect();
+
+  // console.log("Now , Lets's Add data in Database");
+
+  const sortAllProductsList = await PtModels2.find().sort({ "id": 1 });
+  const sortAllProductsArray = [...sortAllProductsList];
 
   return (
     <>
 
-      <div className="flex flex-col gap-y-10">
+      <div className="flex flex-col gap-y-10 pb-20">
+
         <div className="w-full bg-antiquewhite rounded-b-full px-20 py-2">
           <Header></Header>
         </div>
         <main className="px-5">
 
-
-          <ul className="flex gap-x-5 flex-wrap gap-y-5">
+          <ul className="flex gap-x-5 flex-wrap gap-y-5 pb-10">
 
             <h1 className="">
-              {process.env.NODE_ENV}
+              {process.env.NODE_ENV} { }
             </h1>
-            <Link href='/api/product/sort' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full'>
+
+            <Link href='/api/product/sort' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full'>
               Sort
             </Link>
 
-            <Link href='/api/product/read' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full'>
+            <Link href='/api/product/read' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full'>
               Read
             </Link>
 
-            <Link href='/api/product/addall' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full'>
+            <Link href='/api/product/addall' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full'>
               Add all
             </Link>
 
-            <Link href='/api/product/deleteall' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full'>
+            <Link href='/api/product/deleteall' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full'>
               delete all
             </Link>
           </ul>
+
+          <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10'>
+
+
+
+            {sortAllProductsArray.map((curItem, index) => {
+              return (
+                <>
+                  <ProductsCardAdmin key={curItem.id}
+                    id={sortAllProductsArray[index].id}
+                    img={sortAllProductsArray[index].img}
+                    title={sortAllProductsArray[index].title}
+                    description={sortAllProductsArray[index].description}
+                    price={sortAllProductsArray[index].price}
+                  >
+                  </ProductsCardAdmin>
+                </>
+              )
+            })}
+          </div>
+
+
 
         </main>
       </div>
