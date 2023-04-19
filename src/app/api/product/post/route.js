@@ -52,7 +52,7 @@ export async function POST(request) {
     // console.log(`-----------------------------------`);
     // console.log(readAllProductsList);
     // console.log(`---------------------------------`);
-    const sortAllProductsList = await PtModels2.find().sort({ "id": 1 });
+    const sortAllProductsList = await PtModels2.find();
 
 
 

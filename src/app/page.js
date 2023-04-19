@@ -20,7 +20,7 @@ export default async function Home() {
 
   // console.log("Now , Lets's Add data in Database");
 
-  const sortAllProductsList = await PtModels2.find().sort({ "id": 1 });
+  const sortAllProductsList = await PtModels2.find();
   const sortAllProductsArray = [...sortAllProductsList];
 
   return (

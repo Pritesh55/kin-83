@@ -1,3 +1,4 @@
+import ApiNavbar from '@/app/components/cliants/ApiNavbar';
 import ProductsCardAdmin from '@/app/componentsAdmin/ProductsCardAdmin';
 import dbConnect from '@/utils/database';
 import { PtModels2 } from '@/utils/models/allModel';
@@ -13,7 +14,7 @@ const Admin = async () => {
 
     await dbConnect();
 
-    const sortAllProductsList = await PtModels2.find().sort({ "id": 1 });
+    const sortAllProductsList = await PtModels2.find();
     const sortAllProductsArray = [...sortAllProductsList];
 
   
@@ -30,6 +31,8 @@ const Admin = async () => {
                     <div className="">
                         This is Admin page...
                     </div>
+
+                    <ApiNavbar></ApiNavbar>
 
                     <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10'>
 
