@@ -6,6 +6,8 @@ import dbConnect from '@/utils/database';
 import { PtModels2 } from '@/utils/models/allModel';
 import ApiNavbar from './components/cliants/ApiNavbar';
 import Image from 'next/image';
+import axios from 'axios';
+import { GET } from './api/product/read/route';
 
 
 
@@ -17,13 +19,9 @@ export const metadata = {
 
 export default async function Home() {
 
-
   await dbConnect();
-
-  // console.log("Now , Lets's Add data in Database");
-
-  const sortAllProductsList = await PtModels2.find();
-  const sortAllProductsArray = [...sortAllProductsList];
+  const sortAllProductsArray = await GET();
+  console.log(sortAllProductsArray);
 
   return (
     <>
@@ -35,10 +33,7 @@ export default async function Home() {
         </div>
         <main className="px-5">
 
-
           <ApiNavbar></ApiNavbar>
-
-
 
           <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10 mt-10'>
 

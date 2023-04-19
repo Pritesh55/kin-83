@@ -13,9 +13,8 @@ export const metadata = {
 const Admin = async () => {
 
     await dbConnect();
-
-    const sortAllProductsList = await PtModels2.find();
-    const sortAllProductsArray = [...sortAllProductsList];
+    const sortAllProductsArray = await GET();
+    console.log(sortAllProductsArray);
 
 
 

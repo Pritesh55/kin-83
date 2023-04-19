@@ -5,7 +5,6 @@ import React, { useState } from 'react'
 import { useRouter } from "next/navigation";
 
 import axios from 'axios';
-import { Router } from 'next/router';
 
 const ApiNavbar = () => {
 
@@ -14,7 +13,7 @@ const ApiNavbar = () => {
     const refreshPage = () => {
         //this will reload the page without doing SSR
 
-        Router.refresh();
+        router.refresh();
         console.log('refreshPage');
     }
 
@@ -87,7 +86,7 @@ const ApiNavbar = () => {
                     delete all
                 </a>
 
-                <button className="text-lg pl-5 pr-10 pt-4 pb-4 bg-yellow-400 text-black rounded-br-[64px] flex justify-center items-center" onClick={() => { }}> Refresh</button>
+                <button className="text-lg pl-5 pr-10 pt-4 pb-4 bg-yellow-400 text-black rounded-br-[64px] flex justify-center items-center" onClick={() => { refreshPage()}}> Refresh</button>
             </ul>
 
             <div className="">
