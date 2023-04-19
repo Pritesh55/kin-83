@@ -98,14 +98,14 @@ const CartProductsContextComponent = ({ children, ...pageProps }) => {
 
 
 
-    useEffect(() => {
-        dispatch(
-            {
-                type: "TOTAL_ITEM",
+    // useEffect(() => {
+    //     dispatch(
+    //         {
+    //             type: "TOTAL_ITEM",
 
-            }
-        );
-    }, [state.item]);
+    //         }
+    //     );
+    // }, [state.item]);
 
 
 

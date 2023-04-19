@@ -146,35 +146,35 @@ export const reducer = (state, action) => {
 
 
 
-    if (action.type === "TOTAL_ITEM") {
+    // if (action.type === "TOTAL_ITEM") {
 
-        let { totalItem, totalAmount } = state.item.reduce(
-            // fat arrow function
-            (acc, curObject) => {
-                let { isAddedToCart, quantity, price } = curObject;
+    //     let { totalItem, totalAmount } = state.item.reduce(
+    //         // fat arrow function
+    //         (acc, curObject) => {
+    //             let { isAddedToCart, quantity, price } = curObject;
 
-                if (isAddedToCart === true) {
-                    acc.totalItem = acc.totalItem + quantity;
+    //             if (isAddedToCart === true) {
+    //                 acc.totalItem = acc.totalItem + quantity;
 
-                    let totalPrice = price * quantity;
-                    acc.totalAmount = acc.totalAmount + totalPrice;
-                }
+    //                 let totalPrice = price * quantity;
+    //                 acc.totalAmount = acc.totalAmount + totalPrice;
+    //             }
 
-                return acc;
-            },
-            // intial Value
-            {
-                totalItem: 0,
-                totalAmount: 0
-            }
-        );
-        // So, Now Total Item vlaue is Updated...
+    //             return acc;
+    //         },
+    //         // intial Value
+    //         {
+    //             totalItem: 0,
+    //             totalAmount: 0
+    //         }
+    //     );
+    //     // So, Now Total Item vlaue is Updated...
 
-        return {
-            // destructure the intialState object into key-value pairs....
-            ...state, totalItem, totalAmount
-        }
-    }
+    //     return {
+    //         // destructure the intialState object into key-value pairs....
+    //         ...state, totalItem, totalAmount
+    //     }
+    // }
 
     return state;
 }
