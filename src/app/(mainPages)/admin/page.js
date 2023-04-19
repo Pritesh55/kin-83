@@ -1,7 +1,5 @@
 import { GET } from '@/app/api/product/read/route';
 import ApiNavbar from '@/app/components/cliants/ApiNavbar';
-import dbConnect from '@/utils/database';
-import { PtModels2 } from '@/utils/models/allModel';
 import Image from 'next/image';
 
 import React from 'react'
@@ -13,9 +11,8 @@ export const metadata = {
 
 const Admin = async () => {
 
-    await dbConnect();
     const sortAllProductsArray = await GET();
-    console.log(sortAllProductsArray);
+    console.log(`Admin Page :: sortAllProductsArray :: ${sortAllProductsArray} `);
 
 
 
