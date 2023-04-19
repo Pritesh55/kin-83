@@ -1,3 +1,4 @@
+"use client"
 import dbConnect from '@/utils/database';
 import mongoose from 'mongoose';
 import { NextResponse } from 'next/server';
