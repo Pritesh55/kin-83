@@ -31,7 +31,6 @@ const ptSchema2 = new mongoose.Schema(
 );
 
 console.log("now performing :: make models Empty");
-mongoose.models = {};
 
 console.log("now performing :: making ptModel");
 

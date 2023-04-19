@@ -6,7 +6,7 @@ export async function GET(request) {
 
     await dbConnect();
 
-    const readAllProductsList = await PtModels2.find();
+    const readAllProductsList = await PtModels2.find({});
 
     // console.log(`-----------------------------------`);
     // console.log(readAllProductsList);
