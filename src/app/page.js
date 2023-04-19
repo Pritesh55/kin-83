@@ -45,11 +45,11 @@ export default async function Home() {
               return (
                 <>
                   <ProductsCardAdmin key={index}
-                    id={sortAllProductsArray[index].id}
-                    img={sortAllProductsArray[index].img}
-                    title={sortAllProductsArray[index].title}
-                    description={sortAllProductsArray[index].description}
-                    price={sortAllProductsArray[index].price}
+                    id={curItem.id}
+                    img={curItem.img}
+                    title={curItem.title}
+                    description={curItem.description}
+                    price={curItem.price}
                   >
                   </ProductsCardAdmin>
                 </>

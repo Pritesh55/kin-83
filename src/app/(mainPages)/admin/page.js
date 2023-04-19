@@ -10,11 +10,13 @@ export const metadata = {
 }
 
 const Admin = async () => {
-    
+
     await dbConnect();
 
     const sortAllProductsList = await PtModels2.find().sort({ "id": 1 });
     const sortAllProductsArray = [...sortAllProductsList];
+
+  
 
     // const productsJSONObjectFS = await getAllProductsData();
     // const productsArrayFS = productsJSONObjectFS.products;
@@ -35,11 +37,11 @@ const Admin = async () => {
                             return (
                                 <>
                                     <ProductsCardAdmin key={index}
-                                        id={sortAllProductsArray[index].id}
-                                        img={sortAllProductsArray[index].img}
-                                        title={sortAllProductsArray[index].title}
-                                        description={sortAllProductsArray[index].description}
-                                        price={sortAllProductsArray[index].price}
+                                        id={curItem.id}
+                                        img={curItem.img}
+                                        title={curItem.title}
+                                        description={curItem.description}
+                                        price={curItem.price}
                                     >
                                     </ProductsCardAdmin>
                                 </>
