@@ -1,5 +1,6 @@
 import dbConnect from "@/utils/database";
 import { PtModels2 } from "@/utils/models/allModel";
+import { NextResponse } from "next/server";
 
 export async function GET(request) {
 
@@ -12,11 +13,11 @@ export async function GET(request) {
     // console.log(`---------------------------------`);
 
 
-    // return NextResponse.json({
-    //     success: true,
-    //     message: "Product Read Successfully...",
-    //     products: readAllProductsList
-    // });
+    return NextResponse.json({
+        success: true,
+        message: "Product Read Successfully...",
+        products: readAllProductsList
+    });
 
-    return readAllProductsList;
+    // return readAllProductsList;
 }

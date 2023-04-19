@@ -4,7 +4,6 @@
 import Header from './components/servers/header'
 import ApiNavbar from './components/cliants/ApiNavbar';
 import Image from 'next/image';
-import { GET } from './api/product/read/route';
 
 export const metadata = {
   title: 'Home Page',
@@ -13,8 +12,8 @@ export const metadata = {
 
 export default async function Home() {
 
-  const sortAllProductsArray = await GET();
-  console.log(`Home Page :: sortAllProductsArray :: ${sortAllProductsArray} `);
+  // const sortAllProductsArray = await GET();
+  // console.log(`Home Page :: sortAllProductsArray :: ${sortAllProductsArray} `);
 
   return (
     <>
@@ -30,7 +29,7 @@ export default async function Home() {
 
           <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10 mt-10'>
 
-            {sortAllProductsArray.map((curItem, index) => {
+            {/* {sortAllProductsArray.map((curItem, index) => {
               return (
                 <>
                   <div key={index} className="w-max max-w-sm border-orange-400 border-2 rounded-lg px-10 pt-5 pb-5 h-max">
@@ -66,7 +65,7 @@ export default async function Home() {
                   </div>
                 </>
               )
-            })}
+            })} */}
           </div>
 
         </main>
