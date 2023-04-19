@@ -18,7 +18,7 @@ import { useEffect } from "react";
 import { CartProductsContext } from './createContext';
 
 {/* Context API 05 :: import child Component  */ }
-import ShowProducts from '../cliants/ShowProducts';
+// import ShowProducts from '../cliants/ShowProducts';
 
 
 
@@ -33,7 +33,7 @@ const initialState = {
 // const CartProductsContextComponent = ({kyoData}) => {
 {/* @ts-expect-error Async Server Component */ }
 const CartProductsContextComponent = ({ children, ...pageProps }) => {
-    let products13 = pageProps.productsArrayFS;
+
 
     console.log("Enter 0");
     // userReducer 01 :: create (userReducer) hook....
