@@ -8,7 +8,7 @@ export async function GET(request) {
 
     await dbConnect();
 
-    const readAllProductsList = await PtModels2.find().sort({ "id": 1 });
+    const readAllProductsList = await PtModels2.find();
 
     // console.log(`-----------------------------------`);
     // console.log(readAllProductsList);
