@@ -1,13 +1,12 @@
 
-import React, { useContext, useEffect, useState } from 'react'
-import { CartProductsContext } from '../contexts/createContext';
-import Image from 'next/image';
-import Link from 'next/link';
+import React, { useContext} from 'react'
+import CartProductsContextComponent from '../contexts/CartProductsContextComponent';
+
 
 
 export const AddToCartHeader = ({children}) => {
 
-    const { totalItem, totalAmount } = useContext(CartProductsContext);
+    const { totalItem, totalAmount } = useContext(CartProductsContextComponent);
 
     return (
         <div className="flex justify-between px-10 gap-x-20 h-16">
