@@ -71,13 +71,13 @@ const ApiNavbar = () => {
                     {process.env.NODE_ENV}
                 </h1>
 
-                <Link href='/api/product/sort' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
+                <a href='/api/product/sort' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
                     Sort
-                </Link>
+                </a>
 
-                <Link href='/api/product/read' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
+                <a href='/api/product/read' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
                     Read
-                </Link>
+                </a>
 
                 <a href='/api/product/addall' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
                     Add all
