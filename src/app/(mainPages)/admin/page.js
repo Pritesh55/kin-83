@@ -1,3 +1,4 @@
+import { GET } from '@/app/api/product/read/route';
 import ApiNavbar from '@/app/components/cliants/ApiNavbar';
 import dbConnect from '@/utils/database';
 import { PtModels2 } from '@/utils/models/allModel';
