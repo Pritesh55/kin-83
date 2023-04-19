@@ -1,20 +1,27 @@
-
-import dbConnect from "@/utils/database";
-import { NextResponse } from "next/server";
+import dbConnect from '@/utils/database';
+import mongoose from 'mongoose';
+import { NextResponse } from 'next/server';
 
 export async function GET(request) {
 
   await dbConnect();
 
-  // console.log("Now , lET'S cREATE dATA")
+  const Cat = mongoose.models.Cat || mongoose.model('Cat', { name: String });
+  const kitty =  Cat.create({name: "VarunDev"});
 
-  // console.log(`--------------------------------------------`);
-  // console.log(`---------        The END       ---------`);
-  // console.log(`--------------------------------------------`);
+  let  readkitty = await Cat.find({});
+
+  // console.log(`-----------------------------------`);
+  // console.log(readAllProductsList);
+  // console.log(`---------------------------------`);
+
 
   return NextResponse.json({
     success: true,
-    message: "Product created Successfully...",
-  }
-  );
+    message: "Product Read Successfully...",
+    products: readkitty
+  });
+
+  // return readAllProductsList;
 }
+

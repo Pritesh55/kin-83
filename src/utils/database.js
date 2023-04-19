@@ -2,8 +2,11 @@ import mongoose from 'mongoose'
 
 const dbConnect = async () => {
     try {
-        
-        const { connection } = await mongoose.connect('mongodb+srv://kin83:kashi8320@cluster0.afhdeml.mongodb.net/?retryWrites=true&w=majority');
+
+        const { connection } = await mongoose.connect('mongodb+srv://kin83:kashi8320@cluster0.afhdeml.mongodb.net/?retryWrites=true&w=majority', {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
 
         console.log(`\n \n--------------------------------------------`);
         console.log(`Your DataBase is Connected to :: \n${connection.host}`);

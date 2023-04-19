@@ -32,11 +32,5 @@ const ptSchema2 = new mongoose.Schema(
     }
 );
 
-// console.log("now performing :: make models Empty");
-
-// console.log("now performing :: making ptModel");
-
-mongoose.models = {};
-
 export const PtModels2 = mongoose.model("PtModels2", ptSchema2);
 
