@@ -5,6 +5,7 @@ import { NextResponse } from 'next/server';
 export async function GET(request) {
 
   await dbConnect();
+ 
 
   const Cat = mongoose.models.Cat || mongoose.model('Cat', { name: String });
   const kitty =  Cat.create({name: "VarunDev"});
