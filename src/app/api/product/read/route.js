@@ -8,9 +8,9 @@ export async function GET(request) {
 
     const readAllProductsList = await PtModels2.find({});
 
-    // console.log(`-----------------------------------`);
-    // console.log(readAllProductsList);
-    // console.log(`---------------------------------`);
+    console.log(`-----------------------------------`);
+    console.log(readAllProductsList);
+    console.log(`---------------------------------`);
 
 
     return NextResponse.json({
