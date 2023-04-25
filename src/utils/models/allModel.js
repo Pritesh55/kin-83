@@ -34,6 +34,6 @@ const ptSchema2 = new mongoose.Schema(
 
 
 // mongoose.models = {};
-const PtModels2 = mongoose.models.PtModels2  || mongoose.model("PtModels3", ptSchema2 );
+export default mongoose.models.PtModels2 ;
 
-export default PtModels2;
+
