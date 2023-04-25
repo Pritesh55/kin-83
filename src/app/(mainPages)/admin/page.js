@@ -1,7 +1,7 @@
-import { GET } from '@/app/api/product/read/route';
 import ApiNavbar from '@/app/components/cliants/ApiNavbar';
+import ProductsDisplayAdmin from '@/app/componentsAdmin/ProductsDisplayAdmin';
 import { getAllProductsData } from '@/utils/functions/getAllProducts';
-import Image from 'next/image';
+
 
 import React from 'react'
 
@@ -12,8 +12,8 @@ export const metadata = {
 
 const Admin = async () => {
 
-    // const productsJSONObjectFS = await getAllProductsData();
-    // const productsArrayFS = productsJSONObjectFS.products;
+    const productsJSONObjectFS = await getAllProductsData();
+    const productsArrayFS = productsJSONObjectFS.products;
     // console.log(productsArrayFS);
 
     return (
@@ -26,9 +26,8 @@ const Admin = async () => {
 
                     <ApiNavbar></ApiNavbar>
 
-                    <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10'>
-
-                        {/* {sortAllProductsArray.map((curItem, index) => {
+                    {/* <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10'>
+                        {sortAllProductsArray.map((curItem, index) => {
                             return (
                                 <>
                                     <div key={index} className="w-max max-w-sm border-orange-400 border-2 rounded-lg px-10 pt-5 pb-5 h-max">
@@ -64,18 +63,16 @@ const Admin = async () => {
                                     </div>
                                 </>
                             )
-                        })} */}
-                    </div>
-
-                    {/* <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10'>
-                        {productsArrayFS.map((curItem, index) => {
-                            return (
-                                <ProductsCardAdmin key={curItem.id}
-                                    {...curItem}>
-                                </ProductsCardAdmin>
-                            )
                         })}
                     </div> */}
+
+                    {(productsArrayFS != undefined) ?
+                        <ProductsDisplayAdmin></ProductsDisplayAdmin>
+                        : <></>
+                    }
+
+
+
                 </div>
             </div>
 

@@ -14,6 +14,9 @@ const ApiNavbar = () => {
         //this will reload the page without doing SSR
 
         router.refresh();
+        router.refresh();
+        router.refresh();
+        router.refresh();
         console.log('refreshPage');
     }
 

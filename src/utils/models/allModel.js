@@ -32,5 +32,7 @@ const ptSchema2 = new mongoose.Schema(
     }
 );
 
+mongoose.models = {};
+
 export const PtModels2 = mongoose.model("PtModels2", ptSchema2);
 
