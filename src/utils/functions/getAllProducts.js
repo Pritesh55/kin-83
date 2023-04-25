@@ -1,25 +1,20 @@
 
-import { config } from '../constants';
+// import { config } from '../constants';
 
-export const getAllProductsData = async () => {
+// export const getAllProductsData = async () => {
 
-  const URL = config.url;
+//   const URL = config.url;
   
-  console.log(`url is ${URL}`);
+//   console.log(`url is ${URL}`);
 
-  const res = await fetch(`${URL}/api/product/read`);
+//   const res = await fetch(`${URL}/api/product/read`);
 
-  console.log(`${URL}/api/product/read`);
-  // -------------------------------------------------------------------
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
+//   console.log(`${URL}/api/product/read`);
 
+//   if (!res.ok) {
+   
+//     throw new Error('getAllProductsData :: Failed to fetch data from HERE');
+//   }
 
-  // Recommendation: handle errors
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('getAllProductsData :: Failed to fetch data from HERE');
-  }
-
-  return res.json();
-}
+//   return res.json();
+// }

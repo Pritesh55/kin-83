@@ -12,8 +12,8 @@ export const metadata = {
 
 const Admin = async () => {
 
-    const productsJSONObjectFS = await getAllProductsData();
-    const productsArrayFS = productsJSONObjectFS.products;
+    // const productsJSONObjectFS = await getAllProductsData();
+    // const productsArrayFS = productsJSONObjectFS.products;
     // console.log(productsArrayFS);
 
     return (
@@ -67,7 +67,7 @@ const Admin = async () => {
                     </div> */}
 
 
-                    <ProductsDisplayAdmin></ProductsDisplayAdmin>
+                    {/* <ProductsDisplayAdmin></ProductsDisplayAdmin> */}
 
 
 
