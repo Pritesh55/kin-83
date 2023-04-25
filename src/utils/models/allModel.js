@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { model, models } from "mongoose";
 
 
 
@@ -32,7 +32,8 @@ const ptSchema2 = new mongoose.Schema(
     }
 );
 
-mongoose.models = {};
 
-export const PtModels2 = mongoose.model("PtModels2", ptSchema2);
+// mongoose.models = {};
+const PtModels2 = mongoose.models.PtModels2  || mongoose.model("PtModels3", ptSchema2 );
 
+export default PtModels2;

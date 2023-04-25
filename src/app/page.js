@@ -1,6 +1,6 @@
 import Header from './components/servers/header'
 import ApiNavbar from './components/cliants/ApiNavbar';
-import { getAllProductsData } from '@/utils/functions/getAllProducts';
+// import { getAllProductsData } from '@/utils/functions/getAllProducts';
 import ProductsCardAdmin from './componentsAdmin/ProductsCardAdmin';
 
 export const metadata = {
@@ -15,12 +15,12 @@ export const revalidate = 1;
 
 export default async function Home() {
 
-  const productsJSONObjectFS = await getAllProductsData();
-  const productsArrayFS = productsJSONObjectFS.products;
+  // const productsJSONObjectFS = await getAllProductsData();
+  // const productsArrayFS = productsJSONObjectFS.products;
 
-  console.log(` --------------------------- productsArrayFS --------------------------- `);
-  console.log(productsArrayFS);
-  console.log(` --------------------------- productsArrayFS --------------------------- `);
+  // console.log(` --------------------------- productsArrayFS --------------------------- `);
+  // console.log(productsArrayFS);
+  // console.log(` --------------------------- productsArrayFS --------------------------- `);
 
   return (
     <>
@@ -75,7 +75,7 @@ export default async function Home() {
             })}
           </div> */}
 
-
+{/* 
           <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly py-10'>
             {productsArrayFS.map((curItem, index) => {
               return (
@@ -84,7 +84,7 @@ export default async function Home() {
                 </ProductsCardAdmin>
               )
             })}
-          </div>
+          </div> */}
 
         </main>
       </div>

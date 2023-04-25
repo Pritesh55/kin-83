@@ -9,7 +9,7 @@ export const getAllProductsData = async () => {
 
   const res = await fetch(`${URL}/api/product/read`);
 
-  console.log(`${URL}/api/product/sort`);
+  console.log(`${URL}/api/product/read`);
   // -------------------------------------------------------------------
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
