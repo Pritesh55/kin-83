@@ -20,7 +20,7 @@ export async function GET(request) {
 
 
     console.log(`-----------------------------------`);
-    console.log(readptModels2);
+    // console.log(readptModels2);
     console.log(`---------------------------------`);
 
 

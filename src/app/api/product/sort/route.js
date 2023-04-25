@@ -10,7 +10,7 @@ export async function GET(request) {
 
     console.log("Now , Lets's Add data in Database");
 
-    const sortAllProductsList = await mongoose.connection.db.collection('ptmodels2').find({}).sort({ "id": 1 });
+    let sortAllProductsList = await mongoose.connection.db.collection('ptmodels2').find({}).sort({ "id": 1 }).toArray();
 
     // console.log(`--------------------------------------------`);
     // console.log(sortAllProductsList);

@@ -39,7 +39,7 @@ export async function POST(request) {
     // console.log(description);
 
     // await PtModels2.create(createProductdata);
-    await mongoose.connection.db.collection('ptmodels2').create(createProductdata);
+    await mongoose.connection.db.collection('ptmodels2').insertOne( createProductdata);
 
     // const res = await fetch("http://localhost:3000/api/product/post",
     //     {
@@ -54,7 +54,7 @@ export async function POST(request) {
     // console.log(`-----------------------------------`);
     // console.log(readAllProductsList);
     // console.log(`---------------------------------`);
-    const sortAllProductsList = await mongoose.connection.db.collection('ptmodels2').find();
+    let sortAllProductsList = await mongoose.connection.db.collection('ptmodels2').find().toArray();;
 
 
 

@@ -12,10 +12,6 @@ export const metadata = {
 
 const Admin = async () => {
 
-    // const productsJSONObjectFS = await getAllProductsData();
-    // const productsArrayFS = productsJSONObjectFS.products;
-    // console.log(productsArrayFS);
-
     return (
         <>
             <div className="px-5 2xl:container text-2xl">
@@ -67,10 +63,7 @@ const Admin = async () => {
                     </div> */}
 
 
-                    {/* <ProductsDisplayAdmin></ProductsDisplayAdmin> */}
-
-
-
+                    <ProductsDisplayAdmin></ProductsDisplayAdmin>
 
                 </div>
             </div>

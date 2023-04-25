@@ -1,9 +1,7 @@
 "use client"
-import Link from 'next/link'
-import React, { useState } from 'react'
 
+import React, { useState } from 'react';
 import { useRouter } from "next/navigation";
-
 import axios from 'axios';
 
 const ApiNavbar = () => {
@@ -13,10 +11,9 @@ const ApiNavbar = () => {
     const refreshPage = () => {
         //this will reload the page without doing SSR
 
-        router.refresh();
-        router.refresh();
-        router.refresh();
-        router.refresh();
+        router.push('/admin');
+        router.push('/admin');
+        router.push('/admin');
         console.log('refreshPage');
     }
 
@@ -61,13 +58,10 @@ const ApiNavbar = () => {
         setimg('');
     }
 
-
-
-
     return (
         <>
 
-            <ul className="flex gap-x-5 flex-wrap gap-y-5 pb-10">
+            <ul className="flex gap-x-5 flex-wrap gap-y-5">
 
                 <h1 className="">
                     {process.env.NODE_ENV}
@@ -89,155 +83,154 @@ const ApiNavbar = () => {
                     delete all
                 </a>
 
-                <button className="text-lg pl-5 pr-10 pt-4 pb-4 bg-yellow-400 text-black rounded-br-[64px] flex justify-center items-center" onClick={() => { refreshPage()}}> Refresh</button>
+                <button className="text-lg pl-5 pr-10 pt-4 pb-4 bg-yellow-400 text-black rounded-br-[64px] flex justify-center items-center" onClick={() => { refreshPage() }}> Refresh</button>
+
+
+                {/*  className={`text-lg h-max w-max text-black 
+                pl-6 pr-12 py-4 rounded-r-full bg-yellow-400
+               `}
+                // ${!isOpenCNP && 'pl-6 pr-12 py-4 rounded-r-full bg-yellow-400'}  
+                // ${isOpenCNP && 'px-6 py-4 ml-auto mr-2 rounded-full bg-yellow-500'} */}
+                <button className={`text-lg pl-3 pr-6 py-2 text-black rounded-r-full h-max
+                 ${!isOpenCNP && 'bg-yellow-500'}   
+                ${isOpenCNP && ' bg-yellow-400'}`}
+
+                    onClick={() => {
+                        setisOpenCNP(!isOpenCNP);
+                    }}
+                >
+                    {
+                        !isOpenCNP ?
+                            'Create New Product '
+                            : 'Close'
+                    }
+                </button>
             </ul>
 
-            <div className="">
 
-                <div className={`inline-flex flex-col ${!isOpenCNP && 'gap-y-5 my-3'}`}>
 
-                    <button className={`text-lg h-max w-max text-black 
+            <div className={`inline-flex flex-col items-start ${!isOpenCNP && 'hidden'}`}>
 
-                    ${!isOpenCNP && 'pl-6 pr-12 py-4 rounded-r-full bg-yellow-400'} 
+                {/* <!-- Basic HTML Form --> */}
 
-                    ${isOpenCNP && 'px-6 py-4 ml-auto mr-2 rounded-full bg-yellow-500'}`}
+                {isOpenCNP &&
 
-                        onClick={() => {
-                            setisOpenCNP(!isOpenCNP);
-                        }}
-                    >
-                        {
-                            !isOpenCNP ?
-                                'Create New Product '
-                                : 'Close'
-                        }
-                    </button>
+                    <form onSubmit={createProduct} className={`bg-slate-200 inline-flex flex-col gap-y-5 justify-start items-start px-10 py-5 rounded-xl`}>
 
-                    {/* <!-- Basic HTML Form --> */}
+                        <div className="flex gap-x-10 items-center text-xl w-full">
 
-                    {isOpenCNP &&
+                            <label htmlFor="first" className='w-1/2'>
+                                Product Id :
+                            </label>
 
-                        <form onSubmit={createProduct} className={`bg-slate-200 inline-flex flex-col gap-y-5 justify-start items-start px-10 py-5 rounded-xl`}>
-
-                            <div className="flex gap-x-10 items-center text-xl w-full">
-
-                                <label htmlFor="first" className='w-1/2'>
-                                    Product Id :
-                                </label>
-
-                                <input type="text" id="product_Id" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_Id"
-                                    value={id}
-                                    onChange={
-                                        (uvObject) => {
-                                            setId(uvObject.target.value);
-                                        }
+                            <input type="text" id="product_Id" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_Id"
+                                value={id}
+                                onChange={
+                                    (uvObject) => {
+                                        setId(uvObject.target.value);
                                     }
-                                />
-                            </div>
+                                }
+                            />
+                        </div>
 
-                            <div className="flex gap-x-10 items-center text-xl w-full">
+                        <div className="flex gap-x-10 items-center text-xl w-full">
 
-                                <label htmlFor="first" className='w-1/2'>
-                                    Product title :
-                                </label>
+                            <label htmlFor="first" className='w-1/2'>
+                                Product title :
+                            </label>
 
-                                <input type="text" id="product_title" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_title"
-                                    value={title}
-                                    onChange={
-                                        (uvObject) => {
-                                            settitle(uvObject.target.value);
-                                        }
+                            <input type="text" id="product_title" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_title"
+                                value={title}
+                                onChange={
+                                    (uvObject) => {
+                                        settitle(uvObject.target.value);
                                     }
-                                />
-                            </div>
+                                }
+                            />
+                        </div>
 
-                            <div className="flex gap-x-10 items-center text-xl w-full">
+                        <div className="flex gap-x-10 items-center text-xl w-full">
 
-                                <label htmlFor="first" className='w-1/2'>
-                                    Product description :
-                                </label>
+                            <label htmlFor="first" className='w-1/2'>
+                                Product description :
+                            </label>
 
-                                <input type="text" id="product_description" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_description"
-                                    value={description}
-                                    onChange={
-                                        (uvObject) => {
-                                            setdescription(uvObject.target.value);
-                                        }
+                            <input type="text" id="product_description" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_description"
+                                value={description}
+                                onChange={
+                                    (uvObject) => {
+                                        setdescription(uvObject.target.value);
                                     }
-                                />
-                            </div>
+                                }
+                            />
+                        </div>
 
-                            <div className="flex gap-x-10 items-center text-xl w-full">
+                        <div className="flex gap-x-10 items-center text-xl w-full">
 
-                                <label htmlFor="first" className='w-1/2'>
-                                    Product price :
-                                </label>
+                            <label htmlFor="first" className='w-1/2'>
+                                Product price :
+                            </label>
 
-                                <input type="text" id="product_price" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_price"
-                                    value={price}
-                                    onChange={
-                                        (uvObject) => {
-                                            setprice(uvObject.target.value);
-                                        }
+                            <input type="text" id="product_price" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_price"
+                                value={price}
+                                onChange={
+                                    (uvObject) => {
+                                        setprice(uvObject.target.value);
                                     }
-                                />
-                            </div>
+                                }
+                            />
+                        </div>
 
-                            <div className="flex gap-x-10 items-center text-xl w-full">
+                        <div className="flex gap-x-10 items-center text-xl w-full">
 
-                                <label htmlFor="first" className='w-1/2'>
-                                    Product img :
-                                </label>
+                            <label htmlFor="first" className='w-1/2'>
+                                Product img :
+                            </label>
 
-                                <input type="text" id="product_img" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_img"
-                                    value={img}
-                                    onChange={
-                                        (uvObject) => {
-                                            setimg(uvObject.target.value);
-                                        }
+                            <input type="text" id="product_img" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_img"
+                                value={img}
+                                onChange={
+                                    (uvObject) => {
+                                        setimg(uvObject.target.value);
                                     }
-                                />
-                            </div>
+                                }
+                            />
+                        </div>
 
-                            <div className="flex gap-x-10 items-center text-xl w-full">
+                        <div className="flex gap-x-10 items-center text-xl w-full">
 
-                                <label htmlFor="first" className='w-1/2'>
-                                    Product quantity :
-                                </label>
+                            <label htmlFor="first" className='w-1/2'>
+                                Product quantity :
+                            </label>
 
-                                <input type="text" id="product_quantity" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_quantity"
-                                    defaultValue={quantity}
-
-
-                                />
-                            </div>
-
-                            <div className="flex gap-x-10 items-center text-xl w-full">
-
-                                <label htmlFor="first" className='w-1/2'>
-                                    Product isAddedToCart :
-                                </label>
-
-                                <input type="text" id="product_isAddedToCart" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_isAddedToCart"
-                                    defaultValue={isAddedToCart}
+                            <input type="text" id="product_quantity" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_quantity"
+                                defaultValue={quantity}
 
 
-                                />
-                            </div>
+                            />
+                        </div>
 
-                            <button className='text-lg bg-yellow-400 rounded-r-full pl-6 pr-8 py-3 mt-5 mb-3 mx-auto' type='submit'
-                            >
-                                Create New Product
-                            </button>
-                        </form>
-                    }
+                        <div className="flex gap-x-10 items-center text-xl w-full">
 
-                </div>
+                            <label htmlFor="first" className='w-1/2'>
+                                Product isAddedToCart :
+                            </label>
 
+                            <input type="text" id="product_isAddedToCart" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_isAddedToCart"
+                                defaultValue={isAddedToCart}
+
+
+                            />
+                        </div>
+
+                        <button className='text-lg bg-yellow-400 rounded-r-full pl-6 pr-8 py-3 mt-5 mb-3 mx-auto' type='submit'
+                        >
+                            Create New Product
+                        </button>
+                    </form>
+                }
 
             </div>
-
-
 
         </>
     )

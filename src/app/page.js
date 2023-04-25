@@ -1,7 +1,7 @@
 import Header from './components/servers/header'
 import ApiNavbar from './components/cliants/ApiNavbar';
 // import { getAllProductsData } from '@/utils/functions/getAllProducts';
-import ProductsCardAdmin from './componentsAdmin/ProductsCardAdmin';
+// import ProductsCardAdmin from './componentsAdmin/ProductsCardAdmin';
 
 export const metadata = {
   title: 'Home Page',
