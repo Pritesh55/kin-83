@@ -66,10 +66,9 @@ const Admin = async () => {
                         })}
                     </div> */}
 
-                    {(productsArrayFS != undefined) ?
-                        <ProductsDisplayAdmin></ProductsDisplayAdmin>
-                        : <></>
-                    }
+
+                    <ProductsDisplayAdmin></ProductsDisplayAdmin>
+
 
 
 

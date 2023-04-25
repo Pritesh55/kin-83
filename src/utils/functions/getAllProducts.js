@@ -7,7 +7,7 @@ export const getAllProductsData = async () => {
   
   console.log(`url is ${URL}`);
 
-  const res = await fetch(`${URL}/api/product/sort`);
+  const res = await fetch(`${URL}/api/product/read`);
 
   console.log(`${URL}/api/product/sort`);
   // -------------------------------------------------------------------

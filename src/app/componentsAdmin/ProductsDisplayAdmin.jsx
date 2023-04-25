@@ -8,7 +8,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const ProductsDisplayAdmin = () => {
 
-    const { data, error } = useSWR("/api/product/sort", fetcher);
+    const { data, error } = useSWR("/api/product/read", fetcher);
 
     if (error) {
         return (<> Error </>);
@@ -23,7 +23,7 @@ const ProductsDisplayAdmin = () => {
 
     return (
         <>
-            <h3 className="">ok</h3>
+            <h3 className=""> data recieved </h3>
             <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10'>
      
                 {data.products.map((curItem, index) => {
