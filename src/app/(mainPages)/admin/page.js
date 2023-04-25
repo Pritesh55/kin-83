@@ -1,6 +1,6 @@
 import ApiNavbar from '@/app/components/cliants/ApiNavbar';
 import ProductsDisplayAdmin from '@/app/componentsAdmin/ProductsDisplayAdmin';
-import { getAllProductsData } from '@/utils/functions/getAllProducts';
+// import { getAllProductsData } from '@/utils/functions/getAllProducts';
 
 
 import React from 'react'
