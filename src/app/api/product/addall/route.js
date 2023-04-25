@@ -103,13 +103,13 @@ export async function GET(request) {
     //             isAddedToCart: false,
     //         },
     //         {
-    //             id: 11,
-    //             title: "Intex P55 ",
-    //             description: "black in color",
-    //             price: "3200",
-    //             img: "https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-    //             quantity: 1,
-    //             isAddedToCart: false,
+                // id: 11,
+                // title: "Intex P55 ",
+                // description: "black in color",
+                // price: "3200",
+                // img: "https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                // quantity: 1,
+                // isAddedToCart: false,
     //         }
     //     ]
     // );

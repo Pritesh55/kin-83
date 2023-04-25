@@ -15,7 +15,7 @@ export async function GET(request) {
     //     readAllProductsList = await mongoose.connection.db.ptModels2.find({});
     // }
 
-    const readptModels2 = await mongoose.connection.db.collection('ptmodels2').find({}).toArray();
+    let readptModels2 = await mongoose.connection.db.collection('ptmodels2').find({}).toArray();
 
 
 
