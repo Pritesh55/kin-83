@@ -1,5 +1,6 @@
 
 import dbConnect from "@/utils/database";
+import mongoose from "mongoose";
 // import { PtModels2 } from "@/utils/models/allModel";
 import { NextResponse } from "next/server";
 
