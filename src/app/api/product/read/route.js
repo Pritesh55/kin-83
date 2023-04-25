@@ -1,6 +1,5 @@
 import dbConnect from "@/utils/database";
 // import PtModels2 from "@/utils/models/allModel";
-import { db } from "mongodb";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
@@ -21,14 +20,14 @@ export async function GET(request) {
 
 
     console.log(`-----------------------------------`);
-    console.log(readAllProductsList);
+    console.log(readptModels2);
     console.log(`---------------------------------`);
 
 
     return NextResponse.json({
         success: true,
         message: "Product Read Successfully...",
-        products: readAllProductsList,
+        // products: readAllProductsList,
         // collectionInfos: collectionInfos,
         readptModels2: readptModels2,
     });

@@ -1,6 +1,6 @@
 
 import dbConnect from "@/utils/database";
-import { PtModels2 } from "@/utils/models/allModel";
+// import { PtModels2 } from "@/utils/models/allModel";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
@@ -9,7 +9,7 @@ export async function GET(request) {
 
     console.log("Now , Lets's Add data in Database");
 
-    const sortAllProductsList = await PtModels2.find({}).sort({ "id": 1 });
+    const sortAllProductsList = await mongoose.connection.db.collection('ptmodels2').find({}).sort({ "id": 1 });
 
     // console.log(`--------------------------------------------`);
     // console.log(sortAllProductsList);

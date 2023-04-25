@@ -9,7 +9,7 @@ export async function GET(request) {
 
     const id = request.url.slice(request.url.lastIndexOf('/') + 1);
 
-    const productOfUrlId = await PtModels2.findOne({ id: id })
+    const productOfUrlId = await mongoose.connection.db.collection('ptmodels2').findOne({ id: id })
 
     return NextResponse.json(
         productOfUrlId

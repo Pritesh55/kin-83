@@ -1,5 +1,6 @@
 import dbConnect from "@/utils/database";
-import { PtModels2 } from "@/utils/models/allModel";
+import mongoose from "mongoose";
+// import { PtModels2 } from "@/utils/models/allModel";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
@@ -37,7 +38,8 @@ export async function POST(request) {
     // console.log(title);
     // console.log(description);
 
-    await PtModels2.create(createProductdata);
+    // await PtModels2.create(createProductdata);
+    await mongoose.connection.db.collection('ptmodels2').create(createProductdata);
 
     // const res = await fetch("http://localhost:3000/api/product/post",
     //     {
@@ -52,7 +54,7 @@ export async function POST(request) {
     // console.log(`-----------------------------------`);
     // console.log(readAllProductsList);
     // console.log(`---------------------------------`);
-    const sortAllProductsList = await PtModels2.find();
+    const sortAllProductsList = await mongoose.connection.db.collection('ptmodels2').find();
 
 
 
