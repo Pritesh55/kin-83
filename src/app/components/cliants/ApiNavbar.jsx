@@ -22,7 +22,7 @@ const ApiNavbar = () => {
     const [title, settitle] = useState('');
     const [description, setdescription] = useState('');
     const [price, setprice] = useState('');
-    const [img, setimg] = useState('');
+    const [img, setimg] = useState('https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
     const quantity = 1;
     const isAddedToCart = false;
 
@@ -55,7 +55,7 @@ const ApiNavbar = () => {
         settitle('');
         setdescription('');
         setprice('');
-        setimg('https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+        setimg('');
     }
 
     return (
