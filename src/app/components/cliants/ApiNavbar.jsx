@@ -55,7 +55,7 @@ const ApiNavbar = () => {
         settitle('');
         setdescription('');
         setprice('');
-        setimg('');
+        setimg('https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
     }
 
     return (
@@ -188,12 +188,8 @@ const ApiNavbar = () => {
                             </label>
 
                             <input type="text" id="product_img" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_img"
-                                value={img}
-                                onChange={
-                                    (uvObject) => {
-                                        setimg(uvObject.target.value);
-                                    }
-                                }
+                                defaultValue={img}
+
                             />
                         </div>
 
