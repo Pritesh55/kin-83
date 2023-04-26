@@ -187,7 +187,7 @@ const ApiNavbar = () => {
                                 Product img :
                             </label>
 
-                            <input type="text" id="product_img" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_img"
+                            <input type="text" id="product_img" className='text-sm bg-white rounded-lg px-4 py-4 h-8 cursor-pointer' name="product_img"
                                 defaultValue={img}
 
                             />
@@ -199,7 +199,7 @@ const ApiNavbar = () => {
                                 Product quantity :
                             </label>
 
-                            <input type="text" id="product_quantity" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_quantity"
+                            <input type="text" id="product_quantity" className='text-sm bg-white rounded-lg px-4 py-4 h-8 cursor-pointer' name="product_quantity"
                                 defaultValue={quantity}
 
 
@@ -212,7 +212,7 @@ const ApiNavbar = () => {
                                 Product isAddedToCart :
                             </label>
 
-                            <input type="text" id="product_isAddedToCart" className='text-sm bg-white rounded-lg px-4 py-4 h-8' name="product_isAddedToCart"
+                            <input type="text" id="product_isAddedToCart" className='text-sm bg-white rounded-lg px-4 py-4 h-8 cursor-pointer' name="product_isAddedToCart"
                                 defaultValue={isAddedToCart}
 
 
