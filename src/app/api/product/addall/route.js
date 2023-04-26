@@ -136,7 +136,6 @@ export async function GET(request) {
     return NextResponse.json({
         success: true,
         message: "All Product created Successfully...",
-        addProduct: addProduct,
         allProductsList: allProductsList
 
     }
