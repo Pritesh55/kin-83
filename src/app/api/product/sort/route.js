@@ -23,7 +23,7 @@ export async function GET(request) {
     return NextResponse.json({
         success: true,
         message: "Product sorted Successfully...",
-        products: sortAllProductsList
+        readptModels2: sortAllProductsList
     });
 
 

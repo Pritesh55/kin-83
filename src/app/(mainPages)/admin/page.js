@@ -12,15 +12,14 @@ export const metadata = {
 
 const Admin = async () => {
 
+
+
     return (
         <>
             <div className="px-5 2xl:container text-2xl">
-                <div className="flex flex-col gap-y-10">
-                    <div className="">
-                        This is Admin page...
-                    </div>
+                <div className="flex flex-col gap-y-5 -mt-5">
 
-                    <ApiNavbar></ApiNavbar>
+                    <ProductsDisplayAdmin></ProductsDisplayAdmin>
 
                     {/* <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10'>
                         {sortAllProductsArray.map((curItem, index) => {
@@ -61,9 +60,6 @@ const Admin = async () => {
                             )
                         })}
                     </div> */}
-
-
-                    <ProductsDisplayAdmin></ProductsDisplayAdmin>
 
                 </div>
             </div>

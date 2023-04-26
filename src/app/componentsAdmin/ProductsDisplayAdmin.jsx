@@ -1,53 +1,56 @@
 "use client"
 
-import React from 'react'
+import React, { useState } from 'react'
 import ProductsCardAdmin from './ProductsCardAdmin'
 import useSWR from 'swr'
-
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
+import ApiNavbar from '../components/cliants/ApiNavbar';
+import SortProductsDisplay from './data/SortProductsDisplay';
+import ReadProductsDisplay from './data/ReadProductsDisplay';
 
 
 const ProductsDisplayAdmin = () => {
-    // console.log(` ok--------------------------- data.products  --------------------------- `);
-    // // console.log(data.products);
-    // console.log(`ok --------------------------- data.products  --------------------------- `);
 
 
-
-    const { data, error, isLoading } = useSWR("/api/product/read", fetcher, { refreshInterval: 1000 });
-
-    if (error) {
-        return (<> Error </>);
-    }
-
-    if (isLoading) {
-        return (<> wait , Data is on the Way.... </>);
-    }
-
-    if (!data) {
-        return (<> data not found </>);
-    }
-
-    // console.log(` ok--------------------------- data.products  --------------------------- `);
-    // let allProducts = data.readptModels2;
-    // console.log(`ok --------------------------- data.products  --------------------------- `);
+    const [isSort, setIsSort] = useState(false);
 
 
     return (
         <>
-            <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10'>
+            <ul className="flex flex-col items-center lg:flex-row gap-x-5 flex-wrap gap-y-5">
 
-                {data.readptModels2.map((curItem, index) => {
-                    return (
-                        <>
-                            <ProductsCardAdmin key={index}
-                                {...curItem}>
-                            </ProductsCardAdmin>
-                        </>
-                    )
-                })}
-            </div>
+                <span className="text-center text-base">
+                    Admin page - ({process.env.NODE_ENV})
+                </span>
+
+
+                <div className="flex flex-wrap gap-x-5">
+                    <a onClick={() => { setIsSort(false); }} className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max cursor-pointer'>
+                        Read
+                    </a>
+
+                    <a onClick={() => { setIsSort(true); }} className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max cursor-pointer'>
+                        Sort
+                    </a>
+                </div>
+              
+
+            </ul>
+
+            <hr />
+
+            <ApiNavbar></ApiNavbar>
+
+            <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10'>
+                {
+                    (isSort == true) &&
+                    <SortProductsDisplay></SortProductsDisplay>
+                }
+                {
+                    (isSort == false) &&
+                    <ReadProductsDisplay></ReadProductsDisplay>
+                }
+
+            </div >
         </>
     )
 }

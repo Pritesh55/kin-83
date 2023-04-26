@@ -61,37 +61,30 @@ const ApiNavbar = () => {
     return (
         <>
 
-            <ul className="flex gap-x-5 flex-wrap gap-y-5">
+            <ul className="flex justify-center lg:justify-start gap-x-5 flex-wrap gap-y-5">
 
-                <h1 className="">
-                    {process.env.NODE_ENV}
-                </h1>
-
-                <a href='/api/product/sort' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
-                    Sort
-                </a>
-
-                <a href='/api/product/read' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
+                <a href='/api/product/read' target='_blank' className='text-sm lg:text-lg pl-1.5 pr-3 lg:pl-3 lg:pr-6lg:py-1 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
                     Read
                 </a>
 
-                <a href='/api/product/addall' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
+                <a href='/api/product/addall' target='_blank' className='text-sm lg:text-lg pl-1.5 pr-3 lg:pl-3 lg:pr-6 lg:py-1 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
                     Add all
-                </a>
+                </a>    
 
-                <a href='/api/product/deleteall' target='_blank' className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
+                <a href='/api/product/deleteall' target='_blank' className='text-sm lg:text-lg pl-1.5 pr-3 lg:pl-3 lg:pr-6 lg:py-1 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
                     delete all
                 </a>
 
-                <button className="text-lg pl-5 pr-10 pt-4 pb-4 bg-yellow-400 text-black rounded-br-[64px] flex justify-center items-center" onClick={() => { refreshPage() }}> Refresh</button>
+                <button className="text-sm lg:text-lg pl-1.5 lg:pl-5 pr-5 lg:pr-10 lg:py-1 py-2 lg:pt-4 lg:pb-4 bg-yellow-400 text-black rounded-br-[32px] lg:rounded-br-[64px] flex justify-center items-center"
+                    onClick={() => { refreshPage() }}> Refresh</button>
 
 
-                {/*  className={`text-lg h-max w-max text-black 
+                {/*  className={`text-sm lg:text-lg h-max w-max text-black 
                 pl-6 pr-12 py-4 rounded-r-full bg-yellow-400
                `}
                 // ${!isOpenCNP && 'pl-6 pr-12 py-4 rounded-r-full bg-yellow-400'}  
                 // ${isOpenCNP && 'px-6 py-4 ml-auto mr-2 rounded-full bg-yellow-500'} */}
-                <button className={`text-lg pl-3 pr-6 py-2 text-black rounded-r-full h-max
+                <button className={`inline text-sm lg:text-lg pl-1.5 pr-3 lg:pl-3 lg:pr-6 py-2 text-black rounded-r-full h-max
                  ${!isOpenCNP && 'bg-yellow-500'}   
                 ${isOpenCNP && ' bg-yellow-400'}`}
 
@@ -106,8 +99,6 @@ const ApiNavbar = () => {
                     }
                 </button>
             </ul>
-
-
 
             <div className={`inline-flex flex-col items-start ${!isOpenCNP && 'hidden'}`}>
 
@@ -219,7 +210,7 @@ const ApiNavbar = () => {
                             />
                         </div>
 
-                        <button className='text-lg bg-yellow-400 rounded-r-full pl-6 pr-8 py-3 mt-5 mb-3 mx-auto' type='submit'
+                        <button className='text-sm lg:text-lg bg-yellow-400 rounded-r-full pl-6 pr-8 py-3 mt-5 mb-3 mx-auto' type='submit'
                         >
                             Create New Product
                         </button>

@@ -3,20 +3,20 @@ import React from 'react'
 
 const Header = () => {
     return (
-        
+
         <div className='text-xl font-semibold flex justify-between w-full '>
 
             <Link href="/">
                 Home
             </Link>
-            <Link href="/about">
-                About
+            <Link href="/admin">
+                Admin
             </Link>
 
-            <Link href="/products">
+            <Link href="/products" className='hidden lg:inline'>
                 Products
             </Link>
-            <Link href="/contact">
+            <Link href="/contact" className='hidden lg:inline'>
                 Contact
             </Link>
         </div>

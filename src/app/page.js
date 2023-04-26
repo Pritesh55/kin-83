@@ -27,7 +27,7 @@ export default async function Home() {
 
       <div className="flex flex-col gap-y-10 pb-20">
 
-        <div className="w-full bg-antiquewhite rounded-b-full px-20 py-2">
+        <div className="w-full bg-antiquewhite rounded-b-full px-10 lg:px-20 py-2">
           <Header></Header>
         </div>
         <main className="px-5">
