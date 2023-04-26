@@ -14,7 +14,7 @@ export async function GET(request) {
     console.log("Now , Lets's Add data in Database");
 
     // let addProduct =
-    let addAllProduct = mongoose.connection.db.collection('ptmodels2').insertMany(
+    await mongoose.connection.db.collection('ptmodels2').insertMany(
         [
             {
                 id: 1,
@@ -23,7 +23,7 @@ export async function GET(request) {
                 price: "200",
                 img: "https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
                 quantity: 1,
-                isAddedToCart: false,
+                isAddedToCart: false
             },
             {
                 id: 2,
@@ -32,7 +32,7 @@ export async function GET(request) {
                 price: "300",
                 img: "https://images.pexels.com/photos/47261/pexels-photo-47261.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
                 quantity: 1,
-                isAddedToCart: false,
+                isAddedToCart: false
             },
             {
                 id: 3,
@@ -41,7 +41,7 @@ export async function GET(request) {
                 price: "500",
                 img: "https://images-na.ssl-images-amazon.com/images/I/71A9Vo1BatL._SL1500_.jpg",
                 quantity: 1,
-                isAddedToCart: false,
+                isAddedToCart: false
             },
             {
                 id: 4,
@@ -50,7 +50,7 @@ export async function GET(request) {
                 price: "900",
                 img: "https://images-na.ssl-images-amazon.com/images/I/71hIfcIPyxS._SL1500_.jpg",
                 quantity: 1,
-                isAddedToCart: false,
+                isAddedToCart: false
 
             },
             {
@@ -60,7 +60,7 @@ export async function GET(request) {
                 price: "1000",
                 img: "https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
                 quantity: 1,
-                isAddedToCart: false,
+                isAddedToCart: false
             },
             {
                 id: 6,
@@ -69,7 +69,7 @@ export async function GET(request) {
                 price: "2500",
                 img: "https://images-na.ssl-images-amazon.com/images/I/71A9Vo1BatL._SL1500_.jpg",
                 quantity: 1,
-                isAddedToCart: false,
+                isAddedToCart: false
             },
             {
                 id: 7,
@@ -78,7 +78,7 @@ export async function GET(request) {
                 price: "5000",
                 img: "https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
                 quantity: 1,
-                isAddedToCart: false,
+                isAddedToCart: false
             },
             {
                 id: 8,
@@ -87,7 +87,7 @@ export async function GET(request) {
                 price: "400",
                 img: "https://images-na.ssl-images-amazon.com/images/I/71hIfcIPyxS._SL1500_.jpg",
                 quantity: 1,
-                isAddedToCart: false,
+                isAddedToCart: false
             },
             {
                 id: 9,
@@ -96,7 +96,7 @@ export async function GET(request) {
                 price: "600",
                 img: "https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
                 quantity: 1,
-                isAddedToCart: false,
+                isAddedToCart: false
             },
             {
                 id: 10,
@@ -105,7 +105,7 @@ export async function GET(request) {
                 price: "6500",
                 img: "https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
                 quantity: 1,
-                isAddedToCart: false,
+                isAddedToCart: false
             },
             {
                 id: 11,
@@ -114,9 +114,10 @@ export async function GET(request) {
                 price: "3200",
                 img: "https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
                 quantity: 1,
-                isAddedToCart: false,
+                isAddedToCart: false
             }
-        ]
+        ],
+        function(error, docs) {}
     );
 
     // const addProduct = await mongoose.connection.db.collection('ptmodels2').create(
@@ -139,7 +140,6 @@ export async function GET(request) {
     return NextResponse.json({
         success: true,
         message: "All Product created Successfully...",
-        addAllProduct: addAllProduct,
         products: allProductsList
 
     }
