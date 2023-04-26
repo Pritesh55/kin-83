@@ -32,7 +32,7 @@ export async function GET(request) {
         message: "Product Read Successfully...",
         // products: readAllProductsList,
         // collectionInfos: collectionInfos,
-        products: readptModels2,
+        readptModels2: readptModels2,
     });
 
     // return readAllProductsList;
