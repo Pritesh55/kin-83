@@ -61,7 +61,7 @@ const ApiNavbar = () => {
     return (
         <>
 
-            <ul className="flex justify-center lg:justify-start gap-x-5 flex-wrap gap-y-5">
+            <ul className="flex justify-center lg:justify-start items-center gap-x-5 flex-wrap gap-y-5">
 
                 <a href='/api/product/read' target='_blank' className='text-sm lg:text-lg pl-1.5 pr-3 lg:pl-3 lg:pr-6lg:py-1 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
                     Read
