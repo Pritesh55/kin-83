@@ -1,40 +1,44 @@
 "use client"
 
 import React, { useState } from 'react'
-import ProductsCardAdmin from './ProductsCardAdmin'
-import useSWR from 'swr'
 import ApiNavbar from '../components/cliants/ApiNavbar';
 import SortProductsDisplay from './data/SortProductsDisplay';
 import ReadProductsDisplay from './data/ReadProductsDisplay';
 
-
-const ProductsDisplayAdmin = () => {
-
+const ProductsDisplayAdmin = ({ isAdmin = false }) => {
 
     const [isSort, setIsSort] = useState(false);
-
 
     return (
         <>
             <ul className="flex flex-col items-center lg:flex-row gap-x-5 flex-wrap gap-y-5">
 
-                <span className="text-center text-base">
-                    Admin page - ({process.env.NODE_ENV})
-                </span>
+                {
+
+                    (isAdmin) ?
+                        <>
+                            <span span className="text-center text-base">
+                                Admin page - ({process.env.NODE_ENV})
+                            </span>
 
 
-                <div className="flex flex-wrap gap-x-5">
-                    <a onClick={() => { setIsSort(false); }} className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max cursor-pointer'>
-                        Read
-                    </a>
+                            <div className="flex flex-wrap gap-x-5">
+                                <a onClick={() => { setIsSort(false); }} className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max cursor-pointer'>
+                                    Read
+                                </a>
 
-                    <a onClick={() => { setIsSort(true); }} className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max cursor-pointer'>
-                        Sort
-                    </a>
-                </div>
-              
+                                <a onClick={() => { setIsSort(true); }} className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max cursor-pointer'>
+                                    Sort
+                                </a>
+                            </div>
+                        </>
+                        :
+                        <></>
 
-            </ul>
+
+                }
+
+            </ul >
 
             <hr />
 

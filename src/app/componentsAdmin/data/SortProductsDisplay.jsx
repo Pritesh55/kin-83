@@ -25,7 +25,6 @@ const SortProductsDisplay = () => {
 
     return (
         <>
-
             {sortedProducts.map((curItem, index) => {
                 return (
                     <>

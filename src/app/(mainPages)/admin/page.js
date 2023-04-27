@@ -1,7 +1,4 @@
-import ApiNavbar from '@/app/components/cliants/ApiNavbar';
 import ProductsDisplayAdmin from '@/app/componentsAdmin/ProductsDisplayAdmin';
-// import { getAllProductsData } from '@/utils/functions/getAllProducts';
-
 
 import React from 'react'
 
@@ -12,55 +9,11 @@ export const metadata = {
 
 const Admin = async () => {
 
-
-
     return (
         <>
             <div className="px-5 2xl:container text-2xl">
                 <div className="flex flex-col gap-y-5 -mt-5">
-
-                    <ProductsDisplayAdmin></ProductsDisplayAdmin>
-
-                    {/* <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10'>
-                        {sortAllProductsArray.map((curItem, index) => {
-                            return (
-                                <>
-                                    <div key={index} className="w-max max-w-sm border-orange-400 border-2 rounded-lg px-10 pt-5 pb-5 h-max">
-
-                                        <h6 className="mb-2 text-2xl font-semibold text-orange-500 text-center">{`${curItem.id}`}</h6>
-
-                                        <hr className='border-t-2 border-orange-400' />
-
-                                        <div className="h-full pt-4 flex gap-x-8 items-center ">
-
-                                            <Image src={curItem.img} alt="team" width={64} height={64} className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full" />
-
-                                            <div className="flex-grow flex flex-col gap-y-4">
-
-                                                <div className="">
-
-                                                    <h2 className="text-xl text-gray-900 font-medium">
-                                                        {curItem.title}
-                                                    </h2>
-
-                                                    <p className="text-sm text-gray-500">
-                                                        {curItem.description}
-                                                    </p>
-                                                </div>
-
-
-                                                <p className="text-2xl text-black font-semibold">
-                                                    {`${curItem.price} ₹`}
-                                                </p>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </>
-                            )
-                        })}
-                    </div> */}
-
+                    <ProductsDisplayAdmin isAdmin = {true}></ProductsDisplayAdmin>
                 </div>
             </div>
 
