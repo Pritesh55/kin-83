@@ -54,6 +54,8 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
         await axios.put(`/api/product/update/${idInput}`, {
             oldId: id,
             newTitle: titleInput,
+            newDescription: descriptionInput,
+            newPrice: priceInput
         })
             .then((response) => {
                 console.log(response.data);
@@ -121,7 +123,7 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
 
                                     <div className="absolute z-10">
 
-                                        <input type='text' className="mb-2 text-2xl font-semibold text-orange-500 text-center " value={idInput}
+                                        <input type='number' className="mb-2 text-2xl font-semibold text-orange-500 text-center " value={idInput}
                                             onChange={(event) => {
                                                 setIdInput(event.target.value);
                                                 console.log(idInput);
@@ -191,16 +193,70 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
                             }
 
 
+                            {
+                                (isEdit == false) &&
+                                <>
+                                    <p className="text-sm text-gray-500">
+                                        {description}
+                                    </p>
+                                </>
+                            }
 
-                            <p className="text-sm text-gray-500">
-                                {description}
-                            </p>
+                            {
+                                (isEdit == true) &&
+                                <>
+                                    <div className=" min-h-[25px] relative">
+
+                                        <div className="absolute z-10 flex items-center">
+
+                                            <input type='text' className="text-sm text-gray-500 w-full" value={descriptionInput}
+                                                onChange={(event) => {
+                                                    setDescriptionInput(event.target.value);
+                                                    console.log(descriptionInput);
+                                                }}>
+                                            </input>
+
+                                        </div>
+                                    </div>
+                                </>
+                            }
+
                         </div>
 
+                        {
+                            (isEdit == false) &&
+                            <>
 
-                        <p className="text-2xl text-black font-semibold">
-                            {`${price} ₹`}
-                        </p>
+                                <p className="text-2xl text-black font-semibold">
+                                    {`${price} ₹`}
+                                </p>
+                            </>
+                        }
+
+                        {
+                            (isEdit == true) &&
+                            <>
+                                <div className=" min-w-[164px] max-w-full min-h-[40px] relative">
+
+                                    <div className="absolute z-10 flex items-center max-w-full">
+
+                                        <input type='number' className="text-2xl text-black font-semibold max-w-full" value={priceInput}
+                                            onChange={(event) => {
+                                                setPriceInput(event.target.value);
+                                                console.log(priceInput);
+                                            }}>
+                                        </input>
+
+                                        
+
+                                    </div>
+
+
+                                </div>
+                            </>
+                        }
+
+
 
                     </div>
                 </div>

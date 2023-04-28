@@ -48,14 +48,15 @@ export async function PUT(request) {
     let newIdNum = Number(newId);
 
     let data = await request.json();
-    let { oldId, newTitle } = data;
+    let { oldId, newTitle, newDescription, newPrice } = data;
 
     let oldIdNum = Number(oldId);
+    let newPriceNum = Number(newPrice);
 
     let updateptModels2 = await mongoose.connection.db.collection('ptmodels2').updateOne(
         { id: oldIdNum },
         {
-            $set: { id: newIdNum, title: newTitle },
+            $set: { id: newIdNum, title: newTitle, description: newDescription, price: newPriceNum },
         }
     );
 
@@ -64,7 +65,7 @@ export async function PUT(request) {
         message: "Your Product Updated Successfully...(Nothing)",
         oldId: oldIdNum,
         newId: newIdNum,
-        data:data,
+        data: data,
         updateptModels2: updateptModels2
 
     });
