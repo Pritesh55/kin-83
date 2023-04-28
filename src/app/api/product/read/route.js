@@ -10,7 +10,7 @@ export async function GET(request) {
 
     await dbConnect();
 
-    let readAllProductsList;
+    // let readAllProductsList;
 
     // const collectionInfos = await mongoose.connection.db.listCollections().toArray();
 

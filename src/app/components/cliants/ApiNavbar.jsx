@@ -45,7 +45,6 @@ const ApiNavbar = () => {
             console.log(error);
         });
 
-
         console.log("Go to axios");
 
         setisOpenCNP(!isOpenCNP);
@@ -58,25 +57,69 @@ const ApiNavbar = () => {
         setimg('');
     }
 
+
+
+    const deleteAll = async () => {
+
+        await axios.delete(`/api/product/deleteall`).then((response) => {
+            console.log(response);
+
+        }, (error) => {
+            console.log(error);
+        });
+
+        console.log("Go to axios");
+        refreshPage();
+
+    }
+
+    const addAll = async () => {
+
+        await axios.post('/api/product/addall').then((response) => {
+            console.log(response.data);
+        }, (error) => {
+            console.log(error);
+        });
+
+        console.log("Go to axios");
+        refreshPage();
+    }
+
+    const readAll = async () => {
+
+        await axios.get('/api/product/read').then((response) => {
+            console.log(response.data);
+        }, (error) => {
+            console.log(error);
+        });
+
+        console.log("Go to axios");
+        refreshPage();
+    }
+
+
+
     return (
         <>
 
             <ul className="flex justify-center lg:justify-start items-center gap-x-5 flex-wrap gap-y-5">
 
-                <a href='/api/product/read' target='_blank' className='text-sm lg:text-lg pl-1.5 pr-3 lg:pl-3 lg:pr-6lg:py-1 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
+                <button onClick={() => { readAll(); }}  className='text-sm lg:text-lg pl-1.5 pr-3 lg:pl-3 lg:pr-6lg:py-1 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
                     Read
-                </a>
+                </button>
 
-                <a href='/api/product/addall' target='_blank' className='text-sm lg:text-lg pl-1.5 pr-3 lg:pl-3 lg:pr-6 lg:py-1 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
+                <button onClick={() => { addAll(); }}  className='text-sm lg:text-lg pl-1.5 pr-3 lg:pl-3 lg:pr-6 lg:py-1 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
                     Add all
-                </a>    
+                </button>
 
-                <a href='/api/product/deleteall' target='_blank' className='text-sm lg:text-lg pl-1.5 pr-3 lg:pl-3 lg:pr-6 lg:py-1 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
+                <button onClick={() => { deleteAll(); }}  className='text-sm lg:text-lg pl-1.5 pr-3 lg:pl-3 lg:pr-6 lg:py-1 py-2 bg-yellow-500 text-black rounded-r-full h-max'>
                     delete all
-                </a>
+                </button>
 
                 <button className="text-sm lg:text-lg pl-1.5 lg:pl-5 pr-5 lg:pr-10 lg:py-1 py-2 lg:pt-4 lg:pb-4 bg-yellow-400 text-black rounded-br-[32px] lg:rounded-br-[64px] flex justify-center items-center"
-                    onClick={() => { refreshPage() }}> Refresh</button>
+                    onClick={() => { refreshPage() }}>
+                    Refresh
+                </button>
 
 
                 {/*  className={`text-sm lg:text-lg h-max w-max text-black 

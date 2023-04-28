@@ -24,7 +24,7 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
     const deleteProduct = async (id) => {
 
         await axios.delete(`/api/product/delete/${id}`).then((response) => {
-            console.log(response);
+            console.log(response.data);
 
         }, (error) => {
             console.log(error);

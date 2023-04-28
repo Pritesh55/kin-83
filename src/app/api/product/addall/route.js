@@ -7,13 +7,11 @@ import { NextResponse } from "next/server";
 export const revalidate = 1;
 // Data will be fetch from locagost:3000/api/product/read at every 01 sec....
 
-export async function GET(request) {
+export async function POST(request) {
 
     await dbConnect();
 
     console.log("Now , Lets's Add data in Database");
-
-
 
     let addProducts = [
         {
@@ -52,10 +50,10 @@ export async function GET(request) {
             quantity: 1,
             isAddedToCart: false
         },
-       
+
     ];
 
-    await mongoose.connection.db.collection('ptmodels2').insertMany(addProducts);
+    let addAllProducts = await mongoose.connection.db.collection('ptmodels2').insertMany(addProducts);
 
     // const addProduct = await mongoose.connection.db.collection('ptmodels2').create(
     // {
@@ -77,7 +75,8 @@ export async function GET(request) {
     return NextResponse.json({
         success: true,
         message: "All Product created Successfully...",
-        products: allProductsList
+        addAllProducts: addAllProducts,
+        products: allProductsList,
 
     }
     );
