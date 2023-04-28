@@ -7,7 +7,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const SortProductsDisplay = () => {
 
-    const { data, error, isLoading } = useSWR("/api/product/sort", fetcher, { refreshInterval: 1000 });
+    const { data, error, isLoading } = useSWR("/api/product/sort", fetcher, { refreshInterval: 1 });
 
     if (error) {
         return (<> Error </>);

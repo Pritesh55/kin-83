@@ -1,3 +1,4 @@
+
 import dbConnect from "@/utils/database";
 import mongoose from "mongoose";
 // import { PtModels2 } from "@/utils/models/allModel";
@@ -38,29 +39,35 @@ export async function GET(request) {
 
 }
 
-export async function DELETE(request) {
+
+export async function PUT(request) {
 
     await dbConnect();
 
-    let id = request.url.slice(request.url.lastIndexOf('/') + 1);
+    const newId = request.url.slice(request.url.lastIndexOf('/') + 1);
+    let newIdNum = Number(newId);
 
-    let idNum = Number(id);
+    let data = await request.json();
+    let { oldId, newTitle } = data;
 
-    let deleteOneProduct = await mongoose.connection.db.collection('ptmodels2').deleteOne({ id: idNum });
+    let oldIdNum = Number(oldId);
 
-    let readptModels2 = mongoose.connection.db.collection('ptmodels2').find({ id: idNum }).toArray();
+    let updateptModels2 = await mongoose.connection.db.collection('ptmodels2').updateOne(
+        { id: oldIdNum },
+        {
+            $set: { id: newIdNum, title: newTitle },
+        }
+    );
 
     return NextResponse.json({
         success: true,
-        message: "Your Product Deleted Successfully...(Nothing)",
-        id: idNum,
-        deleteOneProduct: deleteOneProduct,
-        readptModels2: readptModels2
+        message: "Your Product Updated Successfully...(Nothing)",
+        oldId: oldIdNum,
+        newId: newIdNum,
+        data:data,
+        updateptModels2: updateptModels2
 
     });
 
-
 }
-
-
 

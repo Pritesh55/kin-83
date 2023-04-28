@@ -18,13 +18,12 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
         router.refresh();
         router.refresh();
         router.refresh();
-        router.refresh();
         console.log('refreshPage');
     }
 
     const deleteProduct = async (id) => {
 
-        await axios.delete(`/api/product/delete/${id}`, { method: 'DELETE' }).then((response) => {
+        await axios.delete(`/api/product/delete/${id}`).then((response) => {
             console.log(response);
 
         }, (error) => {
@@ -37,41 +36,31 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
     }
 
     const [idInput, setIdInput] = useState(`${id}`);
-    const [titleInput, settTitleInput] = useState('');
-    const [descriptionInput, setDescriptionInput] = useState('');
-    const [priceInput, setPriceInput] = useState('');
+    const [titleInput, settTitleInput] = useState(`${title}`);
+    const [descriptionInput, setDescriptionInput] = useState(`${description}`);
+    const [priceInput, setPriceInput] = useState(`${price}`);
 
 
     const [isEdit, setIsEdit] = useState(false);
 
     const updateProduct = (id) => {
-
-        // await axios.put(`/api/product/delete/${id}`, {
-        //     title: "Hello World!",
-        //     body: "This is an updated post."
-        // })
-        //     .then((response) => {
-        //         setPost(response.data);
-        //     });
         setIsEdit(true);
-
     }
-
-
 
     const editdone = async () => {
 
         setIsEdit(false);
 
-        await axios.put(`/api/product/delete/${idInput}`, {
-            oldId: id
+        await axios.put(`/api/product/update/${idInput}`, {
+            oldId: id,
+            newTitle: titleInput,
         })
             .then((response) => {
                 console.log(response.data);
             });
     }
 
-    console.log(idInput);
+    console.log(titleInput);
 
     return (
         <>
@@ -170,9 +159,38 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
 
                         <div className="">
 
-                            <h2 className="text-xl text-gray-900 font-medium">
-                                {title}
-                            </h2>
+                            {
+                                (isEdit == false) &&
+                                <>
+                                    <h2 className="text-xl text-gray-900 font-medium">
+                                        {title}
+                                    </h2>
+
+                                </>
+                            }
+
+                            {
+                                (isEdit == true) &&
+                                <>
+
+                                    <div className="min-h-[35px] relative">
+
+                                        <div className="absolute z-10 flex items-center">
+
+                                            <input type='text' className="text-xl text-gray-900 font-medium w-full" value={titleInput}
+                                                onChange={(event) => {
+                                                    settTitleInput(event.target.value);
+                                                    console.log(titleInput);
+                                                }}>
+                                            </input>
+                                        </div>
+
+                                    </div>
+
+                                </>
+                            }
+
+
 
                             <p className="text-sm text-gray-500">
                                 {description}
