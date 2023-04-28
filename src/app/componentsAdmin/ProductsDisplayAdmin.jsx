@@ -36,8 +36,6 @@ const ProductsDisplayAdmin = ({ isAdmin = false }) => {
             <hr />
 
 
-
-
             <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10'>
                 {
                     (isSort == true) &&
@@ -49,7 +47,7 @@ const ProductsDisplayAdmin = ({ isAdmin = false }) => {
                 }
 
             </div >
-        </>
+        </>     
     )
 }
 

@@ -2,9 +2,7 @@
 import axios from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React from 'react';
-
-
+import React, { useState } from 'react';
 
 const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => {
 
@@ -24,7 +22,7 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
 
         await axios.delete(`/api/product/delete/${id}`, { method: 'DELETE' }).then((response) => {
             console.log(response);
-            
+
         }, (error) => {
             console.log(error);
         });
@@ -34,23 +32,129 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
         refreshPage();
     }
 
+    const [idInput, setIdInput] = useState(`${id}`);
+    const [titleInput, settTitleInput] = useState('');
+    const [descriptionInput, setDescriptionInput] = useState('');
+    const [priceInput, setPriceInput] = useState('');
+
+
+    const [isEdit, setIsEdit] = useState(false);
+
+    const updateProduct = (id) => {
+
+        // await axios.put(`/api/product/delete/${id}`, {
+        //     title: "Hello World!",
+        //     body: "This is an updated post."
+        // })
+        //     .then((response) => {
+        //         setPost(response.data);
+        //     });
+        setIsEdit(true);
+
+    }
+
+
+
+    const editdone = async () => {
+
+        setIsEdit(false);
+
+        await axios.put(`/api/product/delete/${idInput}`, {
+            oldId: id
+        })
+            .then((response) => {
+               console.log(response.data);
+            });
+    }
+
+    console.log(idInput);
+
     return (
         <>
 
             <div className="w-max max-w-sm border-orange-400 border-2 rounded-lg px-10 pt-5 pb-5 h-max">
 
                 <div className="relative">
-                    <h6 className="mb-2 text-2xl font-semibold text-orange-500 text-center">
-                        {`${id}`}
-                    </h6>
 
-                    <button onClick={() => { deleteProduct(id); }} className="absolute -top-5 -right-10 px-3 py-2 border-l-2 border-b-2 border-l-orange-400 border-b-orange-400 rounded-bl-lg">
+                    {
+                        (isEdit == false) &&
+                        <>
+
+                            <button onClick={() => { updateProduct(id); }} className="absolute -top-5 -left-10 px-3 py-1 border-r-2 border-b-2 border-r-orange-400 border-b-orange-400 rounded-br-lg text-base z-50">
+                                {/* <Image src='/trash.svg' alt='' width={20} height={20} className=''></Image> */}
+
+                                {`Edit`}
+                            </button>
+                        </>
+
+                    }
+
+
+                    {
+                        (isEdit) &&
+                        <>
+                            <button onClick={() => { editdone(); }} className="absolute -top-5 -left-10 px-3 py-1 border-r-2 border-b-2 border-r-orange-400 border-b-orange-400 rounded-br-lg text-base z-50">
+                                {/* <Image src='/trash.svg' alt='' width={20} height={20} className=''></Image> */}
+
+                                {`Edit done`}
+                            </button>
+                        </>
+                    }
+
+
+
+                    <div className="relative">
+
+                        {
+                            (isEdit == false) &&
+                            <>
+                                <h6 className="mb-2 text-2xl font-semibold text-orange-500 text-center min-h-[40px] flex justify-center">
+                                    <span className="">
+                                        {`${idInput}`}
+                                    </span>
+
+                                </h6>
+
+                            </>
+                        }
+
+
+                        {
+
+
+                            (isEdit) &&
+                            <>
+                                <div className="mb-2 text-2xl font-semibold text-orange-500 text-center min-h-[40px] flex justify-center ">
+
+                                    <div className="absolute z-10">
+
+                                        <input type='text' className="mb-2 text-2xl font-semibold text-orange-500 text-center " value={idInput}
+                                            onChange={(event) => {
+                                                setIdInput(event.target.value);
+                                                console.log(idInput);
+                                            }}>
+                                        </input>
+                                    </div>
+
+                                </div>
+                            </>
+
+
+                        }
+
+                    </div>
+
+
+                    {
+                        (isEdit) &&
+                        <></>
+                    }
+
+                    <button onClick={() => { deleteProduct(id); }} className="absolute -top-5 -right-10 z-50 px-3 py-2 border-l-2 border-b-2 border-l-orange-400 border-b-orange-400 rounded-bl-lg">
                         <Image src='/trash.svg' alt='' width={20} height={20} className=''></Image>
                     </button>
 
                 </div>
-
-
 
                 <hr className='border-t-2 border-orange-400' />
 
@@ -78,7 +182,7 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
 
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     )
 }

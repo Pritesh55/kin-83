@@ -37,8 +37,6 @@ export default async function Home() {
             <ProductsDisplayAdmin isAdmin = {false}></ProductsDisplayAdmin>
           </div>
 
-          
-
         </main>
       </div>
     </>
