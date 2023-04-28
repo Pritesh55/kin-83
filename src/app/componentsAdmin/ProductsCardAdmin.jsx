@@ -2,7 +2,7 @@
 import axios from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 
 
 export const revalidate = 1;
@@ -67,9 +67,9 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
     return (
         <>
 
-            <div className="w-max max-w-sm border-orange-400 border-2 rounded-lg px-10 pt-5 pb-5 h-max">
+            <div className="flex flex-col items-start max-w-sm border-orange-400 border-2 rounded-lg px-10 pt-5 pb-5 w-full h-max">
 
-                <div className="relative">
+                <div className="relative w-full ">
 
                     {
                         (isEdit == false) &&
@@ -151,15 +151,15 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
 
                 </div>
 
-                <hr className='border-t-2 border-orange-400' />
+                <hr className='border-t-2 border-orange-400 w-full' />
 
-                <div className="h-full pt-4 flex gap-x-8 items-center ">
+                <div className="w-full h-full pt-4 flex gap-x-8 items-center ">
 
                     <Image src={(img) ? img : 'https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'} alt="team" width={64} height={64} className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full" />
 
-                    <div className="flex-grow flex flex-col gap-y-4">
+                    <div className="flex flex-col gap-y-4 w-full">
 
-                        <div className="">
+                        <div className="flex flex-col items-start">
 
                             {
                                 (isEdit == false) &&
@@ -175,7 +175,7 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
                                 (isEdit == true) &&
                                 <>
 
-                                    <div className="min-h-[35px] relative">
+                                    <div className="w-full min-h-[35px] relative">
 
                                         <div className="absolute z-10 flex items-center">
 
@@ -205,7 +205,7 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
                             {
                                 (isEdit == true) &&
                                 <>
-                                    <div className=" min-h-[25px] relative">
+                                    <div className="w-full min-h-[25px] relative">
 
                                         <div className="absolute z-10 flex items-center">
 
@@ -223,38 +223,42 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
 
                         </div>
 
-                        {
-                            (isEdit == false) &&
-                            <>
+                        <div className="text-2xl text-black font-semibold flex gap-x-2">
 
-                                <p className="text-2xl text-black font-semibold">
-                                    {`${price} ₹`}
-                                </p>
-                            </>
-                        }
+                            {
+                                (isEdit == false) &&
+                                <>
 
-                        {
-                            (isEdit == true) &&
-                            <>
-                                <div className=" min-w-[164px] max-w-full min-h-[40px] relative">
+                                    <p className="text-2xl text-black font-semibold">
+                                        {`${price} ₹`}
+                                    </p>
+                                </>
+                            }
 
-                                    <div className="absolute z-10 flex items-center max-w-full">
+                            {
+                                (isEdit == true) &&
+                                <>
+                                    <div className="w-full min-h-[40px] relative">
 
-                                        <input type='number' className="text-2xl text-black font-semibold max-w-full" value={priceInput}
-                                            onChange={(event) => {
-                                                setPriceInput(event.target.value);
-                                                console.log(priceInput);
-                                            }}>
-                                        </input>
+                                        <div className="absolute z-10 flex gap-x-2 items-center max-w-full">
 
-                                        
+                                            <input id='productPrice' type='number' className="text-2xl text-black font-semibold max-w-full" value={priceInput}
+                                                onChange={(event) => {
+                                                    setPriceInput(event.target.value);
+                                                    console.log(priceInput);
+                                                }}>
+                                            </input>
+
+                                
+                                        </div>
+
 
                                     </div>
+                                </>
+                            }
 
+                        </div>
 
-                                </div>
-                            </>
-                        }
 
 
 
