@@ -114,7 +114,7 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
                             <>
                                 <h6 className="mb-2 text-2xl font-semibold text-orange-500 text-center min-h-[40px] flex justify-center">
                                     <span className="">
-                                        {`${idInput}`}
+                                        {`${id}`}
                                     </span>
 
                                 </h6>
