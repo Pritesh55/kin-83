@@ -4,6 +4,10 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
+
+export const revalidate = 1;
+// Data will be fetch from locagost:3000/api/product/read at every 01 sec....
+
 const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => {
 
     const router = useRouter();
@@ -63,7 +67,7 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
             oldId: id
         })
             .then((response) => {
-               console.log(response.data);
+                console.log(response.data);
             });
     }
 
