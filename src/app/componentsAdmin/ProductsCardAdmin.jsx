@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 export const revalidate = 1;
 // Data will be fetch from locagost:3000/api/product/read at every 01 sec....
 
-const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAddedToCart }) => {
+const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAddedToCart, isAdmin = false }) => {
 
     const router = useRouter();
 
@@ -38,7 +38,6 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
     const [titleInput, settTitleInput] = useState(`${title}`);
     const [descriptionInput, setDescriptionInput] = useState(`${description}`);
     const [priceInput, setPriceInput] = useState(`${price}`);
-    const [isAddedToCartInput, setIsAddedToCartInput] = useState(isAddedToCart);
 
     const [isEdit, setIsEdit] = useState(false);
 
@@ -47,34 +46,70 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
     }
 
     const editdone = async () => {
-
         setIsEdit(false);
-        console.log(`past -----  Database :: ${isAddedToCart}`);
-        console.log(`past -----  newIsAddedToCart :: ${isAddedToCartInput}`);
-
-        let a = isAddedToCartInput;
-        (a == true) ? a = false : a = true;
-        setIsAddedToCartInput(a);
-        console.log(`a is ${a}`)
-        console.log(`new ----    newIsAddedToCart :: ${isAddedToCartInput}`);
 
         await axios.put(`/api/product/update/${idInput}`, {
             oldId: id,
             newTitle: titleInput,
             newDescription: descriptionInput,
             newPrice: priceInput,
-
-            newIsAddedToCart: a
         })
             .then((response) => {
                 console.log(response.data);
                 refreshPage();
-                refreshPage();
-                refreshPage();
             });
     }
 
-    console.log(titleInput);
+    const decProductQuantity = async () => {
+
+        await axios.put(`/api/product/quantity/${idInput}`, {
+            quantity: quantity-1,
+            
+        })
+            .then((response) => {
+                console.log(response.data);
+            });
+        refreshPage();
+        refreshPage();
+    }
+
+    const incProductQuantity = async () => {
+
+        await axios.put(`/api/product/quantity/${idInput}`, {
+            quantity: quantity+1,
+        })
+            .then((response) => {
+                console.log(response.data);
+
+            });
+        refreshPage();
+        refreshPage();
+    }
+
+    const cartAdd = async () => {
+
+        await axios.put(`/api/product/cart/${idInput}`, {
+            newIsAddedToCart: true,
+
+        })
+            .then((response) => {
+                console.log(response.data);
+
+            });
+        refreshPage();
+    }
+
+    const cartRemove = async () => {
+
+        await axios.put(`/api/product/cart/${idInput}`, {
+            newIsAddedToCart: false
+        })
+            .then((response) => {
+                console.log(response.data);
+
+            });
+        refreshPage();
+    }
 
     return (
         <>
@@ -85,7 +120,7 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
                 <div className="relative w-full ">
 
                     {
-                        (isEdit == false) &&
+                        (isEdit == false && isAdmin) &&
                         <>
 
                             <button onClick={() => { updateProduct(id); }} className="absolute -top-5 -left-10 px-3 py-1 border-r-2 border-b-2 border-r-orange-400 border-b-orange-400 rounded-br-lg text-base z-50">
@@ -99,7 +134,7 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
 
 
                     {
-                        (isEdit) &&
+                        (isEdit && isAdmin) &&
                         <>
                             <button onClick={() => { editdone(); }} className="absolute -top-5 -left-10 px-3 py-1 border-r-2 border-b-2 border-r-orange-400 border-b-orange-400 rounded-br-lg text-base z-50">
                                 {/* <Image src='/trash.svg' alt='' width={20} height={20} className=''></Image> */}
@@ -152,13 +187,15 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
 
 
                     {
-                        (isEdit) &&
-                        <></>
+                        (isAdmin) &&
+                        <>
+                            <button onClick={() => { deleteProduct(id); }} className="absolute -top-5 -right-10 z-50 px-3 py-2 border-l-2 border-b-2 border-l-orange-400 border-b-orange-400 rounded-bl-lg">
+                                <Image src='/trash.svg' alt='' width={20} height={20} className=''></Image>
+                            </button>
+                        </>
                     }
 
-                    <button onClick={() => { deleteProduct(id); }} className="absolute -top-5 -right-10 z-50 px-3 py-2 border-l-2 border-b-2 border-l-orange-400 border-b-orange-400 rounded-bl-lg">
-                        <Image src='/trash.svg' alt='' width={20} height={20} className=''></Image>
-                    </button>
+
 
                 </div>
 
@@ -273,30 +310,61 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
 
                         </div>
 
+                        {/* Quantity */}
+                        <div className="flex flex-col gap-y-1 items-center font-semibold  w-full sm:w-1/2 lg:w-1/4 prevent-select mx-auto md:mx-0">
+
+                            {/* Quantity */}
+                            <div className="flex justify-center ">
+
+                                {/* Minus Icon */}
+                                <svg
+                                    // (decProductQuantity) 01 :: Call incProductQuantity function on Click on Plus Icon....
+                                    onClick={() => { decProductQuantity(); }} className="fill-current text-gray-600 w-3 cursor-pointer" viewBox="0 0 448 512" ><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+                                </svg>
+
+                                {/* Product Quantity */}
+                                <input className="mx-2 prevent-select text-lg border text-center w-8" type="text" value={quantity} readOnly />
+
+                                {/* Plus Icon */}
+                                <svg className="fill-current text-gray-600 w-3 cursor-pointer" viewBox="0 0 448 512"
+                                    // (incProductQuantity) 01 :: Call incProductQuantity function on Click on Plus Icon....
+                                    onClick={() => { incProductQuantity(id); }}>
+
+                                    <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+                                </svg>
+                            </div>
+
+                            <span className="lg:hidden text-sm text-orange-400">
+                                Product Quantity
+                            </span>
+                        </div>
+
+                        <div className="">
+                            {`Total : ${price * quantity}`}
+                        </div>
+
                         {/* Add to cart , Remove from cart */}
                         <div className="flex flex-col gap-y-4 items-center md:items-start">
 
                             <div className="flex flex-col md:flex-row items-center flex-wrap gap-x-2 gap-y-4">
 
                                 <button onClick={() => {
-                                    setIsEdit(true);
-                                    editdone();
+                                    cartAdd();
                                 }} className="flex px-4 py-2 bg-orange-200 text-black text-sm font-medium rounded-md text-center">
                                     Add to cart
                                 </button>
 
                                 <button onClick={() => {
-                                    setIsEdit(true);
-                                    editdone();
+                                    cartRemove();
                                 }} className="flex px-4 py-2 bg-orange-200 text-black text-sm font-medium rounded-md text-center">
                                     Remove from cart
                                 </button>
                             </div>
 
                             <h1 className="text-orange-600 font-medium text-xl capitalize">
-
                                 {`Now : ${isAddedToCart}`}
                             </h1>
+
                         </div>
 
                     </div>

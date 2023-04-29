@@ -60,8 +60,7 @@ export async function PUT(request) {
                 id: newIdNum,
                 title: newTitle,
                 description: newDescription,
-                price: newPriceNum,
-                isAddedToCart:newIsAddedToCart 
+                price: newPriceNum
             },
         }
     );

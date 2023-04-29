@@ -5,7 +5,7 @@ import useSWR from 'swr';
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-const SortProductsDisplay = () => {
+const SortProductsDisplay = ({ isCart = false }) => {
 
     const { data, error, isLoading } = useSWR("/api/product/sort", fetcher, { refreshInterval: 1 });
 
@@ -22,20 +22,45 @@ const SortProductsDisplay = () => {
     }
 
     let sortedProducts = data.readptModels2.sort((a, b) => { return a.id - b.id; });
+    let catPtoducts = sortedProducts.filter(item => item.isAddedToCart == true);
 
-    return (
-        <>
-            {sortedProducts.map((curItem, index) => {
-                return (
-                    <>
-                        <ProductsCardAdmin key={index}
-                            {...curItem}>
-                        </ProductsCardAdmin>
-                    </>
-                )
-            })}
-        </>
-    )
+
+
+    if (isCart == false) {
+        return (
+            <>
+                {sortedProducts.map((curItem, index) => {
+                    return (
+                        <>
+                            <ProductsCardAdmin key={index}
+                                {...curItem}>
+                            </ProductsCardAdmin>
+                        </>
+                    )
+                })}
+            </>
+        )
+
+    }
+
+
+    if (isCart == true) {
+        return (
+            <>
+                {
+                    catPtoducts.map((curItem, index) => {
+                        return (
+                            <ProductsCardAdmin key={index}
+                                {...curItem}>
+                            </ProductsCardAdmin>
+                        )
+                    })}
+            </>
+        )
+
+    }
+
+   
 }
 
 export default SortProductsDisplay

@@ -21,8 +21,6 @@ export const AddToCartHeader = ({children}) => {
 
             {children}
 
-
-
         </div>
     )
 }
