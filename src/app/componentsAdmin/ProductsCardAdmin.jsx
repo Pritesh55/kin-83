@@ -68,6 +68,9 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
         })
             .then((response) => {
                 console.log(response.data);
+                refreshPage();
+                refreshPage();
+                refreshPage();
             });
     }
 
