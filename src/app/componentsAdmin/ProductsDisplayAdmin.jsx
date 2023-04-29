@@ -11,7 +11,7 @@ const ProductsDisplayAdmin = ({ isAdmin = false }) => {
 
     return (
         <>
-            <ul className="flex flex-col items-center lg:flex-row justify-between gap-x-5 flex-wrap gap-y-5">
+            <ul className="flex flex-col items-center lg:flex-row justify-between gap-x-5 flex-wrap gap-y-5 ">
 
                 {
                     (isAdmin) &&
@@ -36,7 +36,7 @@ const ProductsDisplayAdmin = ({ isAdmin = false }) => {
             <hr />
 
 
-            <div className='flex flex-wrap gap-x-10 gap-y-10 justify-evenly pb-10'>
+            <div className='flex flex-wrap gap-x-5 xl:gap-x-10 gap-y-10 justify-evenly pb-10'>
                 {
                     (isSort == true) &&
                     <SortProductsDisplay></SortProductsDisplay>

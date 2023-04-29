@@ -2,13 +2,12 @@
 import axios from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React, { useLayoutEffect, useRef, useState } from 'react';
-
+import React, { useState } from 'react';
 
 export const revalidate = 1;
 // Data will be fetch from locagost:3000/api/product/read at every 01 sec....
 
-const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => {
+const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAddedToCart }) => {
 
     const router = useRouter();
 
@@ -39,7 +38,7 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
     const [titleInput, settTitleInput] = useState(`${title}`);
     const [descriptionInput, setDescriptionInput] = useState(`${description}`);
     const [priceInput, setPriceInput] = useState(`${price}`);
-
+    const [isAddedToCartInput, setIsAddedToCartInput] = useState(isAddedToCart);
 
     const [isEdit, setIsEdit] = useState(false);
 
@@ -50,12 +49,22 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
     const editdone = async () => {
 
         setIsEdit(false);
+        console.log(`past -----  Database :: ${isAddedToCart}`);
+        console.log(`past -----  newIsAddedToCart :: ${isAddedToCartInput}`);
+
+        let a = isAddedToCartInput;
+        (a == true) ? a = false : a = true;
+        setIsAddedToCartInput(a);
+        console.log(`a is ${a}`)
+        console.log(`new ----    newIsAddedToCart :: ${isAddedToCartInput}`);
 
         await axios.put(`/api/product/update/${idInput}`, {
             oldId: id,
             newTitle: titleInput,
             newDescription: descriptionInput,
-            newPrice: priceInput
+            newPrice: priceInput,
+
+            newIsAddedToCart: a
         })
             .then((response) => {
                 console.log(response.data);
@@ -67,8 +76,9 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
     return (
         <>
 
-            <div className="flex flex-col items-start max-w-sm border-orange-400 border-2 rounded-lg px-10 pt-5 pb-5 w-full h-max">
+            <div className="flex flex-col items-start border-orange-400 border-2 rounded-lg px-10 pt-5 pb-5 w-full h-max max-w-[100%] md:max-w-[45%]">
 
+                {/* id */}
                 <div className="relative w-full ">
 
                     {
@@ -95,8 +105,6 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
                             </button>
                         </>
                     }
-
-
 
                     <div className="relative">
 
@@ -153,13 +161,15 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
 
                 <hr className='border-t-2 border-orange-400 w-full' />
 
-                <div className="w-full h-full pt-4 flex gap-x-8 items-center ">
+                <div className="w-full h-full pt-4 flex flex-col gap-y-5 md:flex-row gap-x-8 items-center">
 
+                    {/* Image */}
                     <Image src={(img) ? img : 'https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'} alt="team" width={64} height={64} className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full" />
 
                     <div className="flex flex-col gap-y-4 w-full">
 
-                        <div className="flex flex-col items-start">
+                        {/* Title and description */}
+                        <div className="flex flex-col items-center md:items-start">
 
                             {
                                 (isEdit == false) &&
@@ -223,7 +233,8 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
 
                         </div>
 
-                        <div className="text-2xl text-black font-semibold flex gap-x-2">
+                        {/* Price */}
+                        <div className="flex justify-center md:justify-start gap-x-2 text-2xl text-black font-semibold ">
 
                             {
                                 (isEdit == false) &&
@@ -249,7 +260,7 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
                                                 }}>
                                             </input>
 
-                                
+
                                         </div>
 
 
@@ -259,11 +270,35 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity }) => 
 
                         </div>
 
+                        {/* Add to cart , Remove from cart */}
+                        <div className="flex flex-col gap-y-4 items-center md:items-start">
 
+                            <div className="flex flex-col md:flex-row items-center flex-wrap gap-x-2 gap-y-4">
 
+                                <button onClick={() => {
+                                    setIsEdit(true);
+                                    editdone();
+                                }} className="flex px-4 py-2 bg-orange-200 text-black text-sm font-medium rounded-md text-center">
+                                    Add to cart
+                                </button>
+
+                                <button onClick={() => {
+                                    setIsEdit(true);
+                                    editdone();
+                                }} className="flex px-4 py-2 bg-orange-200 text-black text-sm font-medium rounded-md text-center">
+                                    Remove from cart
+                                </button>
+                            </div>
+
+                            <h1 className="text-orange-600 font-medium text-xl capitalize">
+
+                                {`Now : ${isAddedToCart}`}
+                            </h1>
+                        </div>
 
                     </div>
                 </div>
+
             </div >
         </>
     )

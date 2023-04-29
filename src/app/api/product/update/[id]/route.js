@@ -48,7 +48,7 @@ export async function PUT(request) {
     let newIdNum = Number(newId);
 
     let data = await request.json();
-    let { oldId, newTitle, newDescription, newPrice } = data;
+    let { oldId, newTitle, newDescription, newPrice, newIsAddedToCart } = data;
 
     let oldIdNum = Number(oldId);
     let newPriceNum = Number(newPrice);
@@ -56,7 +56,13 @@ export async function PUT(request) {
     let updateptModels2 = await mongoose.connection.db.collection('ptmodels2').updateOne(
         { id: oldIdNum },
         {
-            $set: { id: newIdNum, title: newTitle, description: newDescription, price: newPriceNum },
+            $set: {
+                id: newIdNum,
+                title: newTitle,
+                description: newDescription,
+                price: newPriceNum,
+                isAddedToCart:newIsAddedToCart 
+            },
         }
     );
 

@@ -3,7 +3,6 @@
 import AddToCartHeaderCall from '@/app/components/cliants/AddToCartHeaderCall'
 import ShowProductsCall from '@/app/components/cliants/ShowProductsCall'
 
-
 import React from 'react'
 
 export const metadata = {
