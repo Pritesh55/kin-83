@@ -21,9 +21,11 @@ const Sign = ({ loc }) => {
                 <Link href="/api/auth/signout" className='inline'>
                     <button onClick={() => {
                         signOut();
-                    }}>
-                        log Out
-                        {/* {session?.user?.name} {loc} */}
+                    }} className='flex flex-col items-end'>
+                        <span className="">log Out</span>
+                        <span className="">{session?.user?.name}</span>
+                        <span className="">{session?.user?.email}</span>
+                        {/*  {loc} */}
                     </button>
                 </Link>
             </>
