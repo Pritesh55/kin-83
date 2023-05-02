@@ -4,30 +4,26 @@ import React from 'react'
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect } from "react";
 
-
-const Sign = (type = 'in') => {
+const Sign = ({ loc }) => {
 
     const { data: session } = useSession();
 
     console.log("session", session);
 
     useEffect(() => {
-        if (session?.error === "RefreshAccessTokenError") {
-            signIn(); // Force sign in to hopefully resolve error
-        }
+        console.log("session", session);
     }, [session]);
 
-    if (session && session != {} && session?.user) {
+    // if (session && session != {} && session?.user) {
+    if (loc == 3) {
         return (
             <>
-
                 <Link href="/api/auth/signout" className='lg:inline'>
                     <button onClick={() => {
-
                         signOut();
-
                     }}>
-                        log Out {session?.user?.email}
+                        log Out
+                        {/* {session?.user?.name} {loc} */}
                     </button>
                 </Link>
             </>
@@ -36,21 +32,14 @@ const Sign = (type = 'in') => {
 
         return (
             <>
-
-
                 <Link href="/api/auth/signin" className='lg:inline'>
                     <button onClick={() => {
-
                         signIn();
-
                     }}>
                         log in
+                        {/* {session?.user?.name}{loc} */}
                     </button>
                 </Link>
-
-
-
-
             </>
         )
 }

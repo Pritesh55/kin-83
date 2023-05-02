@@ -52,8 +52,8 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false }) => {
         let totalPricePerProduct = 0;
         let totalAmount = catPtoducts.reduce(
             (acc, currentItem) => {
-                console.log(currentItem.price);
-                console.log(currentItem.quantity);
+                // console.log(currentItem.price);
+                // console.log(currentItem.quantity);
                 totalPricePerProduct = currentItem.price * currentItem.quantity;
                 return acc + parseInt(totalPricePerProduct);
             }, 0

@@ -3,13 +3,16 @@ import React from 'react'
 import { SessionProvider } from 'next-auth/react';
 import Sign from './Sign';
 
-const CallSign = (session) => {
+
+const CallSign = ({session, loc}) => {
 
     return (
         <>
             <SessionProvider session={session}>
-                <Sign></Sign>
+                <Sign loc={loc}></Sign>
             </SessionProvider>
+
+
         </>
     )
 }
