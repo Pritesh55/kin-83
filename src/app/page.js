@@ -32,6 +32,7 @@ export default async function Home() {
           <Header></Header>
         </div>
         <main className="px-5">
+          
 
           <div className="flex flex-col gap-y-5 -mt-5">
             <ProductsDisplayAdmin isAdmin = {false}></ProductsDisplayAdmin>

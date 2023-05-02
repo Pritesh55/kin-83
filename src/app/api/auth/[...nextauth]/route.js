@@ -1,18 +1,23 @@
 import NextAuth from "next-auth/next";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import { config } from "../../../../utils/constants";
 
+console.log(GITHUB_ID);
+console.log(GITHUB_SECRET);
+
+console.log(GOOGLE_ID);
+console.log(GOOGLE_SECRET);
 
 const handler = NextAuth({
+
     providers: [
         GitHubProvider({
-            clientId: config.GITHUB_ID,
-            clientSecret:  config.GITHUB_SECRET
+            clientId: GITHUB_ID,
+            clientSecret: GITHUB_SECRET
         }),
         GoogleProvider({
-            clientId:  config.GOOGLE_ID,
-            clientSecret:  config.GOOGLE_SECRET
+            clientId: GOOGLE_ID,
+            clientSecret: GOOGLE_SECRET
         }),
     ]
 })
