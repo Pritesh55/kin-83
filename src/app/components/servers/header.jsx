@@ -1,7 +1,13 @@
 import Link from 'next/link'
 import React from 'react'
+import Sign from '../cliants/user/Sign';
+import CallSign from '../cliants/user/CallSign';
+
+
+export const revalidate = 1;
 
 const Header = () => {
+
     return (
 
         <div className='text-xl font-semibold flex justify-between w-full '>
@@ -16,9 +22,14 @@ const Header = () => {
             <Link href="/products" className='hidden lg:inline'>
                 Products
             </Link>
-            <Link href="/contact" className='hidden lg:inline'>
-                Contact
-            </Link>
+
+            <CallSign></CallSign>
+
+
+
+ 
+
+
         </div>
     )
 }
