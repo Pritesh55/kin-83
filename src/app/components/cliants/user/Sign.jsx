@@ -18,7 +18,7 @@ const Sign = ({ loc }) => {
     if (loc == 3) {
         return (
             <>
-                <Link href="/api/auth/signout" className='lg:inline'>
+                <Link href="/api/auth/signout" className='inline'>
                     <button onClick={() => {
                         signOut();
                     }}>
@@ -32,7 +32,7 @@ const Sign = ({ loc }) => {
 
         return (
             <>
-                <Link href="/api/auth/signin" className='lg:inline'>
+                <Link href="/api/auth/signin" className='inline'>
                     <button onClick={() => {
                         signIn();
                     }}>
