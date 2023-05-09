@@ -72,7 +72,21 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
         refreshPage();
     }
 
+    // -----------------------------------------------
+    const deleteAllUser = async () => {
 
+        await axios.delete(`/api/cuser/deleteAllUser`).then((response) => {
+            console.log(response);
+
+        }, (error) => {
+            console.log(error);
+        });
+
+        console.log("Go to axios");
+        refreshPage();
+
+    }
+    // -----------------------------------------------
 
 
     return (
@@ -83,6 +97,24 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
                     (isAdmin) &&
                     <>
                         <ApiNavbar></ApiNavbar>
+                    </>
+                }
+
+                {
+                    (isAdmin) &&
+                    <>
+
+                        <div className="flex gap-x-10 flex-wrap">
+                            <a href='/api/cuser' className="px-8 py-2 bg-gray-200 text-purple-900 font-medium rounded-md text-lg">
+                                See All User
+                            </a>
+
+                            <button onClick={() => { deleteAllUser(); }} className="px-8 py-2 bg-gray-200 text-purple-900 font-medium rounded-md text-lg">
+                                delete All User
+                            </button>
+
+                        </div>
+
                     </>
                 }
 
@@ -107,35 +139,40 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
                     </>
                 }
 
-                <div className="flex gap-x-20 justify-center items-center sm:justify-between flex-wrap gap-y-5 px-10 py-2 bg-yellow-300 rounded-t-full ">
-                    {
-                        (!isAdmin) &&
-                        <>
-                            <div className="">
-                                <span className="text-2xl">
-                                    {`${totalItem} Items`}
-                                </span>
-                            </div>
+                {
+                    (!isAdmin) &&
+                    <>
+                        <div className="flex gap-x-20 justify-center items-center sm:justify-between flex-wrap gap-y-5 px-10 py-2 bg-yellow-300 rounded-t-full ">
+                            {
+                                (!isAdmin) &&
+                                <>
+                                    <div className="">
+                                        <span className="text-2xl">
+                                            {`${totalItem} Items`}
+                                        </span>
+                                    </div>
 
-                        </>
-                    }
+                                </>
+                            }
 
-                    {
-                        (!isAdmin) &&
-                        <>
-                            <div className="">
-                                <span className="text-xl">
-                                    {`Total : `}
-                                </span>
-                                <span className="text-2xl">
-                                    {`${totalAmount} ₹`}
-                                </span>
-                            </div>
+                            {
+                                (!isAdmin) &&
+                                <>
+                                    <div className="">
+                                        <span className="text-xl">
+                                            {`Total : `}
+                                        </span>
+                                        <span className="text-2xl">
+                                            {`${totalAmount} ₹`}
+                                        </span>
+                                    </div>
 
-                        </>
-                    }
+                                </>
+                            }
 
-                </div>
+                        </div>
+                    </>
+                }
 
                 <div className="w-full flex justify-between">
 

@@ -2,10 +2,18 @@
 import React from 'react'
 import ProductsCardAdmin from '../ProductsCardAdmin';
 import useSWR from 'swr';
+{/* ---------------------------------- */ }
+// 01 :: session
+import { SessionProvider } from 'next-auth/react';
+{/* ---------------------------------- */ }
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-const SortProductsDisplay = ({ isCart = false }) => {
+const SortProductsDisplay = ({ isCart = false,
+    //  -----------------
+    // 02 :: session
+    // ------------------
+    session }) => {
 
     const { data, error, isLoading } = useSWR("/api/product/sort", fetcher, { refreshInterval: 1 });
 
@@ -47,20 +55,26 @@ const SortProductsDisplay = ({ isCart = false }) => {
     if (isCart == true) {
         return (
             <>
-                {
-                    catPtoducts.map((curItem, index) => {
-                        return (
-                            <ProductsCardAdmin key={index}
-                                {...curItem}>
-                            </ProductsCardAdmin>
-                        )
-                    })}
+
+                {/* ---------------------------------- */}
+                {/* // 03 :: session */}
+                {/* ---------------------------------- */}
+                <SessionProvider session={session}>
+                    {
+                        catPtoducts.map((curItem, index) => {
+                            return (
+                                <ProductsCardAdmin key={index}
+                                    {...curItem}>
+                                </ProductsCardAdmin>
+                            )
+                        })}
+                </SessionProvider>
             </>
         )
 
     }
 
-   
+
 }
 
 export default SortProductsDisplay

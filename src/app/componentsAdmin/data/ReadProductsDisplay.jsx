@@ -2,13 +2,22 @@
 import React, { useState } from 'react'
 import useSWR from 'swr';
 import ProductsCardAdmin from '../ProductsCardAdmin';
+{/* ---------------------------------- */ }
+// 01 :: session
+import { SessionProvider } from 'next-auth/react';
+{/* ---------------------------------- */ }
 
 export const revalidate = 1;
 // Data will be fetch from locagost:3000/api/product/read at every 01 sec....
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-const ReadProductsDisplay = ({ isCart = false, isAdmin = false }) => {
+const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
+    //  -----------------
+    // 02 :: session
+    // ------------------
+    session
+}) => {
 
     const [total, setTotal] = useState();
 
@@ -31,14 +40,20 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false }) => {
     if (isCart == false) {
         return (
             <>
-                {
-                    readProducts.map((curItem, index) => {
-                        return (
-                            <ProductsCardAdmin key={index} isAdmin={isAdmin}
-                                {...curItem}>
-                            </ProductsCardAdmin>
-                        )
-                    })}
+
+                {/* ---------------------------------- */}
+                {/* // 03 :: session */}
+                {/* ---------------------------------- */}
+                <SessionProvider session={session}>
+                    {
+                        readProducts.map((curItem, index) => {
+                            return (
+                                <ProductsCardAdmin key={index} isAdmin={isAdmin}
+                                    {...curItem}>
+                                </ProductsCardAdmin>
+                            )
+                        })}
+                </SessionProvider>
             </>
         )
 
@@ -61,14 +76,24 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false }) => {
 
         return (
             <>
-                {
-                    catPtoducts.map((curItem, index) => {
-                        return (
-                            <ProductsCardAdmin key={index} isAdmin={isAdmin}
-                                {...curItem}>
-                            </ProductsCardAdmin>
-                        )
-                    })}
+
+                {/* ---------------------------------- */}
+                {/* // 03 :: session */}
+                {/* ---------------------------------- */}
+                <SessionProvider session={session}>
+                    {
+                        catPtoducts.map((curItem, index) => {
+                            return (
+                                <ProductsCardAdmin key={index} isAdmin={isAdmin}
+                                    {...curItem}>
+                                </ProductsCardAdmin>
+                            )
+                        })
+                    }
+                    {/* ---------------------------------- */}
+                </SessionProvider>
+                {/* ---------------------------------- */}
+
 
             </>
         )

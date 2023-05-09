@@ -10,7 +10,6 @@ export const metadata = {
 }
 
 
-
 export const revalidate = 0.3;
 // Data will be fetch from locagost:3000/api/product/read at every 01 sec....
 
