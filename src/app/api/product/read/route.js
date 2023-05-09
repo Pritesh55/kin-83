@@ -8,7 +8,14 @@ export const revalidate = 1;
 
 export async function GET(request) {
 
-    await dbConnect();
+    
+    if (mongoose.connection.readyState !== 1) {
+        await dbConnect();
+        console.log('Read connected');
+        console.log(mongoose.connection.readyState); //logs 1
+    }
+
+
 
     // let readAllProductsList;
 
@@ -22,9 +29,9 @@ export async function GET(request) {
 
     // mongoose.connection.close();
 
-    console.log(`-----------------------------------`);
+    // console.log(`-----------------------------------`);
     // console.log(readptModels2);
-    console.log(`---------------------------------`);
+    // console.log(`---------------------------------`);
 
 
     return NextResponse.json({

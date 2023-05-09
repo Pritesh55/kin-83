@@ -34,6 +34,8 @@ const Sign = ({ loc }) => {
         });
     }
 
+  
+
 
     // if (session && session != {} && session?.user) {
     if (session?.user?.name) {

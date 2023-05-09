@@ -1,4 +1,5 @@
 import ProductsDisplayAdmin from '@/app/componentsAdmin/ProductsDisplayAdmin';
+import axios from 'axios';
 
 import React from 'react'
 
@@ -10,7 +11,14 @@ export const metadata = {
 export const revalidate = 1;
 // Data will be fetch from locagost:3000/api/product/read at every 01 sec....
 
+
 const Admin = async () => {
+
+    await axios.get("/api/cuser").then((response) => {
+        console.log(response.data);
+    }, (error) => {
+        console.log(error);
+    });;
 
     return (
         <>

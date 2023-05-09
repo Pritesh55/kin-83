@@ -14,7 +14,7 @@ const ApiNavbar = () => {
         router.push('/admin');
         router.push('/admin');
         router.push('/admin');
-        console.log('refreshPage');
+        // console.log('refreshPage');
     }
 
     const [isOpenCNP, setisOpenCNP] = useState(false);

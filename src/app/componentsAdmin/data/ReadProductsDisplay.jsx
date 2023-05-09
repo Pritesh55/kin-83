@@ -1,27 +1,32 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useSWR from 'swr';
 import ProductsCardAdmin from '../ProductsCardAdmin';
-{/* ---------------------------------- */ }
-// 01 :: session
-import { SessionProvider } from 'next-auth/react';
-{/* ---------------------------------- */ }
+import { useSession } from 'next-auth/react';
 
-export const revalidate = 1;
+export const revalidate = 0.1;
 // Data will be fetch from locagost:3000/api/product/read at every 01 sec....
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
-    //  -----------------
-    // 02 :: session
-    // ------------------
-    session
+
 }) => {
+    // ---------------------------------------------------------------
+    const { data: session } = useSession();
+
+    // console.log("session", session);
+
+    useEffect(() => {
+        // console.log("session", session);
+    }, [session]);
+
+    // ---------------------------------------------------------------
 
     const [total, setTotal] = useState();
 
     const { data, error, isLoading } = useSWR("/api/product/read", fetcher, { refreshInterval: 1 });
+    const { data: user } = useSWR("/api/cuser", fetcher, { refreshInterval: 1 });
 
     if (error) {
         return (<> Error </>);
@@ -37,23 +42,29 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
 
     let readProducts = data.readptModels2;
 
+    // console.log(session?.user);
+
     if (isCart == false) {
         return (
             <>
+                <div className='hidden'>{session?.user?.email}</div>
 
-                {/* ---------------------------------- */}
-                {/* // 03 :: session */}
-                {/* ---------------------------------- */}
-                <SessionProvider session={session}>
-                    {
-                        readProducts.map((curItem, index) => {
-                            return (
-                                <ProductsCardAdmin key={index} isAdmin={isAdmin}
-                                    {...curItem}>
-                                </ProductsCardAdmin>
-                            )
-                        })}
-                </SessionProvider>
+                {
+                    (session?.user?.email !== undefined) &&
+
+                    <>
+                        {
+                            readProducts.map((curItem, index) => {
+                                return (
+                                    <ProductsCardAdmin key={index} isAdmin={isAdmin} userEmail={session?.user?.email}
+                                        {...curItem}>
+                                    </ProductsCardAdmin>
+                                )
+                            })
+                        }
+                    </>
+                }
+
             </>
         )
 
@@ -77,22 +88,23 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
         return (
             <>
 
-                {/* ---------------------------------- */}
-                {/* // 03 :: session */}
-                {/* ---------------------------------- */}
-                <SessionProvider session={session}>
+                <div>{session?.user?.email}</div>
+
+                {session?.user?.email !== undefined} &&
+
+                <>
                     {
                         catPtoducts.map((curItem, index) => {
                             return (
-                                <ProductsCardAdmin key={index} isAdmin={isAdmin}
+                                <ProductsCardAdmin key={index} isAdmin={isAdmin} userEmail={session?.user?.email}
                                     {...curItem}>
                                 </ProductsCardAdmin>
                             )
                         })
                     }
-                    {/* ---------------------------------- */}
-                </SessionProvider>
-                {/* ---------------------------------- */}
+                </>
+
+
 
 
             </>

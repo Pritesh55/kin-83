@@ -1,19 +1,23 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
 import ProductsCardAdmin from '../ProductsCardAdmin';
 import useSWR from 'swr';
-{/* ---------------------------------- */ }
-// 01 :: session
-import { SessionProvider } from 'next-auth/react';
-{/* ---------------------------------- */ }
+import { useSession } from 'next-auth/react';
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-const SortProductsDisplay = ({ isCart = false,
-    //  -----------------
-    // 02 :: session
-    // ------------------
-    session }) => {
+const SortProductsDisplay = ({ isCart = false }) => {
+
+    // ---------------------------------------------------------------
+    const { data: session } = useSession();
+
+    // console.log("session", session);
+
+    useEffect(() => {
+        // console.log("session", session);
+    }, [session]);
+
+    // ---------------------------------------------------------------
 
     const { data, error, isLoading } = useSWR("/api/product/sort", fetcher, { refreshInterval: 1 });
 
@@ -33,14 +37,16 @@ const SortProductsDisplay = ({ isCart = false,
     let catPtoducts = sortedProducts.filter(item => item.isAddedToCart == true);
 
 
+    console.log(session?.user?.email);
 
     if (isCart == false) {
         return (
             <>
+                <div className='hidden'>{session?.user?.email}</div>
                 {sortedProducts.map((curItem, index) => {
                     return (
                         <>
-                            <ProductsCardAdmin key={index}
+                            <ProductsCardAdmin key={index} userEmail={session?.user?.email}
                                 {...curItem}>
                             </ProductsCardAdmin>
                         </>
@@ -55,20 +61,17 @@ const SortProductsDisplay = ({ isCart = false,
     if (isCart == true) {
         return (
             <>
+                <div>{session?.user?.email}</div>
 
-                {/* ---------------------------------- */}
-                {/* // 03 :: session */}
-                {/* ---------------------------------- */}
-                <SessionProvider session={session}>
-                    {
-                        catPtoducts.map((curItem, index) => {
-                            return (
-                                <ProductsCardAdmin key={index}
-                                    {...curItem}>
-                                </ProductsCardAdmin>
-                            )
-                        })}
-                </SessionProvider>
+                {
+                    catPtoducts.map((curItem, index) => {
+                        return (
+                            <ProductsCardAdmin key={index} userEmail={session?.user?.email}
+                                {...curItem}>
+                            </ProductsCardAdmin>
+                        )
+                    })}
+
             </>
         )
 

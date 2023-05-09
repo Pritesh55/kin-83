@@ -9,12 +9,22 @@ import Image from 'next/image';
 import useSWR from 'swr';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+{/* ---------------------------------- */ }
+// 01 :: session
+import { SessionProvider } from 'next-auth/react';
+{/* ---------------------------------- */ }
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
+const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false,
+    //  -----------------
+    // 02 :: session
+    // ------------------
+    session
+}) => {
     const router = useRouter();
     const { data, error, isLoading } = useSWR("/api/product/read", fetcher, { refreshInterval: 1 });
+
 
     const [isSort, setIsSort] = useState(false);
     const [total, setTotal] = useState();
@@ -44,7 +54,10 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
 
     let readProducts = data.readptModels2;
 
+
+
     let catPtoducts = readProducts.filter(item => item.isAddedToCart == true);
+
 
     let totalPricePerProduct = 0;
     let totalAmount = catPtoducts.reduce(
@@ -53,6 +66,7 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
             return acc + parseInt(totalPricePerProduct);
         }, 0
     );
+
 
     let totalItem = catPtoducts.reduce(
         (acc, currentItem) => {
@@ -72,6 +86,7 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
         refreshPage();
     }
 
+
     // -----------------------------------------------
     const deleteAllUser = async () => {
 
@@ -88,6 +103,8 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
     }
     // -----------------------------------------------
 
+    
+ 
 
     return (
         <>
@@ -220,15 +237,20 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
 
 
             <div className='flex flex-wrap gap-x-5 xl:gap-x-10 gap-y-10 justify-evenly pb-10'>
-                {
-                    (isSort == true) &&
-                    <SortProductsDisplay isAdmin={isAdmin} isCart={isCart}></SortProductsDisplay>
-                }
-                {
-                    (isSort == false) &&
-                    <ReadProductsDisplay isAdmin={isAdmin} isCart={isCart} ></ReadProductsDisplay>
-                }
 
+                {/* ---------------------------------- */}
+                {/* // 03 :: session */}
+                {/* ---------------------------------- */}
+                <SessionProvider session={session}>
+                    {
+                        (isSort == true) &&
+                        <SortProductsDisplay isAdmin={isAdmin} isCart={isCart}></SortProductsDisplay>
+                    }
+                    {
+                        (isSort == false) &&
+                        <ReadProductsDisplay isAdmin={isAdmin} isCart={isCart} ></ReadProductsDisplay>
+                    }
+                </SessionProvider>
             </div >
         </>
     )

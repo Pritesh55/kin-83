@@ -1,8 +1,5 @@
 "use client"
 import axios from 'axios';
-// ---------------------------------------------------------------
-import { useSession } from 'next-auth/react';
-// ---------------------------------------------------------------
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -10,17 +7,8 @@ import React, { useEffect, useState } from 'react';
 export const revalidate = 1;
 // Data will be fetch from locagost:3000/api/product/read at every 01 sec....
 
-const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAddedToCart, isAdmin = false }) => {
-    // ---------------------------------------------------------------
-    const { data: session } = useSession();
+const ProductsCardAdmin = ({ userEmail, id, title, description, price, img, quantity, isAddedToCart, isAdmin = false }) => {
 
-    // console.log("session", session);
-
-    useEffect(() => {
-        // console.log("session", session);
-    }, [session]);
-
-    // ---------------------------------------------------------------
     const router = useRouter();
 
     const refreshPage = () => {
@@ -50,6 +38,7 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
     const [titleInput, settTitleInput] = useState(`${title}`);
     const [descriptionInput, setDescriptionInput] = useState(`${description}`);
     const [priceInput, setPriceInput] = useState(`${price}`);
+
 
     const [isEdit, setIsEdit] = useState(false);
 
@@ -124,10 +113,10 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
     }
 
 
-    const ucartAdd = async () => {
+    const ucartAdd = async (userEmail2) => {
 
         await axios.put(`/api/cuser/cart`, {
-            userEmail: session?.user?.email,
+            userEmail: userEmail2,
             id: id,
             title: titleInput,
             description: descriptionInput,
@@ -137,8 +126,7 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
             img: "https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
             isAddedToCart: true,
 
-        })
-            .then((response) => {
+        }).then((response) => {
                 console.log(response.data);
 
             });
@@ -149,6 +137,8 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
         <>
 
             <div className="flex flex-col items-start border-orange-400 border-2 rounded-lg px-10 pt-5 pb-5 w-full h-max max-w-[100%] md:max-w-[45%]">
+
+                <div className=''>{userEmail}</div>
 
                 {/* id */}
                 <div className="relative w-full ">
@@ -405,7 +395,8 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
                             <div className="flex flex-col md:flex-row items-center flex-wrap gap-x-2 gap-y-4">
 
                                 <button onClick={() => {
-                                    ucartAdd();
+                                    let userEmail2 = userEmail;
+                                    ucartAdd(userEmail2);
                                 }} className="flex px-4 py-2 bg-orange-200 text-black text-sm font-medium rounded-md text-center">
                                     Add to uCart
                                 </button>

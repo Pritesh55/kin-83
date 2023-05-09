@@ -2,11 +2,11 @@ import NextAuth from "next-auth/next";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
-console.log(process.env.GITHUB_ID);
-console.log(process.env.GITHUB_SECRET);
+// console.log(process.env.GITHUB_ID);
+// console.log(process.env.GITHUB_SECRET);
 
-console.log(process.env.GOOGLE_ID);
-console.log(process.env.GOOGLE_SECRET);
+// console.log(process.env.GOOGLE_ID);
+// console.log(process.env.GOOGLE_SECRET);
 
 const handler = NextAuth({
 
