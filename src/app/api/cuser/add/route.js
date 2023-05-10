@@ -15,7 +15,7 @@ export async function POST(request) {
     const newUserdata = {
         userName,
         userEmail,
-        cart:[]
+        cart: []
     };
 
     // console.log(id);
@@ -30,12 +30,17 @@ export async function POST(request) {
 
     // Working :: 
     // -------------------
-    let a = await mongoose.connection.db.collection('user').findOne({ userEmail: `${userEmail}` });
+    let a;
 
-
-    if (a == null) {
-        await mongoose.connection.db.collection('user').insertOne(newUserdata);
+    if (userEmail !== undefined && userEmail !== null) {
+        a = await mongoose.connection.db.collection('user').findOne({ userEmail: `${userEmail}` });
+        if (a === null) {
+            await mongoose.connection.db.collection('user').insertOne(newUserdata);
+        }
     }
+
+
+
 
     // const res = await fetch("http://localhost:3000/api/product/post",
     //     {

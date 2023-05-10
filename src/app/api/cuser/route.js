@@ -10,7 +10,7 @@ export async function GET(request) {
 
     await dbConnect();
 
-    console.log(mongoose.connection.readyState);
+    // console.log(mongoose.connection.readyState);
 
     let readUser = await mongoose.connection.db.collection('user').find({}).toArray();
 

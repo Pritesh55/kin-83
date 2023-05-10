@@ -3,6 +3,10 @@ import React, { useEffect, useState } from 'react'
 import useSWR from 'swr';
 import ProductsCardAdmin from '../ProductsCardAdmin';
 import { useSession } from 'next-auth/react';
+import axios from 'axios';
+import CallSign from '@/app/components/cliants/user/CallSign';
+
+
 
 export const revalidate = 0.1;
 // Data will be fetch from locagost:3000/api/product/read at every 01 sec....
@@ -13,12 +17,25 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
 
 }) => {
     // ---------------------------------------------------------------
+
+    const refreshPage = () => {
+        //this will reload the page without doing SSR
+        // console.log('refreshPage');
+    }
     const { data: session } = useSession();
 
     // console.log("session", session);
 
     useEffect(() => {
         // console.log("session", session);
+
+        if (session === undefined) {
+            refreshPage();
+            refreshPage();
+            refreshPage();
+        }
+        refreshPage();
+
     }, [session]);
 
     // ---------------------------------------------------------------
@@ -42,7 +59,22 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
 
     let readProducts = data.readptModels2;
 
-    // console.log(session?.user);
+    const createUser = async () => {
+        await axios.post('/api/cuser/add', {
+            userName: session?.user?.name,
+            userEmail: session?.user?.email
+        }).then((response) => {
+
+            if (response.data.a == null) {
+                console.log(response.data);
+            }
+
+        }, (error) => {
+            console.log(error);
+        });
+    }
+
+
 
     if (isCart == false) {
         return (
@@ -50,20 +82,15 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
                 <div className='hidden'>{session?.user?.email}</div>
 
                 {
-                    (session?.user?.email !== undefined) &&
-
-                    <>
-                        {
-                            readProducts.map((curItem, index) => {
-                                return (
-                                    <ProductsCardAdmin key={index} isAdmin={isAdmin} userEmail={session?.user?.email}
-                                        {...curItem}>
-                                    </ProductsCardAdmin>
-                                )
-                            })
-                        }
-                    </>
+                    readProducts.map((curItem, index) => {
+                        return (
+                            <ProductsCardAdmin key={index} isAdmin={isAdmin} userEmail={session?.user?.email}
+                                {...curItem}>
+                            </ProductsCardAdmin>
+                        )
+                    })
                 }
+
 
             </>
         )
@@ -88,21 +115,19 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
         return (
             <>
 
+    
                 <div>{session?.user?.email}</div>
 
-                {session?.user?.email !== undefined} &&
+                {
+                    catPtoducts.map((curItem, index) => {
+                        return (
+                            <ProductsCardAdmin key={index} isAdmin={isAdmin} userEmail={session?.user?.email}
+                                {...curItem}>
+                            </ProductsCardAdmin>
+                        )
+                    })
+                }
 
-                <>
-                    {
-                        catPtoducts.map((curItem, index) => {
-                            return (
-                                <ProductsCardAdmin key={index} isAdmin={isAdmin} userEmail={session?.user?.email}
-                                    {...curItem}>
-                                </ProductsCardAdmin>
-                            )
-                        })
-                    }
-                </>
 
 
 
@@ -111,8 +136,6 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
         )
 
     }
-
-
 }
 
 export default ReadProductsDisplay

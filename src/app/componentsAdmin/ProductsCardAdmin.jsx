@@ -1,6 +1,7 @@
 "use client"
 import axios from 'axios';
 import Image from 'next/image';
+
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
@@ -9,15 +10,14 @@ export const revalidate = 1;
 
 const ProductsCardAdmin = ({ userEmail, id, title, description, price, img, quantity, isAddedToCart, isAdmin = false }) => {
 
+  
     const router = useRouter();
 
     const refreshPage = () => {
         //this will reload the page without doing SSR
+        router.replace('/');
+        // console.log('refreshPage');
 
-        router.refresh();
-        router.refresh();
-        router.refresh();
-        console.log('refreshPage');
     }
 
     const deleteProduct = async (id) => {
@@ -114,6 +114,8 @@ const ProductsCardAdmin = ({ userEmail, id, title, description, price, img, quan
 
 
     const ucartAdd = async (userEmail2) => {
+        refreshPage();
+      
 
         await axios.put(`/api/cuser/cart`, {
             userEmail: userEmail2,
@@ -127,9 +129,9 @@ const ProductsCardAdmin = ({ userEmail, id, title, description, price, img, quan
             isAddedToCart: true,
 
         }).then((response) => {
-                console.log(response.data);
+            console.log(response.data);
 
-            });
+        });
         refreshPage();
     }
 
@@ -395,6 +397,7 @@ const ProductsCardAdmin = ({ userEmail, id, title, description, price, img, quan
                             <div className="flex flex-col md:flex-row items-center flex-wrap gap-x-2 gap-y-4">
 
                                 <button onClick={() => {
+                                    refreshPage();
                                     let userEmail2 = userEmail;
                                     ucartAdd(userEmail2);
                                 }} className="flex px-4 py-2 bg-orange-200 text-black text-sm font-medium rounded-md text-center">

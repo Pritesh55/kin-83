@@ -14,12 +14,6 @@ export const revalidate = 1;
 
 const Admin = async () => {
 
-    await axios.get("/api/cuser").then((response) => {
-        console.log(response.data);
-    }, (error) => {
-        console.log(error);
-    });;
-
     return (
         <>
             <div className="px-5 2xl:container text-2xl">

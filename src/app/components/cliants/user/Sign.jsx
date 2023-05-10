@@ -20,9 +20,13 @@ const Sign = ({ loc }) => {
     // ---------------------------------------------------------------
 
     const createUser = async () => {
+
+        let userName = session?.user?.name;
+        let userEmail = session?.user?.email;
+
         await axios.post('/api/cuser/add', {
-            userName: session?.user?.name,
-            userEmail: session?.user?.email
+            userName: userName,
+            userEmail: userEmail
         }).then((response) => {
 
             if (response.data.a == null) {
@@ -32,9 +36,17 @@ const Sign = ({ loc }) => {
         }, (error) => {
             console.log(error);
         });
+
+        userEmail = userEmail.substring(0,userEmail.length-10);
+
+        // await axios.get(`/api/cuser/now/${userEmail}`).then((response) => {
+        //     console.log(response.data);
+        // }, (error) => {
+        //     console.log(error);
+        // });
     }
 
-  
+
 
 
     // if (session && session != {} && session?.user) {

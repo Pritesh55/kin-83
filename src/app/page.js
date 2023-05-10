@@ -3,6 +3,7 @@ import ApiNavbar from './components/cliants/ApiNavbar';
 import ProductsDisplayAdmin from './componentsAdmin/ProductsDisplayAdmin';
 // import { getAllProductsData } from '@/utils/functions/getAllProducts';
 // import ProductsCardAdmin from './componentsAdmin/ProductsCardAdmin';
+import { cookies } from 'next/headers';
 
 export const metadata = {
   title: 'Home Page',
@@ -10,10 +11,16 @@ export const metadata = {
 }
 
 
-export const revalidate = 1;
+export const revalidate = 0.1;
 // Data will be fetch from locagost:3000/api/product/read at every 01 sec....
 
+
+
 export default async function Home() {
+
+  const cookieStore = cookies();
+
+  const arrOfCookies = cookieStore.getAll();
 
   // const productsJSONObjectFS = await getAllProductsData();
   // const productsArrayFS = productsJSONObjectFS.products;
@@ -21,6 +28,8 @@ export default async function Home() {
   // console.log(` --------------------------- productsArrayFS --------------------------- `);
   // console.log(productsArrayFS);
   // console.log(` --------------------------- productsArrayFS --------------------------- `);
+
+  
 
   return (
     <>
@@ -31,10 +40,10 @@ export default async function Home() {
           <Header></Header>
         </div>
         <main className="px-5">
-          
+
 
           <div className="flex flex-col gap-y-5 -mt-5">
-            <ProductsDisplayAdmin isAdmin = {false}></ProductsDisplayAdmin>
+            <ProductsDisplayAdmin loc={arrOfCookies.length} isAdmin={false}></ProductsDisplayAdmin>
           </div>
 
         </main>
