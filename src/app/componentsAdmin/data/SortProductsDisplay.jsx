@@ -2,22 +2,12 @@
 import React, { useEffect } from 'react'
 import ProductsCardAdmin from '../ProductsCardAdmin';
 import useSWR from 'swr';
-import { useSession } from 'next-auth/react';
+import ReadProductsMap from './ReadProductsMap';
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-const SortProductsDisplay = ({ isCart = false }) => {
+const SortProductsDisplay = ({ isCart = false, isAdmin }) => {
 
-    // ---------------------------------------------------------------
-    const { data: session } = useSession();
-
-    // console.log("session", session);
-
-    useEffect(() => {
-        // console.log("session", session);
-    }, [session]);
-
-    // ---------------------------------------------------------------
 
     const { data, error, isLoading } = useSWR("/api/product/sort", fetcher, { refreshInterval: 1 });
 
@@ -37,21 +27,13 @@ const SortProductsDisplay = ({ isCart = false }) => {
     let catPtoducts = sortedProducts.filter(item => item.isAddedToCart == true);
 
 
-    console.log(session?.user?.email);
 
     if (isCart == false) {
         return (
             <>
-                <div className='hidden'>{session?.user?.email}</div>
-                {sortedProducts.map((curItem, index) => {
-                    return (
-                        <>
-                            <ProductsCardAdmin key={index} userEmail={session?.user?.email}
-                                {...curItem}>
-                            </ProductsCardAdmin>
-                        </>
-                    )
-                })}
+
+                <ReadProductsMap readProducts={sortedProducts} isAdmin={isAdmin}>
+                </ReadProductsMap>
             </>
         )
 
@@ -61,16 +43,9 @@ const SortProductsDisplay = ({ isCart = false }) => {
     if (isCart == true) {
         return (
             <>
-                <div>{session?.user?.email}</div>
 
-                {
-                    catPtoducts.map((curItem, index) => {
-                        return (
-                            <ProductsCardAdmin key={index} userEmail={session?.user?.email}
-                                {...curItem}>
-                            </ProductsCardAdmin>
-                        )
-                    })}
+                <ReadProductsMap readProducts={catPtoducts} isAdmin={isAdmin}>
+                </ReadProductsMap>
 
             </>
         )

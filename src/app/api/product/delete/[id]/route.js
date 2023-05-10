@@ -58,8 +58,6 @@ export async function DELETE(request) {
         readptModels2: readptModels2
 
     });
-
-
 }
 
 

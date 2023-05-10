@@ -8,15 +8,13 @@ export const revalidate = 0.3;
 
 export async function POST(request) {
 
+    let message = '';
+
     await dbConnect();
 
     const { userName, userEmail } = await request.json();
 
-    const newUserdata = {
-        userName,
-        userEmail,
-        cart: []
-    };
+
 
     // console.log(id);
     // console.log(title);
@@ -30,14 +28,33 @@ export async function POST(request) {
 
     // Working :: 
     // -------------------
-    let a;
+    let usersMatchedTotal;
 
     if (userEmail !== undefined && userEmail !== null) {
-        a = await mongoose.connection.db.collection('user').findOne({ userEmail: `${userEmail}` });
-        if (a === null) {
+        // Check if userEmail From Post-request is exists in the database....
+        usersMatchedTotal = await mongoose.connection.db.collection('user').findOne({ userEmail: `${userEmail}` });
+
+        // if userEmail From Post-request is not there in database....
+        // then Only, usersMatchedTotal will be null....
+        // then insert this new user in the database....
+        if (usersMatchedTotal === null && usersMatchedTotal !== undefined) {
+
+            const newUserdata = {
+                userName,
+                userEmail,
+                cart: [],
+                totalItem: 0,
+                totalAmount:0
+            };
+
             await mongoose.connection.db.collection('user').insertOne(newUserdata);
+
+            message = `Welcome ${userName} , (New User is created successfully)`;
+        } else {
+            message = `Welcome Back ${userName} , Nice to see you again...`;
         }
     }
+
 
 
 
@@ -55,20 +72,24 @@ export async function POST(request) {
     // console.log(`-----------------------------------`);
     // console.log(readAllProductsList);
     // console.log(`---------------------------------`);
-    let sortAllUsersList = await mongoose.connection.db.collection('user').find().toArray();
-
+    let allUsersList = await mongoose.connection.db.collection('user').find().toArray();
+    let totalUsers = allUsersList.length;
 
 
     return NextResponse.json({
+        message,
         success: true,
-        message: "New User created Successfully... ram ram",
         method: request.method,
-        sortAllUsersList: sortAllUsersList,
-        a: a
+        // usersMatchedTotal,
+        userName,
+        userEmail,
+        usercart: usersMatchedTotal?.cart,
+        allUsersList,
+        totalUsers: `Total ${totalUsers} user...`
+
+        // findId: findId
         // userEmail: userEmail,
         // isUser: isUser,
-
-
     });
 
 

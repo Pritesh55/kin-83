@@ -17,30 +17,75 @@ export async function PUT(request) {
     let data = await request.json();
     let { userEmail, id, title, description, price, quantity, img, isAddedToCart } = data;
 
-    let idNum = Number(id);
-    let priceNum = Number(price);
+
+    var idNum = Number(id);
+    var priceNum = Number(price);
     // ---------------------------------------------------------------------------------
-    let updateUser = await mongoose.connection.db.collection('user').updateOne(
-        { userEmail: data.userEmail },
-        {
-            $push: {
-                cart: {
-                    idNum, title, description, priceNum, quantity, img, isAddedToCart
+
+
+    let findId = await mongoose.connection.db.collection('user').findOne(
+        { userEmail: userEmail });
+
+    let cart = findId?.cart;
+
+
+
+    let message = "";
+    let reCount = 0;
+
+    if (cart != null && cart != undefined) {
+        cart.map((cart) => { reCount = (cart.id == idNum) ? reCount + 1 : reCount });
+    } else {
+        cart= [];
+    }
+
+
+
+    let updateUser;
+
+    if (reCount == 0) {
+
+        updateUser = await mongoose.connection.db.collection('user').updateOne(
+            { userEmail: userEmail },
+            {
+                $push: {
+                    cart: {
+                        id: idNum, title, description, price: priceNum, quantity, img, isAddedToCart
+                    }
                 }
-            }
 
-        }
-    );
+            }
+        );
+
+        message = "Thank you,Your Product is Added to Cart Sucessfully..."
+
+    } else if (reCount > 0) {
+        message = "Oh... Product is Already in the cart";
+    }
+
 
     // ---------------------------------------------------------------------------------
+
+    let cartProduct = {
+        id: idNum, title, description, price: priceNum, quantity, img, isAddedToCart
+    };
+
 
     return NextResponse.json({
+        message: message,
         success: true,
-        message: "Your User Cart Updated Successfully...(Nothing)",
         data: data,
-        updateUser: updateUser
-
+        cartProduct: cartProduct,
+        updateUser: updateUser,
+        userEmail: userEmail,
+        findId: findId,
+        cart: cart,
+        reCount: reCount
     });
+
+
+
+
 
 }
 

@@ -3,7 +3,7 @@ import dbConnect from "@/utils/database";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
-export const revalidate = 0.1;
+export const revalidate = 1;
 // Data will be fetch from locagost:3000/api/product/read at every 01 sec....
 
 export async function GET(request) {
@@ -14,8 +14,13 @@ export async function GET(request) {
         // console.log(mongoose.connection.readyState); //logs 1
     }
 
-    let userEmail = request.url.slice(request.url.lastIndexOf('/') + 1);
+    let apiUrl = request.url;
+    let userEmail = '';
 
+    if (apiUrl.includes("@")) {
+        userEmail = apiUrl.slice(request.url.lastIndexOf('/') + 1);
+
+    }
 
 
 
@@ -27,14 +32,31 @@ export async function GET(request) {
     //     readAllProductsList = await mongoose.connection.db.ptModels2.find({});
     // }
 
+    let userInfo = await mongoose.connection.db.collection('user').findOne({ userEmail: `${userEmail}` });
+
+    let cartProducts = userInfo?.cart;
+
+    let totalPricePerProduct = 0;
+    let totalAmount = cartProducts?.reduce(
+        (acc, currentItem) => {
+            totalPricePerProduct = currentItem.price * currentItem.quantity;
+            return acc + parseInt(totalPricePerProduct);
+        }, 0
+    );
 
 
-    let userInfo = await mongoose.connection.db.collection('user').findOne({ userEmail: `${userEmail}@gmail.com` });
+    let totalItem = cartProducts?.reduce(
+        (acc, currentItem) => {
+            acc = (currentItem.isAddedToCart) ? acc + currentItem.quantity : acc
+            return acc
+        }, 0
+    );
+
+    totalAmount = (cartProducts == undefined) ? 0 : totalAmount;
+    totalItem = (cartProducts == undefined) ? 0 : totalItem;
+
 
     // let readptModels2 = await mongoose.connection.db.collection('user').find({}).toArray();
-
-
-
 
     // mongoose.connection.close();
 
@@ -49,7 +71,68 @@ export async function GET(request) {
         // products: readAllProductsList,
         // collectionInfos: collectionInfos,
         // a: a,
-        userInfo:userInfo
+        userInfo: userInfo,
+        totalAmount,
+        totalItem,
+        apiUrl: apiUrl,
+        userEmail: userEmail
+    });
+
+    // return readAllProductsList;
+}
+
+export async function DELETE(request) {
+
+    if (mongoose.connection.readyState !== 1) {
+        await dbConnect();
+        // console.log('Read connected');
+        // console.log(mongoose.connection.readyState); //logs 1
+    }
+
+    let userEmail = request.url.slice(request.url.lastIndexOf('/') + 1);
+
+
+    let DeletedUser = await mongoose.connection.db.collection('user').findOne({ userEmail: `${userEmail}` });
+
+
+
+    // let data = await request.json();
+    // console.log(data);
+    // let idNum = Number(id);
+
+
+    let DeletedUser2 = await mongoose.connection.db.collection('user').updateOne(
+        { userEmail: `${userEmail}` },
+        { $pull: { cart: { id: 6 } } }
+    );
+
+
+
+
+    // let cart = await mongoose.connection.db.collection('user').findOne({ userEmail: `${userEmail}` }).cart.deleteOne({ id: idNum });
+
+    // let readptModels2 = await mongoose.connection.db.collection('user').find({}).toArray();
+
+    // mongoose.connection.close();
+
+    // console.log(`-----------------------------------`);
+    // console.log(readptModels2);
+    // console.log(`---------------------------------`);
+
+
+    return NextResponse.json({
+        success: true,
+        message: "Product DELETED Successfully...",
+        // products: readAllProductsList,
+        // collectionInfos: collectionInfos,
+        // a: a,
+        DeletedUser: DeletedUser,
+        DeletedUser2: DeletedUser2,
+        // data: data
+        // // cart: cart,
+        // userEmail: `${userEmail}`,
+        // id:idNum,
+        // DeletedUser2:DeletedUser2,
     });
 
     // return readAllProductsList;

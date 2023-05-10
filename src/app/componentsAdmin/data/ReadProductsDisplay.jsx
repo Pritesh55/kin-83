@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react'
 import useSWR from 'swr';
 import ProductsCardAdmin from '../ProductsCardAdmin';
-import { useSession } from 'next-auth/react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import ReadProductsMap from './ReadProductsMap';
 
 export const revalidate = 0.1;
 // Data will be fetch from locagost:3000/api/product/read at every 01 sec....
@@ -12,7 +12,7 @@ export const revalidate = 0.1;
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
-
+    userEmailFull
 }) => {
     // ---------------------------------------------------------------
 
@@ -21,34 +21,15 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
     const refreshPage = () => {
         router.refresh();
         router.refresh();
+
         //this will reload the page without doing SSR
         // console.log('refreshPage');
     }
-    const { data: session } = useSession();
-
-    // console.log("session", session);
-
-    useEffect(() => {
-        // console.log("session", session);
-
-    }, [session]);
-
     // ---------------------------------------------------------------
 
     const [total, setTotal] = useState();
 
     const { data, error, isLoading } = useSWR("/api/product/read", fetcher, { refreshInterval: 1 });
-
-
-
-    let userEmail = session?.user?.email;
-    if (userEmail !== undefined) {
-        userEmail = userEmail.substring(0, userEmail.length - 10);
-    } else {
-        userEmail = "guest";
-    }
-
-    // const { data: user } = useSWR(`/api/cuser/now/${userEmail}`, fetcher, { refreshInterval: 1 });
 
     if (error) {
         return (<> Error </>);
@@ -69,41 +50,15 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
     // console.log(readUserInfo?.cart);
     // console.log(readUserCart);
 
-    const createUser = async () => {
-        await axios.post('/api/cuser/add', {
-            userName: session?.user?.name,
-            userEmail: session?.user?.email
-        }).then((response) => {
-
-            if (response.data.a == null) {
-                console.log(response.data);
-            }
-
-        }, (error) => {
-            console.log(error);
-        });
-    }
-
 
 
     if (isCart == false) {
 
-        createUser();
         return (
             <>
-                <div className='hidden'>{session?.user?.email}</div>
 
-                {
-                    readProducts.map((curItem, index) => {
-                        return (
-                            <ProductsCardAdmin key={index} isAdmin={isAdmin} userEmail={session?.user?.email}
-                                {...curItem}>
-                            </ProductsCardAdmin>
-                        )
-                    })
-                }
-
-
+                <ReadProductsMap readProducts={readProducts} isAdmin={isAdmin}>
+                </ReadProductsMap>
             </>
         )
 
@@ -126,29 +81,8 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
 
         return (
             <>
-
-
-                <div>{session?.user?.email}</div>
-
-
-
-
-                {
-
-                    catPtoducts.map((curItem, index) => {
-                        return (
-                            <ProductsCardAdmin key={index} isAdmin={isAdmin} userEmail={session?.user?.email}
-                                {...curItem}>
-                            </ProductsCardAdmin>
-                        )
-                    })
-                }
-
-
-
-
-
-
+                <ReadProductsMap readProducts={catPtoducts} isAdmin={isAdmin}>
+                </ReadProductsMap>
 
             </>
         )

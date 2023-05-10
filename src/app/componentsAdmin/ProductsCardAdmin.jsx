@@ -5,19 +5,38 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
+//  ----------------------------------------------
+//  03 :: fetcher :: 
+import useSWR from 'swr';
+// -----------------------------------------------
 export const revalidate = 1;
 // Data will be fetch from locagost:3000/api/product/read at every 01 sec....
 
-const ProductsCardAdmin = ({ userEmail, id, title, description, price, img, quantity, isAddedToCart, isAdmin = false }) => {
+//  ----------------------------------------------
+//  01 :: fetcher :: 
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+// -----------------------------------------------------------------------
 
-
+const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAddedToCart, isAdmin = false }) => {
     const router = useRouter();
+
+    const { data: userNowData, error: userNowError, isLoading: userNowIsLoading } = useSWR(`/api/auth/session`, fetcher, { refreshInterval: 1 });
+
+
+
+    let userEmailFull = userNowData?.user?.email;
+
+
 
     const refreshPage = () => {
         //this will reload the page without doing SSR
-        router.replace('/');
+        // router.replace('/');
         // console.log('refreshPage');
 
+    }
+
+    if (userEmailFull == undefined) {
+        userEmailFull = "guest";
     }
 
     const deleteProduct = async (id) => {
@@ -113,12 +132,10 @@ const ProductsCardAdmin = ({ userEmail, id, title, description, price, img, quan
     }
 
 
-    const ucartAdd = async (userEmail2) => {
-        refreshPage();
-
+    const ucartAdd = async () => {
 
         await axios.put(`/api/cuser/cart`, {
-            userEmail: userEmail2,
+            userEmail: `${userEmailFull}`,
             id: id,
             title: titleInput,
             description: descriptionInput,
@@ -132,7 +149,16 @@ const ProductsCardAdmin = ({ userEmail, id, title, description, price, img, quan
             console.log(response.data);
 
         });
-        refreshPage();
+
+    }
+
+    const ucartRemove = async () => {
+
+        await axios.delete(`/api/cuser/now/${userEmailFull}/${id}`).then((response) => {
+            console.log(response.data);
+
+        });
+
     }
 
     return (
@@ -140,7 +166,7 @@ const ProductsCardAdmin = ({ userEmail, id, title, description, price, img, quan
 
             <div className="flex flex-col items-start border-orange-400 border-2 rounded-lg px-10 pt-5 pb-5 w-full h-max max-w-[100%] md:max-w-[45%]">
 
-                <div className=''>{userEmail}</div>
+                <div className=''>{`${userEmailFull}`} </div>
 
                 {/* id */}
                 <div className="relative w-full ">
@@ -397,17 +423,15 @@ const ProductsCardAdmin = ({ userEmail, id, title, description, price, img, quan
                             <div className="flex flex-col md:flex-row items-center flex-wrap gap-x-2 gap-y-4">
 
                                 <button onClick={() => {
-                                    refreshPage();
-                                    let userEmail2 = userEmail;
-                                    ucartAdd(userEmail2);
+                                    ucartAdd();
                                 }} className="flex px-4 py-2 bg-orange-200 text-black text-sm font-medium rounded-md text-center">
                                     Add to uCart
                                 </button>
 
                                 <button onClick={() => {
-                                    cartRemove();
+                                    ucartRemove();
                                 }} className="flex px-4 py-2 bg-orange-200 text-black text-sm font-medium rounded-md text-center">
-                                    Remove from cart
+                                    Remove from ucart
                                 </button>
                             </div>
 

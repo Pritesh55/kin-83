@@ -19,6 +19,9 @@ export async function GET(request) {
     // console.log(`--------------------------------------------`);
     // console.log(sortAllProductsList);
     // console.log(`--------------------------------------------`);
+    if(sortAllProductsList === undefined) {
+        sortAllProductsList = [{}];
+    }
 
     return NextResponse.json({
         success: true,

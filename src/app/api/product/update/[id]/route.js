@@ -65,6 +65,10 @@ export async function PUT(request) {
         }
     );
 
+    if(updateptModels2 === undefined) {
+        updateptModels2 = [{}];
+    }
+
     return NextResponse.json({
         success: true,
         message: "Your Product Updated Successfully...(Nothing)",
