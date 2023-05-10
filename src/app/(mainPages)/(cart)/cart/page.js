@@ -1,7 +1,6 @@
 
 
 import ProductsDisplayAdmin from '@/app/componentsAdmin/ProductsDisplayAdmin';
-import ReadProductsDisplay from '@/app/componentsAdmin/data/ReadProductsDisplay';
 import React from 'react'
 
 export const metadata = {

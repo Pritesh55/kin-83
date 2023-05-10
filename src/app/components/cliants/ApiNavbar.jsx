@@ -10,10 +10,9 @@ const ApiNavbar = () => {
 
     const refreshPage = () => {
         //this will reload the page without doing SSR
-
-        router.push('/admin');
-        router.push('/admin');
-        router.push('/admin');
+        router.refresh();
+        router.refresh();
+        router.refresh();
         // console.log('refreshPage');
     }
 

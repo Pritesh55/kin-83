@@ -10,7 +10,7 @@ export const revalidate = 1;
 
 const ProductsCardAdmin = ({ userEmail, id, title, description, price, img, quantity, isAddedToCart, isAdmin = false }) => {
 
-  
+
     const router = useRouter();
 
     const refreshPage = () => {
@@ -115,7 +115,7 @@ const ProductsCardAdmin = ({ userEmail, id, title, description, price, img, quan
 
     const ucartAdd = async (userEmail2) => {
         refreshPage();
-      
+
 
         await axios.put(`/api/cuser/cart`, {
             userEmail: userEmail2,

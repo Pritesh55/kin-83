@@ -4,9 +4,7 @@ import useSWR from 'swr';
 import ProductsCardAdmin from '../ProductsCardAdmin';
 import { useSession } from 'next-auth/react';
 import axios from 'axios';
-import CallSign from '@/app/components/cliants/user/CallSign';
-
-
+import { useRouter } from 'next/navigation';
 
 export const revalidate = 0.1;
 // Data will be fetch from locagost:3000/api/product/read at every 01 sec....
@@ -18,7 +16,11 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
 }) => {
     // ---------------------------------------------------------------
 
+    const router = useRouter();
+
     const refreshPage = () => {
+        router.refresh();
+        router.refresh();
         //this will reload the page without doing SSR
         // console.log('refreshPage');
     }
@@ -29,13 +31,6 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
     useEffect(() => {
         // console.log("session", session);
 
-        if (session === undefined) {
-            refreshPage();
-            refreshPage();
-            refreshPage();
-        }
-        refreshPage();
-
     }, [session]);
 
     // ---------------------------------------------------------------
@@ -43,7 +38,17 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
     const [total, setTotal] = useState();
 
     const { data, error, isLoading } = useSWR("/api/product/read", fetcher, { refreshInterval: 1 });
-    const { data: user } = useSWR("/api/cuser", fetcher, { refreshInterval: 1 });
+
+
+
+    let userEmail = session?.user?.email;
+    if (userEmail !== undefined) {
+        userEmail = userEmail.substring(0, userEmail.length - 10);
+    } else {
+        userEmail = "guest";
+    }
+
+    // const { data: user } = useSWR(`/api/cuser/now/${userEmail}`, fetcher, { refreshInterval: 1 });
 
     if (error) {
         return (<> Error </>);
@@ -58,6 +63,11 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
     }
 
     let readProducts = data.readptModels2;
+    // let readUserCart = user?.userInfo?.cart;
+
+    // console.log(`readUsers`);
+    // console.log(readUserInfo?.cart);
+    // console.log(readUserCart);
 
     const createUser = async () => {
         await axios.post('/api/cuser/add', {
@@ -77,6 +87,8 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
 
 
     if (isCart == false) {
+
+        createUser();
         return (
             <>
                 <div className='hidden'>{session?.user?.email}</div>
@@ -115,10 +127,14 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
         return (
             <>
 
-    
+
                 <div>{session?.user?.email}</div>
 
+
+
+
                 {
+
                     catPtoducts.map((curItem, index) => {
                         return (
                             <ProductsCardAdmin key={index} isAdmin={isAdmin} userEmail={session?.user?.email}
@@ -127,6 +143,8 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
                         )
                     })
                 }
+
+
 
 
 

@@ -34,6 +34,10 @@ export async function GET(request) {
     // console.log(`---------------------------------`);
 
 
+    if(readptModels2 === undefined) {
+        readptModels2 = [{}];
+    }
+
     return NextResponse.json({
         success: true,
         message: "Product Read Successfully...",

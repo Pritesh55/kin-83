@@ -29,7 +29,7 @@ export async function GET(request) {
 
 
 
-    // a = await mongoose.connection.db.collection('user').findOne({ userEmail: `${userEmail}` });
+    let userInfo = await mongoose.connection.db.collection('user').findOne({ userEmail: `${userEmail}@gmail.com` });
 
     // let readptModels2 = await mongoose.connection.db.collection('user').find({}).toArray();
 
@@ -49,7 +49,7 @@ export async function GET(request) {
         // products: readAllProductsList,
         // collectionInfos: collectionInfos,
         // a: a,
-        userEmail: userEmail
+        userInfo:userInfo
     });
 
     // return readAllProductsList;

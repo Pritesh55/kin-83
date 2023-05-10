@@ -1,9 +1,8 @@
 import Header from './components/servers/header'
-import ApiNavbar from './components/cliants/ApiNavbar';
-import ProductsDisplayAdmin from './componentsAdmin/ProductsDisplayAdmin';
+
 // import { getAllProductsData } from '@/utils/functions/getAllProducts';
 // import ProductsCardAdmin from './componentsAdmin/ProductsCardAdmin';
-import { cookies } from 'next/headers';
+import ProductsDisplayAdmin from './componentsAdmin/ProductsDisplayAdmin';
 
 export const metadata = {
   title: 'Home Page',
@@ -18,9 +17,6 @@ export const revalidate = 0.1;
 
 export default async function Home() {
 
-  const cookieStore = cookies();
-
-  const arrOfCookies = cookieStore.getAll();
 
   // const productsJSONObjectFS = await getAllProductsData();
   // const productsArrayFS = productsJSONObjectFS.products;
@@ -43,7 +39,7 @@ export default async function Home() {
 
 
           <div className="flex flex-col gap-y-5 -mt-5">
-            <ProductsDisplayAdmin loc={arrOfCookies.length} isAdmin={false}></ProductsDisplayAdmin>
+            <ProductsDisplayAdmin isAdmin={false}></ProductsDisplayAdmin>
           </div>
 
         </main>
