@@ -31,8 +31,9 @@ export async function GET(request) {
     // if (PtModels2 != undefined) {
     //     readAllProductsList = await mongoose.connection.db.ptModels2.find({});
     // }
+    let userInfo = {};
 
-    let userInfo = await mongoose.connection.db.collection('user').findOne({ userEmail: `${userEmail}` });
+    userInfo = await mongoose.connection.db.collection('user').findOne({ userEmail: `${userEmail}` });
 
     let cartProducts = userInfo?.cart;
 
@@ -54,6 +55,8 @@ export async function GET(request) {
 
     totalAmount = (cartProducts == undefined) ? 0 : totalAmount;
     totalItem = (cartProducts == undefined) ? 0 : totalItem;
+    cartProducts = (cartProducts == undefined) ? [] : cartProducts;
+
 
 
     // let readptModels2 = await mongoose.connection.db.collection('user').find({}).toArray();
@@ -72,6 +75,7 @@ export async function GET(request) {
         // collectionInfos: collectionInfos,
         // a: a,
         userInfo: userInfo,
+        cartProducts:cartProducts,
         totalAmount,
         totalItem,
         apiUrl: apiUrl,

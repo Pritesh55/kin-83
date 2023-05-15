@@ -18,21 +18,60 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 // -----------------------------------------------------------------------
 
 const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAddedToCart, isAdmin = false }) => {
+
+
+    const [isAddedToCart4, setIsAddedToCart4] = useState(false);
+    const [CountisAddedToCart4, setCountIsAddedToCart4] = useState(0);
+
+
+    const isAddedToCart2 = async () => {
+
+        console.log(userEmailFull, "userEmailFull");
+
+        await axios.get(`/api/cuser/now/${userEmailFull}`).then((response) => {
+            console.log(response.data);
+            let myCart = response?.data?.userInfo?.cart;
+            if (myCart != undefined) {
+
+                if (myCart == []) {
+                    setIsAddedToCart4(false);
+                }
+
+                if (myCart != null) {
+                    let isAddedToCart3 = myCart.find(item => item.id == id);
+                    console.log(isAddedToCart3, "isAddedToCart3");
+                    if (isAddedToCart3 != undefined) {
+                        setIsAddedToCart4(true);
+                        console.log(true, "isAddedToCart3");
+                    } else {
+                        setIsAddedToCart4(false);
+                    }
+                }
+
+            }
+            else {
+                console.log(false, "myCart");
+            }
+        });
+
+        setCountIsAddedToCart4(1);
+
+    }
+
+
     const router = useRouter();
+
 
     const { data: userNowData, error: userNowError, isLoading: userNowIsLoading } = useSWR(`/api/auth/session`, fetcher, { refreshInterval: 1 });
 
-
-
     let userEmailFull = userNowData?.user?.email;
-
-
 
     const refreshPage = () => {
         //this will reload the page without doing SSR
-        // router.replace('/');
+        router.refresh();
+        router.refresh();
+        router.refresh();
         // console.log('refreshPage');
-
     }
 
     if (userEmailFull == undefined) {
@@ -106,32 +145,6 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
         refreshPage();
     }
 
-    const cartAdd = async () => {
-
-        await axios.put(`/api/product/cart/${idInput}`, {
-            newIsAddedToCart: true,
-
-        })
-            .then((response) => {
-                console.log(response.data);
-
-            });
-        refreshPage();
-    }
-
-    const cartRemove = async () => {
-
-        await axios.put(`/api/product/cart/${idInput}`, {
-            newIsAddedToCart: false
-        })
-            .then((response) => {
-                console.log(response.data);
-
-            });
-        refreshPage();
-    }
-
-
     const ucartAdd = async () => {
 
         await axios.put(`/api/cuser/cart`, {
@@ -150,17 +163,37 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
 
         });
 
+        setCountIsAddedToCart4(0);
+        refreshPage();
+
+
     }
 
     const ucartRemove = async () => {
 
         await axios.delete(`/api/cuser/now/${userEmailFull}/${id}`).then((response) => {
             console.log(response.data);
-        });
 
+
+        });
+        setCountIsAddedToCart4(0);
+        refreshPage();
     }
 
+    if (CountisAddedToCart4 == 0) {
+        isAddedToCart2();
+    }
+
+
+
+
+
+
+
+
+
     return (
+
         <>
 
             <div className="flex flex-col items-start border-orange-400 border-2 rounded-lg px-10 pt-5 pb-5 w-full h-max max-w-[100%] md:max-w-[45%]">
@@ -403,20 +436,24 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
                             <div className="flex flex-col md:flex-row items-center flex-wrap gap-x-2 gap-y-4">
 
                                 <button onClick={() => {
+                                    setIsAddedToCart4(true);
                                     ucartAdd();
+                                    isAddedToCart2();
                                 }} className="flex px-4 py-2 bg-orange-200 text-black text-sm font-medium rounded-md text-center">
                                     Add to uCart
                                 </button>
 
                                 <button onClick={() => {
+                                    setIsAddedToCart4(false);
                                     ucartRemove();
+                                    isAddedToCart2();
                                 }} className="flex px-4 py-2 bg-orange-200 text-black text-sm font-medium rounded-md text-center">
                                     Remove from ucart
                                 </button>
                             </div>
 
                             <h1 className="text-orange-600 font-medium text-xl capitalize">
-                                {`Now : ${isAddedToCart}`}
+                                {`Now : ${isAddedToCart4}`}
                             </h1>
 
                             {/* ------------------------------------------------------------------- */}
