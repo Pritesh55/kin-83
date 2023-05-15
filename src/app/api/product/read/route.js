@@ -8,7 +8,7 @@ export const revalidate = 1;
 
 export async function GET(request) {
 
-    
+
     if (mongoose.connection.readyState !== 1) {
         await dbConnect();
         console.log('Read connected');
@@ -25,7 +25,11 @@ export async function GET(request) {
     //     readAllProductsList = await mongoose.connection.db.ptModels2.find({});
     // }
 
-    let readptModels2 = await mongoose.connection.db.collection('ptmodels2').find({}).toArray();
+    let readptModels2 = [{}];
+    if (mongoose.connection.readyState == 1) {
+        readptModels2 = await mongoose.connection.db.collection('ptmodels2').find({}).toArray();
+    }
+
 
     // mongoose.connection.close();
 
@@ -34,7 +38,7 @@ export async function GET(request) {
     // console.log(`---------------------------------`);
 
 
-    if(readptModels2 === undefined) {
+    if (readptModels2 === undefined) {
         readptModels2 = [{}];
     }
 

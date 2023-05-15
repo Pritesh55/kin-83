@@ -101,10 +101,10 @@ export async function DELETE(request) {
     // let idNum = Number(id);
 
 
-    let DeletedUser2 = await mongoose.connection.db.collection('user').updateOne(
-        { userEmail: `${userEmail}` },
-        { $pull: { cart: { id: 6 } } }
-    );
+    // let DeletedUser2 = await mongoose.connection.db.collection('user').updateOne(
+    //     { userEmail: `${userEmail}` },
+    //     { $pull: { cart: { id: 6 } } }
+    // );
 
 
 

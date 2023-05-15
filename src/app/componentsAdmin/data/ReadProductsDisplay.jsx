@@ -67,10 +67,10 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
 
     if (isCart == true) {
 
-        let catPtoducts = readProducts.filter(item => item.isAddedToCart == true);
+        let cartPtoducts = readProducts.filter(item => item.isAddedToCart == true);
 
         let totalPricePerProduct = 0;
-        let totalAmount = catPtoducts.reduce(
+        let totalAmount = cartPtoducts.reduce(
             (acc, currentItem) => {
                 // console.log(currentItem.price);
                 // console.log(currentItem.quantity);
@@ -81,7 +81,7 @@ const ReadProductsDisplay = ({ isCart = false, isAdmin = false,
 
         return (
             <>
-                <ReadProductsMap readProducts={catPtoducts} isAdmin={isAdmin}>
+                <ReadProductsMap readProducts={cartPtoducts} isAdmin={isAdmin}>
                 </ReadProductsMap>
 
             </>

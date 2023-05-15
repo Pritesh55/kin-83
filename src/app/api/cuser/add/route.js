@@ -55,10 +55,6 @@ export async function POST(request) {
         }
     }
 
-
-
-
-
     // const res = await fetch("http://localhost:3000/api/product/post",
     //     {
     //         method: "POST",

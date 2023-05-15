@@ -156,7 +156,6 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
 
         await axios.delete(`/api/cuser/now/${userEmailFull}/${id}`).then((response) => {
             console.log(response.data);
-
         });
 
     }
@@ -397,25 +396,6 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
 
                         {/* Add to cart , Remove from cart */}
                         <div className="flex flex-col gap-y-4 items-center md:items-start">
-
-                            <div className="flex flex-col md:flex-row items-center flex-wrap gap-x-2 gap-y-4">
-
-                                <button onClick={() => {
-                                    cartAdd();
-                                }} className="flex px-4 py-2 bg-orange-200 text-black text-sm font-medium rounded-md text-center">
-                                    Add to cart
-                                </button>
-
-                                <button onClick={() => {
-                                    cartRemove();
-                                }} className="flex px-4 py-2 bg-orange-200 text-black text-sm font-medium rounded-md text-center">
-                                    Remove from cart
-                                </button>
-                            </div>
-
-                            <h1 className="text-orange-600 font-medium text-xl capitalize">
-                                {`Now : ${isAddedToCart}`}
-                            </h1>
 
 
                             {/* ------------------------------------------------------------------- */}
