@@ -1,7 +1,7 @@
 "use client"
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ApiNavbar from '../components/cliants/ApiNavbar';
 import ReadProductsDisplay from './data/ReadProductsDisplay';
 import SortProductsDisplay from './data/SortProductsDisplay';
@@ -10,7 +10,9 @@ import SortProductsDisplay from './data/SortProductsDisplay';
 //  03 :: fetcher :: 
 import useSWR from 'swr';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 // -----------------------------------------------
+
 
 //  ----------------------------------------------
 //  01 :: fetcher :: 
@@ -18,12 +20,23 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 // -----------------------------------------------------------------------
 
 const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
+
+    const router = useRouter();
+    const refreshPage = () => {
+        //this will reload the page without doing SSR
+        router.refresh();
+        router.refresh();
+        router.refresh();
+        // console.log('refreshPage');
+    }
+
+    
     const [isSort, setIsSort] = useState(false);
     const [total, setTotal] = useState(0);
 
 
     // --------------------------------------------------------------------------------
-    const { data: userInfo, error: userInfoError, isLoading: userInfoIsLoading } = useSWR(`/api/auth/session`, fetcher, { refreshInterval: 1 });
+    const { data: userInfo, error: userInfoError, isLoading: userInfoIsLoading } = useSWR(`/api/auth/session`, fetcher, { refreshInterval: 0.1 });
 
     let userEmailFull = userInfo?.user?.email;
     let userName = userInfo?.user?.name;
@@ -41,7 +54,7 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
 
     // ------------------------------------------------------------------------
     //  02 :: fetcher :: 
-    const { data: userNowData, error: userNowError, isLoading: userNowIsLoading } = useSWR(`/api/cuser/now/${userEmailFull}`, fetcher, { refreshInterval: 1 });
+    const { data: userNowData, error: userNowError, isLoading: userNowIsLoading } = useSWR(`/api/cuser/now/${userEmailFull}`, fetcher, { refreshInterval: 0.1 });
 
     // -----------------------------------------------
     let cartProducts = [{}];
@@ -53,8 +66,6 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
         totalItem = userNowData?.totalItem;
         totalAmount = userNowData?.totalAmount;
     }
-
-
 
 
     // -----------------------------------------------------------------------------------
@@ -82,7 +93,8 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
         }).catch(function (error) {
             console.log(error);
         });
-
+        refreshPage();
+        refreshPage();
     }
 
     return (

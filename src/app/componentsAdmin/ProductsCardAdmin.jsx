@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 //  03 :: fetcher :: 
 import useSWR from 'swr';
 // -----------------------------------------------
-export const revalidate = 1;
+
 // Data will be fetch from locagost:3000/api/product/read at every 01 sec....
 
 //  ----------------------------------------------
@@ -20,52 +20,53 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAddedToCart, isAdmin = false }) => {
 
 
-    const [isAddedToCart4, setIsAddedToCart4] = useState(false);
+    const [isAddedToCart4, setIsAddedToCart4] = useState();
     const [CountisAddedToCart4, setCountIsAddedToCart4] = useState(0);
+ 
 
 
     const isAddedToCart2 = async () => {
 
-        console.log(userEmailFull, "userEmailFull");
+        // console.log(userEmailFull, "userEmailFull");
 
         await axios.get(`/api/cuser/now/${userEmailFull}`).then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             let myCart = response?.data?.userInfo?.cart;
+
             if (myCart != undefined) {
 
-                if (myCart == []) {
+
+                let isAddedToCart3 = myCart.find(item => item.id == id);
+                // console.log(isAddedToCart3, "isAddedToCart3");
+
+                if (isAddedToCart3 != undefined) {
+                    setIsAddedToCart4(true);
+                    // console.log(true, "isAddedToCart3");
+
+                } else {
                     setIsAddedToCart4(false);
+                    // console.log(false, "isAddedToCart3");
                 }
 
-                if (myCart != null) {
-                    let isAddedToCart3 = myCart.find(item => item.id == id);
-                    console.log(isAddedToCart3, "isAddedToCart3");
-                    if (isAddedToCart3 != undefined) {
-                        setIsAddedToCart4(true);
-                        console.log(true, "isAddedToCart3");
-                    } else {
-                        setIsAddedToCart4(false);
-                    }
-                }
 
             }
             else {
-                console.log(false, "myCart");
+                // console.log(false, "myCart");
             }
         });
 
-        setCountIsAddedToCart4(1);
-
+        // setCountIsAddedToCart4(1);
+        // console.log("Finish", "isAddedToCart3");
     }
 
 
-    const router = useRouter();
 
 
-    const { data: userNowData, error: userNowError, isLoading: userNowIsLoading } = useSWR(`/api/auth/session`, fetcher, { refreshInterval: 1 });
+
+    const { data: userNowData, error: userNowError, isLoading: userNowIsLoading } = useSWR(`/api/auth/session`, fetcher, { refreshInterval: 0.1 });
 
     let userEmailFull = userNowData?.user?.email;
-
+    const router = useRouter();
     const refreshPage = () => {
         //this will reload the page without doing SSR
         router.refresh();
@@ -160,12 +161,12 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
 
         }).then((response) => {
             console.log(response.data);
-
         });
 
         setCountIsAddedToCart4(0);
-        refreshPage();
-
+        console.log("ucartAdd Ended");
+  
+     
 
     }
 
@@ -177,24 +178,23 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
 
         });
         setCountIsAddedToCart4(0);
-        refreshPage();
+        console.log("ucartRemove Ended");
+
+  
+      
     }
 
     if (CountisAddedToCart4 == 0) {
         isAddedToCart2();
+     
     }
-
-
-
-
-
-
-
 
 
     return (
 
         <>
+
+
 
             <div className="flex flex-col items-start border-orange-400 border-2 rounded-lg px-10 pt-5 pb-5 w-full h-max max-w-[100%] md:max-w-[45%]">
 
@@ -436,17 +436,17 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
                             <div className="flex flex-col md:flex-row items-center flex-wrap gap-x-2 gap-y-4">
 
                                 <button onClick={() => {
-                                    setIsAddedToCart4(true);
+                                    // setIsAddedToCart4(true);
                                     ucartAdd();
-                                    isAddedToCart2();
+                         
                                 }} className="flex px-4 py-2 bg-orange-200 text-black text-sm font-medium rounded-md text-center">
                                     Add to uCart
                                 </button>
 
                                 <button onClick={() => {
-                                    setIsAddedToCart4(false);
+                                    // setIsAddedToCart4(false);
                                     ucartRemove();
-                                    isAddedToCart2();
+                     
                                 }} className="flex px-4 py-2 bg-orange-200 text-black text-sm font-medium rounded-md text-center">
                                     Remove from ucart
                                 </button>
