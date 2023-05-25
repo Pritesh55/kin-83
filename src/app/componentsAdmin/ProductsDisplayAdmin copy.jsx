@@ -179,42 +179,6 @@ const ProductsDisplayAdmin = ({ loc = 2, isAdmin = false, isCart = false }) => {
                     </>
                 }
 
-                {
-                    (!isAdmin) &&
-                    <>
-                        <div className="flex gap-x-20 justify-center items-center sm:justify-between flex-wrap gap-y-5 px-10 py-2 bg-yellow-300 rounded-t-full ">
-                            {
-                                (!isAdmin) &&
-                                <>
-                                    <div className="">
-                                        <span className="text-2xl">
-                                            {/* {`${totalItem} Items`} */}
-                                            {` Items`}
-                                        </span>
-                                    </div>
-
-                                </>
-                            }
-
-                            {
-                                (!isAdmin) &&
-                                <>
-                                    <div className="">
-                                        <span className="text-xl">
-                                            {`Total : `}
-                                        </span>
-                                        <span className="text-2xl">
-                                            {/* {`${totalAmount} ₹`} */}
-                                            {`0 ₹`}
-                                        </span>
-                                    </div>
-
-                                </>
-                            }
-
-                        </div>
-                    </>
-                }
 
                 <div className="w-full flex justify-between">
 

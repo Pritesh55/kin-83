@@ -1,6 +1,6 @@
 "use client"
 import Link from 'next/link';
-import React from 'react'
+import React, { useState } from 'react'
 // ---------------------------------------------------------------
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect } from "react";
@@ -11,6 +11,8 @@ import axios from 'axios';
 const Sign = ({ loc }) => {
     // ---------------------------------------------------------------
     const { data: session } = useSession();
+
+    const [isAdded1, setIsAdded1] = useState(0)
 
     // console.log("session", session);
 
@@ -31,13 +33,14 @@ const Sign = ({ loc }) => {
 
             if (response.data.a == null) {
                 console.log(response.data);
+                setIsAdded1(1);
             }
 
         }, (error) => {
             console.log(error);
         });
 
-        userEmail = userEmail.substring(0,userEmail.length-10);
+        userEmail = userEmail.substring(0, userEmail.length - 10);
 
         // await axios.get(`/api/cuser/now/${userEmail}`).then((response) => {
         //     console.log(response.data);
@@ -51,7 +54,11 @@ const Sign = ({ loc }) => {
 
     // if (session && session != {} && session?.user) {
     if (session?.user?.name) {
-        createUser();
+
+        if (isAdded1 == 0) {
+            createUser();
+        }
+
         return (
             <>
                 <Link href="/api/auth/signout" className='inline'>

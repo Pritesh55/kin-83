@@ -20,44 +20,44 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAddedToCart, isAdmin = false }) => {
 
 
-    const [isAddedToCart4, setIsAddedToCart4] = useState();
+    // const [isAddedToCart4, setIsAddedToCart4] = useState();
     const [CountisAddedToCart4, setCountIsAddedToCart4] = useState(0);
  
 
 
-    const isAddedToCart2 = async () => {
+    // const isAddedToCart2 = async () => {
 
-        // console.log(userEmailFull, "userEmailFull");
+    //     // console.log(userEmailFull, "userEmailFull");
 
-        await axios.get(`/api/cuser/now/${userEmailFull}`).then((response) => {
-            // console.log(response.data);
-            let myCart = response?.data?.userInfo?.cart;
+    //     await axios.get(`/api/cuser/now/${userEmailFull}`).then((response) => {
+    //         // console.log(response.data);
+    //         let myCart = response?.data?.userInfo?.cart;
 
-            if (myCart != undefined) {
-
-
-                let isAddedToCart3 = myCart.find(item => item.id == id);
-                // console.log(isAddedToCart3, "isAddedToCart3");
-
-                if (isAddedToCart3 != undefined) {
-                    setIsAddedToCart4(true);
-                    // console.log(true, "isAddedToCart3");
-
-                } else {
-                    setIsAddedToCart4(false);
-                    // console.log(false, "isAddedToCart3");
-                }
+    //         if (myCart != undefined) {
 
 
-            }
-            else {
-                // console.log(false, "myCart");
-            }
-        });
+    //             let isAddedToCart3 = myCart.find(item => item.id == id);
+    //             // console.log(isAddedToCart3, "isAddedToCart3");
 
-        // setCountIsAddedToCart4(1);
-        // console.log("Finish", "isAddedToCart3");
-    }
+    //             if (isAddedToCart3 != undefined) {
+    //                 setIsAddedToCart4(true);
+    //                 // console.log(true, "isAddedToCart3");
+
+    //             } else {
+    //                 setIsAddedToCart4(false);
+    //                 // console.log(false, "isAddedToCart3");
+    //             }
+
+
+    //         }
+    //         else {
+    //             // console.log(false, "myCart");
+    //         }
+    //     });
+
+    //     // setCountIsAddedToCart4(1);
+    //     // console.log("Finish", "isAddedToCart3");
+    // }
 
 
 
@@ -163,8 +163,8 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
             console.log(response.data);
         });
 
-        setCountIsAddedToCart4(0);
-        console.log("ucartAdd Ended");
+        // setCountIsAddedToCart4(0);
+        // console.log("ucartAdd Ended");
   
      
 
@@ -177,17 +177,17 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
 
 
         });
-        setCountIsAddedToCart4(0);
-        console.log("ucartRemove Ended");
+        // setCountIsAddedToCart4(0);
+        // console.log("ucartRemove Ended");
 
   
       
     }
 
-    if (CountisAddedToCart4 == 0) {
-        isAddedToCart2();
+    // if (CountisAddedToCart4 == 0) {
+    //     isAddedToCart2();
      
-    }
+    // }
 
 
     return (
@@ -453,7 +453,7 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
                             </div>
 
                             <h1 className="text-orange-600 font-medium text-xl capitalize">
-                                {`Now : ${isAddedToCart4}`}
+                                {/* {`Now : ${isAddedToCart4}`} */}
                             </h1>
 
                             {/* ------------------------------------------------------------------- */}

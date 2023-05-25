@@ -30,7 +30,7 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
         // console.log('refreshPage');
     }
 
-    
+
     const [isSort, setIsSort] = useState(false);
     const [total, setTotal] = useState(0);
 
@@ -87,7 +87,7 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
     // -----------------------------------------------
 
     const clearCart = async () => {
-    await axios.delete(`/api/cuser/cart/clearAll/${userEmailFull}`).then((response) => {
+        await axios.delete(`/api/cuser/cart/clearAll/${userEmailFull}`).then((response) => {
             console.log(response.data);
 
         }).catch(function (error) {
@@ -145,7 +145,7 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
                 {
                     (!isAdmin) &&
                     <>
-                        <Link href="/cart" className="bg-yellow-300 rounded-full p-5 border-red-500 border-2">
+                        <Link href="/cart" className="fixed bottom-8 right-8 bg-yellow-300 rounded-full p-5 border-red-500 border-2">
                             <Image src='/cart-icon.svg' alt='cart' width={32} height={32} className=' svg-convert-to-black '></Image>
                         </Link>
                     </>
@@ -154,44 +154,14 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
                 {
                     (!isAdmin) &&
                     <>
-                        <div className="flex gap-x-20 justify-center items-center sm:justify-between flex-wrap gap-y-5 px-10 py-2 bg-yellow-300 rounded-t-full ">
-                            {
-                                (!isAdmin) &&
-                                <>
-                                    <div className="">
-                                        <span className="text-2xl">
-                                            {`${totalItem} Items`}
-                                            {/* {`0 Items`} */}
-                                        </span>
-                                    </div>
-
-                                </>
-                            }
-
-                            {
-                                (!isAdmin) &&
-                                <>
-                                    <div className="">
-                                        <span className="text-xl">
-                                            {`Total : `}
-                                        </span>
-                                        <span className="text-2xl">
-                                            {`${totalAmount} ₹`}
-                                            {/* {`0 ₹`} */}
-                                        </span>
-                                    </div>
-
-                                </>
-                            }
-
-                        </div>
+                        
                     </>
                 }
 
                 <div className="w-full flex justify-between">
 
                     {
-                        (!isAdmin && isCart == true) &&
+                        (isAdmin && isCart == true) &&
                         <>
                             <Link href="/" className="flex font-semibold text-purple-900 text-base items-center gap-x-2 bg-gray-200 px-8 py-2 rounded-s-full ">
 

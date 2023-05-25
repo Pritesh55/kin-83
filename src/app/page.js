@@ -1,8 +1,10 @@
+import Link from 'next/link';
 import Header from './components/servers/header'
 
 // import { getAllProductsData } from '@/utils/functions/getAllProducts';
 // import ProductsCardAdmin from './componentsAdmin/ProductsCardAdmin';
 import ProductsDisplayAdmin from './componentsAdmin/ProductsDisplayAdmin';
+import Image from 'next/image';
 
 export const metadata = {
   title: 'Home Page',
@@ -25,7 +27,7 @@ export default async function Home() {
   // console.log(productsArrayFS);
   // console.log(` --------------------------- productsArrayFS --------------------------- `);
 
-  
+
 
   return (
     <>
@@ -43,7 +45,12 @@ export default async function Home() {
           </div>
 
         </main>
+
+
       </div>
+
+
+
     </>
   )
 }

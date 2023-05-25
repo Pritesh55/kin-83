@@ -7,7 +7,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className=" text-2xl">
+        <div className=" text-2xl relative">
           {children}
         </div>
       </body>

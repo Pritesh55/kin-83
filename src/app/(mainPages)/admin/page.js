@@ -1,5 +1,7 @@
 import ProductsDisplayAdmin from '@/app/componentsAdmin/ProductsDisplayAdmin';
 import axios from 'axios';
+import Image from 'next/image';
+import Link from 'next/link';
 
 import React from 'react'
 
