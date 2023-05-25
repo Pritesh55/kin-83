@@ -131,7 +131,7 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
                 }
 
 
-                <div className="flex flex-wrap gap-x-5 items-center h-20">
+                {/* <div className="flex flex-wrap gap-x-5 items-center h-20">
                     <a onClick={() => { setIsSort(false); }} className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max cursor-pointer'>
                         Read
                     </a>
@@ -139,7 +139,7 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
                     <a onClick={() => { setIsSort(true); }} className='text-lg pl-3 pr-6 py-2 bg-yellow-500 text-black rounded-r-full h-max cursor-pointer'>
                         Sort
                     </a>
-                </div>
+                </div> */}
 
 
                 {
@@ -154,7 +154,7 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
                 {
                     (!isAdmin) &&
                     <>
-                        
+
                     </>
                 }
 
@@ -205,9 +205,9 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
             <hr />
 
             <div className='flex flex-wrap gap-x-5 xl:gap-x-10 gap-y-10 justify-evenly pb-10'>
+                <ReadProductsDisplay isAdmin={isAdmin} isCart={isCart} userEmailFull={`userEmailFull`}></ReadProductsDisplay>
 
-
-                {
+                {/* {
                     (isSort == true) &&
                     <>
                         <SortProductsDisplay isAdmin={isAdmin} isCart={isCart} userEmailFull={`userEmailFull`} ></SortProductsDisplay>
@@ -221,7 +221,7 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
                         <ReadProductsDisplay isAdmin={isAdmin} isCart={isCart} userEmailFull={`userEmailFull`}></ReadProductsDisplay>
                     </>
 
-                }
+                } */}
 
             </div>
         </>
