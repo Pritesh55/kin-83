@@ -13,7 +13,7 @@ const Header = () => {
     return (
 
         <>
-            <div className='text-xl font-semibold flex justify-between w-full flex-wrap gap-x-10'>
+            <div className='text-xl font-semibold flex justify-between w-full flex-wrap gap-10'>
 
                 <Link href="/">
                     Home
