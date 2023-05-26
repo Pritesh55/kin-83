@@ -141,3 +141,16 @@ export async function DELETE(request) {
 
     // return readAllProductsList;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

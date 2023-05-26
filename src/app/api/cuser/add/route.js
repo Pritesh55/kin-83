@@ -44,7 +44,25 @@ export async function POST(request) {
                 userEmail,
                 cart: [],
                 totalItem: 0,
-                totalAmount:0
+                totalAmount: 0,
+
+                shipDetail: [
+                    // {
+                    //     unitNo: 0,
+                    //     address: "",
+                    //     cityName: "",
+                    //     stateName: "",
+                    //     pincode: 0,
+                    // }
+                ],
+
+                mobileNo: [
+                    // {
+                    //     unitNo: 0,
+                    //     mobileNo: 0
+                    // }
+                ]
+
             };
 
             await mongoose.connection.db.collection('user').insertOne(newUserdata);
