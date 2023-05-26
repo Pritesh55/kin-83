@@ -48,18 +48,26 @@ export async function POST(request) {
 
                 shipDetail: [
                     // {
+                    // unitNo: 0,
+                    // address: "",
+                    // cityName: "",
+                    // stateName: "",
+                    // pincode: 0,
+                    // mobileNo: 0,
+                    // emailId: '',
+                    // }
+                ],
+
+                profileInfo: [
+                    // {
                     //     unitNo: 0,
+                    //     userName: '',
+                    //     emailId: '',
+                    //     mobileNo: 0,
                     //     address: "",
                     //     cityName: "",
                     //     stateName: "",
                     //     pincode: 0,
-                    // }
-                ],
-
-                mobileNo: [
-                    // {
-                    //     unitNo: 0,
-                    //     mobileNo: 0
                     // }
                 ]
 

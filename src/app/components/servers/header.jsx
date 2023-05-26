@@ -13,7 +13,7 @@ const Header = () => {
     return (
 
         <>
-            <div className='text-xl font-semibold flex justify-between w-full '>
+            <div className='text-xl font-semibold flex justify-between w-full flex-wrap gap-x-10'>
 
                 <Link href="/">
                     Home
@@ -22,8 +22,8 @@ const Header = () => {
                     Admin
                 </Link>
 
-                <Link href="/products" className='hidden lg:inline'>
-                    {arrOfCookies.length}
+                <Link href="/profile">
+                    profile
                 </Link>
 
                 <CallSign loc={arrOfCookies.length}></CallSign>

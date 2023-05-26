@@ -111,12 +111,12 @@ const ProductsDisplayAdmin = ({ loc = 2, isAdmin = false, isCart = false }) => {
     // -----------------------------------------------
     const deleteAllUser = async () => {
 
-        // await axios.delete(`/api/cuser/deleteAllUser`).then((response) => {
-        //     console.log(response);
+        await axios.delete(`/api/cuser/deleteAllUser`).then((response) => {
+            console.log(response);
 
-        // }).catch(function (error) {
-        //     console.log(error);
-        // });
+        }).catch(function (error) {
+            console.log(error);
+        });
 
         console.log("Go to axios");
         refreshPage();

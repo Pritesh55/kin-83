@@ -59,10 +59,6 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
     //     // console.log("Finish", "isAddedToCart3");
     // }
 
-
-
-
-
     const { data: userNowData, error: userNowError, isLoading: userNowIsLoading } = useSWR(`/api/auth/session`, fetcher, { refreshInterval: 0.1 });
 
     let userEmailFull = userNowData?.user?.email;
@@ -165,8 +161,6 @@ const ProductsCardAdmin = ({ id, title, description, price, img, quantity, isAdd
 
         // setCountIsAddedToCart4(0);
         // console.log("ucartAdd Ended");
-  
-     
 
     }
 

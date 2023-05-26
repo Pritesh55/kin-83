@@ -131,7 +131,7 @@ export async function DELETE(request) {
         // collectionInfos: collectionInfos,
         // a: a,
         DeletedUser: DeletedUser,
-        DeletedUser2: DeletedUser2,
+
         // data: data
         // // cart: cart,
         // userEmail: `${userEmail}`,

@@ -73,7 +73,7 @@ const ProductsDisplayAdmin = ({ isAdmin = false, isCart = false }) => {
     // -----------------------------------------------
     const deleteAllUser = async () => {
 
-        await axios.delete(`/api/cuser/now/${userEmailFull}`).then((response) => {
+        await axios.delete(`/api/cuser/deleteAllUser`).then((response) => {
             console.log(response);
 
         }).catch(function (error) {
