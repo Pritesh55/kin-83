@@ -1,10 +1,12 @@
-import Link from 'next/link';
-import Header from './components/servers/header'
+// import Link from 'next/link';
+// import Header from './components/servers/header'
+
+import AboutSection from "./components/cliants/Wix/aboutSection";
 
 // import { getAllProductsData } from '@/utils/functions/getAllProducts';
 // import ProductsCardAdmin from './componentsAdmin/ProductsCardAdmin';
-import ProductsDisplayAdmin from './componentsAdmin/ProductsDisplayAdmin';
-import Image from 'next/image';
+// import ProductsDisplayAdmin from './componentsAdmin/ProductsDisplayAdmin';
+// import Image from 'next/image';
 
 export const metadata = {
   title: 'Home Page',
@@ -17,6 +19,8 @@ export const revalidate = 1;
 
 
 
+
+
 export default async function Home() {
 
 
@@ -26,6 +30,7 @@ export default async function Home() {
   // console.log(` --------------------------- productsArrayFS --------------------------- `);
   // console.log(productsArrayFS);
   // console.log(` --------------------------- productsArrayFS --------------------------- `);
+
 
 
 
@@ -42,6 +47,8 @@ export default async function Home() {
           <div className="flex flex-col gap-y-5 -mt-5">
             {/* <ProductsDisplayAdmin isAdmin={false}></ProductsDisplayAdmin> */}
           </div>
+
+          <AboutSection></AboutSection>
         </main>
       </div>
 

@@ -7,10 +7,14 @@ const nextConfig = {
 
 
   images: {
+
     domains: ['images.pexels.com',
       'images-na.ssl-images-amazon.com',
+      'static.wixstatic.com'
+     
     ],
   },
+
 
   env: {
     customKey: 'my-value',
