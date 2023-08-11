@@ -54,19 +54,20 @@ const AboutSectionCall = () => {
     }, []);
 
 
- 
+
 
 
 
     return (
         <>
-            <div>
+            <div className='flex flex-col gap-y-20'>
                 {/* Click on "Manage fields" button  */}
                 {/* click on respective Field's "Setting (...) Icon" */}
                 {/* Then choose "Edit option" */}
                 {/* copy the "Field key" in the dilogue box*/}
                 {/* {collectionName.data.fieldKey} */}
                 {
+
 
 
                     (Array.isArray(aboutSection) && aboutSection.length > 0) &&

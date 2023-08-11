@@ -11,25 +11,39 @@ const AboutSection = ({ aboutSectionProp }) => {
     }
 
     console.log(aboutSectionImageURL2);
-      
+
     return (
-        <> 
-            <h1 className="">
+        <>
 
-                {aboutSectionProp.data.title}
+            <div className="flex flex-wrap">
 
-            </h1>
 
-            <p className="">
-                {aboutSectionProp.data.descrptionShort}
+                <div className="flex flex-col gap-y-4 w-1/2">
 
-            </p>
+                    <h1 className="text-4xl font-bold">
 
-            <Image src={aboutSectionImageURL2} alt='' width={400} height={400}></Image>
-         
+                        {aboutSectionProp.data.title}
+
+                    </h1>
+
+                    <p className="text-sm">
+                        {aboutSectionProp.data.descrptionShort}
+
+                    </p>
+                </div>
+
+
+                <div className="lg:w-1/2 flex justify-center items-center">
+                    <Image src={aboutSectionImageURL2} alt='' width={800} height={800} className='w-4/5 ' ></Image>
+                </div>
+            </div>
+
+
+
+
 
         </>
     )
 }
 
-export default AboutSection
+export default AboutSection 
