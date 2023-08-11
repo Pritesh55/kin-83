@@ -1,6 +1,12 @@
+"use client"
+
 import React from 'react'
 import { media } from '@wix/api-client';
 import Image from 'next/image';
+
+
+
+
 const AboutSection = ({ aboutSectionProp }) => {
 
     var aboutSectionImageURL2 = '';
