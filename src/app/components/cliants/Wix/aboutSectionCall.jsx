@@ -9,7 +9,8 @@ import { items } from '@wix/data';
 
 import Cookies from 'js-cookie';
 import Image from 'next/image';
-import AboutSection from './AboutSection';
+import AboutSection from './aboutSection';
+
 
 
 

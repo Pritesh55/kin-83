@@ -52,4 +52,4 @@ const AboutSection = ({ aboutSectionProp }) => {
     )
 }
 
-export default AboutSection 
+export default AboutSection
