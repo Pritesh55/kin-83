@@ -35,20 +35,15 @@ export default async function Home() {
       <div className="flex flex-col gap-y-10 pb-20">
 
         <div className="w-full bg-antiquewhite rounded-b-full px-10 lg:px-20 py-2">
-          <Header></Header>
+          {/* <Header></Header> */}
         </div>
+
         <main className="px-5">
-
-
           <div className="flex flex-col gap-y-5 -mt-5">
-            <ProductsDisplayAdmin isAdmin={false}></ProductsDisplayAdmin>
+            {/* <ProductsDisplayAdmin isAdmin={false}></ProductsDisplayAdmin> */}
           </div>
-
         </main>
-
-
       </div>
-
 
 
     </>
