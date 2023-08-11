@@ -51,7 +51,7 @@ const AboutSection = () => {
         fetchAboutSection();
     }, []);
 
-    const { url: aboutSectionImageURL } = media.getImageUrl("wix:image://v1/cbd623_8ed4af7fd5294e53a27d0be307628ed5~mv2.jpg/str-office-front-view-photo.jpg#originWidth=639&originHeight=436")
+    const { url: aboutSectionImageURL } = media.getImageUrl(`${aboutSection.data.sectionImage}`)
 
 
 
