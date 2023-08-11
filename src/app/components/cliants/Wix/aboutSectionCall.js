@@ -12,6 +12,7 @@ import Image from 'next/image';
 import AboutSection from './AboutSection';
 
 
+
 const myWixClient = createClient({
     modules: { items },
     auth: OAuthStrategy({
