@@ -49,12 +49,6 @@ const AboutSection = () => {
     // This ensures that the data is retrieved when the component mounts.
     useEffect(() => {
         fetchAboutSection();
-
-
-
-
-
-
     }, []);
 
     const { url: aboutSectionImageURL } = media.getImageUrl("wix:image://v1/cbd623_8ed4af7fd5294e53a27d0be307628ed5~mv2.jpg/str-office-front-view-photo.jpg#originWidth=639&originHeight=436")
