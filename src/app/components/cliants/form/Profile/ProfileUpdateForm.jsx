@@ -11,15 +11,20 @@ import useSWR from 'swr';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 // -----------------------------------------------
+import { usePathname } from 'next/navigation';
 
 //  ----------------------------------------------
 //  01 :: fetcher :: 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 // -----------------------------------------------------------------------
 
+
+
+
 const ProfileUpdateForm = () => {
 
     const router = useRouter();
+    const pathname = usePathname();
     // console.log(uuidv4());
 
     //  ----------------------------------------------
@@ -53,6 +58,7 @@ const ProfileUpdateForm = () => {
 
     // profile data :: Define state Variables ::
     const [isProfileInfoOutputEmpty, setIsProfileInfoOutputEmpty] = useState(false);
+    const [isShipDetailEmpty, setIsShipDetailEmpty] = useState(false);
 
     const [userNameOutput, setUserNameOutput] = useState(``);
     const [emailIdOutput, setEmailIdOutput] = useState(``);
@@ -122,6 +128,12 @@ const ProfileUpdateForm = () => {
             setIsProfileInfoOutputEmpty(false);
         }
 
+        if (userInfo?.shipDetail?.length == 0) {
+            setIsShipDetailEmpty(true);
+        } else {
+            setIsShipDetailEmpty(false);
+        }
+
 
         if (userInfo?.profileInfo != undefined && userInfo?.profileInfo?.length > 0) {
 
@@ -158,17 +170,17 @@ const ProfileUpdateForm = () => {
     }, [userInfo]);
 
     if (co == 1) {
-        console.log(`userNameOutput`);
+        // console.log(`userNameOutput`);
 
-        console.log(userNameOutput);
-        console.log(emailIdOutput);
-        console.log(valueAddressOutput);
-        console.log(cityNameOutput);
-        console.log(stateNameOutput);
-        console.log(pincodeOutput);
-        console.log(mobileNoOutput);
+        // console.log(userNameOutput);
+        // console.log(emailIdOutput);
+        // console.log(valueAddressOutput);
+        // console.log(cityNameOutput);
+        // console.log(stateNameOutput);
+        // console.log(pincodeOutput);
+        // console.log(mobileNoOutput);
 
-        if (cityNameOutput !== '') {
+        if (isShipDetailEmpty == true && cityNameOutput !== '') {
             setEmailIdInput(emailIdOutput);
             setMobileNoInput(mobileNoOutput);
 
@@ -176,6 +188,24 @@ const ProfileUpdateForm = () => {
             setCityNameInput(cityNameOutput);
             setStateNameInput(stateNameOutput);
             setPincodeInput(pincodeOutput);
+        }
+
+        if (isShipDetailEmpty == false) {
+
+            let mobileNoShip = userInfo?.shipDetail[userInfo?.profileInfo.length - 1]?.mobileNo;
+            let emailIdShip = userInfo?.shipDetail[userInfo?.profileInfo.length - 1]?.emailId;
+            let addressShip = userInfo?.shipDetail[userInfo?.profileInfo.length - 1]?.address;
+            let cityNameShip = userInfo?.shipDetail[userInfo?.profileInfo.length - 1]?.cityName;
+            let stateNameShip = userInfo?.shipDetail[userInfo?.profileInfo.length - 1]?.stateName;
+            let pincodeShip = userInfo?.shipDetail[userInfo?.profileInfo.length - 1]?.pincode;
+
+            setEmailIdInput(mobileNoShip);
+            setMobileNoInput(emailIdShip);
+
+            setValueAddress(addressShip);
+            setCityNameInput(cityNameShip);
+            setStateNameInput(stateNameShip);
+            setPincodeInput(pincodeShip);
         }
 
         setco(0);
@@ -186,7 +216,8 @@ const ProfileUpdateForm = () => {
     const [ispaymentPage, setIsPaymentPage] = useState(false);
     const goToPayment = async () => {
 
-        setIsPaymentPage(true);
+        router.push('/cart/checkout/payment', 'tes', { shallow: true });
+        // setIsPaymentPage(true);
 
         if (isProfileInfoOutputEmpty == true) {
             await axios.put(`/api/cuser/profile`, {
@@ -236,16 +267,13 @@ const ProfileUpdateForm = () => {
     }
 
 
-
-
-
-
     return (
         <>
 
             {(ispaymentPage == false) &&
 
                 <>
+
                     <div className="flex gap-10 flex-wrap">
 
                         <div className="flex flex-col w-full gap-y-2">
@@ -332,7 +360,9 @@ const ProfileUpdateForm = () => {
 
                         </div>
 
-                        <button onClick={() => { goToPayment(); }} className="px-8 py-2 bg-yellow-300 text-black font-medium text-lg rounded-lg">
+                        <button
+                            onClick={() => { goToPayment(); }}
+                            className="px-8 py-2 bg-yellow-300 text-black font-medium text-lg rounded-lg">
                             Continue to Payment
                         </button>
 
@@ -343,7 +373,9 @@ const ProfileUpdateForm = () => {
 
                     </div>
 
-                </>}
+                </>
+            }
+
 
         </>
     )
