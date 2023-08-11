@@ -1,7 +1,7 @@
 // import Link from 'next/link';
 // import Header from './components/servers/header'
 
-import AboutSection from "./components/cliants/Wix/aboutSection";
+import AboutSectionCall from "./components/cliants/Wix/aboutSectionCall";
 
 // import { getAllProductsData } from '@/utils/functions/getAllProducts';
 // import ProductsCardAdmin from './componentsAdmin/ProductsCardAdmin';
@@ -48,7 +48,7 @@ export default async function Home() {
             {/* <ProductsDisplayAdmin isAdmin={false}></ProductsDisplayAdmin> */}
           </div>
 
-          <AboutSection></AboutSection>
+          <AboutSectionCall></AboutSectionCall>
         </main>
       </div>
 
